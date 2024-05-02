@@ -27,13 +27,24 @@ public class UIMethods
 
             if (int.TryParse(Console.ReadLine(), out userCalculatorSelect))
             {
-                Console.Clear();
-                return userCalculatorSelect;
+                if (userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_SINGLE_MORTGAGE ||
+                    userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_AND_COMPARE_TWO_MORTGAGES)
+                {
+                    Console.Clear();
+                    return userCalculatorSelect;
+                }
             }
-            
-            Console.WriteLine("Invalid input. Please try again");
-            Console.Clear();
+            InvalidInputMessage();
         }
+    }
+
+    /// <summary>
+    /// User made invalid input 
+    /// </summary>
+    public static void InvalidInputMessage()
+    {
+        Console.WriteLine("Invalid input. Please try again");
+        Console.Clear();
     }
 
     /// <summary>
@@ -53,6 +64,4 @@ public class UIMethods
         Console.Clear();
         Console.WriteLine("Calculate and compare two mortgages");
     }
-    
-    
 }
