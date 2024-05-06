@@ -80,7 +80,7 @@ public class UIMethods
                 return amount;
             }
 
-            Console.WriteLine("Write amount in numbers. ");
+            InvalidInputMessage();
         }
     }
 
@@ -98,9 +98,28 @@ public class UIMethods
                 return term;
             }
 
-            Console.WriteLine("Enter the number of years you want the loan.");
+            InvalidInputMessage();
         }
     }
-    
-    
+
+    public static int MortgageType()
+    {
+        Console.WriteLine(
+            "Select the mortgage type. " +
+            "\n1. Repayment: repay capital and interest together. " +
+            "\n2. Interest only: repay the interest. Capital paid off at the end of term. ");
+        while (true)
+        {
+            if (int.TryParse(Console.ReadLine(), out int mortgageType))
+            {
+                if (mortgageType == CONSTANTS.OPTION_MORTGAGE_TYPE_REPAYMENT ||
+                    mortgageType == CONSTANTS.OPTION_MORTGAGE_TYPE_INTERESTONLY)
+                {
+                    return mortgageType;
+                }
+
+                InvalidInputMessage();
+            }
+        }
+    }
 }

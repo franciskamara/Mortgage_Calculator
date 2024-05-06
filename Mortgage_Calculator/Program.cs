@@ -14,11 +14,11 @@ namespace Mortgage_Calculator
             {
                 UIMethods.PrintCalculateSingleMortgageMessage();
 
-                int loanAmount = UIMethods.LoanAmountInput();
+                int amount = UIMethods.LoanAmountInput();
 
-                int termTime = UIMethods.TermTime();
-                
-                
+                int term = UIMethods.TermTime();
+
+                int type = UIMethods.MortgageType();
             }
 
             if (userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_AND_COMPARE_TWO_MORTGAGES)
