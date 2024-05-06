@@ -34,6 +34,7 @@ public class UIMethods
                     return userCalculatorSelect;
                 }
             }
+
             InvalidInputMessage();
         }
     }
@@ -63,5 +64,18 @@ public class UIMethods
     {
         Console.Clear();
         Console.WriteLine("Calculate and compare two mortgages");
+    }
+
+    public static int LoanAmountInput()
+    {
+        while (true)
+        {
+            Console.Write("Loan amount: £");
+            if (int.TryParse(Console.ReadLine(), out int amount))
+            {
+                return amount;
+            }
+            Console.WriteLine("Write amount in numbers. ");
+        }
     }
 }

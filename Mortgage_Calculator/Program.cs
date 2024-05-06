@@ -13,6 +13,9 @@ namespace Mortgage_Calculator
                 if (userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_SINGLE_MORTGAGE)
                 {
                     UIMethods.PrintCalculateSingleMortgageMessage();
+
+                    int loanAmount = UIMethods.LoanAmountInput();
+
                 }
 
                 if (userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_AND_COMPARE_TWO_MORTGAGES)
