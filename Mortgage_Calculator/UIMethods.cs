@@ -66,6 +66,10 @@ public class UIMethods
         Console.WriteLine("Calculate and compare two mortgages");
     }
 
+    /// <summary>
+    /// Loan/deposit amount input
+    /// </summary>
+    /// <returns>amount inputted</returns>
     public static int LoanAmountInput()
     {
         while (true)
@@ -75,7 +79,28 @@ public class UIMethods
             {
                 return amount;
             }
+
             Console.WriteLine("Write amount in numbers. ");
         }
     }
+
+    /// <summary>
+    /// Term time of the loan
+    /// </summary>
+    /// <returns>Term in years</returns>
+    public static int TermTime()
+    {
+        while (true)
+        {
+            Console.Write("Term of the agreement (In years): ");
+            if (int.TryParse(Console.ReadLine(), out int term))
+            {
+                return term;
+            }
+
+            Console.WriteLine("Enter the number of years you want the loan.");
+        }
+    }
+    
+    
 }

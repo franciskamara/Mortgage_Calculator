@@ -7,23 +7,24 @@ namespace Mortgage_Calculator
         static void Main(string[] args)
         {
             UIMethods.PrintWelcomeMessage();
-            
-                int userCalculatorSelect = UIMethods.SingleOrDoubleCalculatorSelection();
 
-                if (userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_SINGLE_MORTGAGE)
-                {
-                    UIMethods.PrintCalculateSingleMortgageMessage();
+            int userCalculatorSelect = UIMethods.SingleOrDoubleCalculatorSelection();
 
-                    int loanAmount = UIMethods.LoanAmountInput();
+            if (userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_SINGLE_MORTGAGE)
+            {
+                UIMethods.PrintCalculateSingleMortgageMessage();
 
-                }
+                int loanAmount = UIMethods.LoanAmountInput();
 
-                if (userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_AND_COMPARE_TWO_MORTGAGES)
-                {
-                    UIMethods.PrintCalculateDoubleMortgageMessage();
-                }
-
+                int termTime = UIMethods.TermTime();
                 
+                
+            }
+
+            if (userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_AND_COMPARE_TWO_MORTGAGES)
+            {
+                UIMethods.PrintCalculateDoubleMortgageMessage();
+            }
         }
     }
 }
