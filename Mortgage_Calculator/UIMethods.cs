@@ -8,8 +8,7 @@ public class UIMethods
     public static void PrintWelcomeMessage()
     {
         Console.WriteLine(" Welcome to the Mortgage Calculator ");
-        Console.WriteLine("++++++++++++++++++++++++++++++++++++");
-        Console.WriteLine();
+        Console.WriteLine("++++++++++++++++++++++++++++++++++++\n");
     }
 
     /// <summary>
@@ -36,6 +35,7 @@ public class UIMethods
             }
 
             InvalidInputMessage();
+            ClearConsole();
         }
     }
 
@@ -45,6 +45,11 @@ public class UIMethods
     public static void InvalidInputMessage()
     {
         Console.WriteLine("Invalid input. Please try again");
+        ClearConsole();
+    }
+
+    public static void ClearConsole()
+    {
         Console.Clear();
     }
 
@@ -76,12 +81,11 @@ public class UIMethods
         {
             try
             {
+                ClearConsole();
                 Console.Write("Loan amount: £");
                 int amount = int.Parse(Console.ReadLine());
-                    
+
                 return amount;
-                
-                
             }
             catch (Exception e)
             {
@@ -98,7 +102,8 @@ public class UIMethods
     {
         while (true)
         {
-            Console.Write("Term of the agreement (In years): ");
+            ClearConsole();
+            Console.Write("Term of agreement (In years): ");
             if (int.TryParse(Console.ReadLine(), out int term))
             {
                 return term;
@@ -110,12 +115,13 @@ public class UIMethods
 
     public static int MortgageType()
     {
-        Console.WriteLine(
-            "Select the mortgage type. " +
-            "\n1. Repayment: repay capital and interest together. " +
-            "\n2. Interest only: repay the interest. Capital paid off at the end of term. ");
         while (true)
         {
+            ClearConsole();
+            Console.WriteLine(
+                "Select the mortgage type. " +
+                "\n1. Repayment: repay capital and interest together. " +
+                "\n2. Interest only: repay the interest. Capital paid off at the end of term. ");
             if (int.TryParse(Console.ReadLine(), out int mortgageType))
             {
                 if (mortgageType == CONSTANTS.OPTION_MORTGAGE_TYPE_REPAYMENT ||
