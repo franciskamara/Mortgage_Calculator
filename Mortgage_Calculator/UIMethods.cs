@@ -74,13 +74,19 @@ public class UIMethods
     {
         while (true)
         {
-            Console.Write("Loan amount: £");
-            if (int.TryParse(Console.ReadLine(), out int amount))
+            try
             {
+                Console.Write("Loan amount: £");
+                int amount = int.Parse(Console.ReadLine());
+                    
                 return amount;
+                
+                
             }
-
-            InvalidInputMessage();
+            catch (Exception e)
+            {
+                InvalidInputMessage();
+            }
         }
     }
 
