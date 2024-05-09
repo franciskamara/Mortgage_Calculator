@@ -136,6 +136,10 @@ public class UIMethods
         }
     }
 
+    /// <summary>
+    /// Interest Rate user input, with default
+    /// </summary>
+    /// <returns>User input</returns>
     public static decimal InterestRateInput()
     {
         Console.Write("Interest rate: % ");

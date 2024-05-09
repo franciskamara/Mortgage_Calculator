@@ -20,7 +20,7 @@ namespace Mortgage_Calculator
 
                 int type = UIMethods.MortgageType();//Mortgage type selection: Repayment or Interest-only
 
-                decimal interestRate = UIMethods.InterestRateInput();
+                decimal interestRate = UIMethods.InterestRateInput();//Interest Rate input
 
                 
             }
