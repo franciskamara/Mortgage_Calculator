@@ -122,6 +122,7 @@ public class UIMethods
                 "Select the mortgage type. " +
                 "\n1. Repayment: repay capital and interest together. " +
                 "\n2. Interest only: repay the interest. Capital paid off at the end of term. ");
+            Console.Write("Select: ");
             if (int.TryParse(Console.ReadLine(), out int mortgageType))
             {
                 if (mortgageType == CONSTANTS.OPTION_MORTGAGE_TYPE_REPAYMENT ||
@@ -133,5 +134,14 @@ public class UIMethods
                 InvalidInputMessage();
             }
         }
+    }
+
+    public static decimal InterestRateInput()
+    {
+        Console.Write("Interest rate: % ");
+        string input = Console.ReadLine();
+        decimal interest = string.IsNullOrEmpty(input) ? 5 : decimal.Parse(input);
+
+        return interest;
     }
 }

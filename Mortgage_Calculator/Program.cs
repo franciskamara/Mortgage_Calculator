@@ -10,7 +10,7 @@ namespace Mortgage_Calculator
 
             int userCalculatorSelect = UIMethods.SingleOrDoubleCalculatorSelection();
 
-            if (userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_SINGLE_MORTGAGE)
+            if (userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_SINGLE_MORTGAGE)//Single mortgage calculation
             {
                 UIMethods.PrintCalculateSingleMortgageMessage(); 
 
@@ -18,7 +18,11 @@ namespace Mortgage_Calculator
 
                 int term = UIMethods.TermTime();//Term time input 
 
-                int type = UIMethods.MortgageType();//Type selection: Repay of Interest-only
+                int type = UIMethods.MortgageType();//Mortgage type selection: Repayment or Interest-only
+
+                decimal interestRate = UIMethods.InterestRateInput();
+
+                
             }
 
             
