@@ -1,2 +1,17 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿namespace Mortgage_Calculator
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+
+
+            var x = new UserInput();
+            x.Amount = 20000;
+
+            var z = LogicMethod.CalcResults(x);
+
+        }
+    }
+}

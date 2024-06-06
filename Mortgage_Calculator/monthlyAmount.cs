@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Mortgage_Calculator
 {
-	public class PaymentItem
+	public class MonthlyAmount
 	{
 		private double _amount;
 		public double Amount
@@ -9,15 +9,7 @@ namespace Mortgage_Calculator
 			get { return _amount; }
 			set { _amount = value; }
 		}
-
-		private DateTime _year;
-		public DateTime Year
-		{
-			get { return _year; }
-			set { _year = value; }
-		}
-
-
+		
 	}
 }
 

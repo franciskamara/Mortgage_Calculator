@@ -1,10 +1,13 @@
 ﻿using System;
 namespace Mortgage_Calculator
 {
-	public class totalRepayment
+	public class TotalRepayment
 	{
-		public totalRepayment()
+		private double _amount;
+		public double Amount
 		{
+			get { return _amount; }
+			set { _amount = value; }
 		}
 	}
 }
