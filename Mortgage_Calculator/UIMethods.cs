@@ -2,6 +2,7 @@ namespace Mortgage_Calculator;
 
 public class UIMethods
 {
+
     /// <summary>
     /// Print Mortgage Calculator Welcome message
     /// </summary>
