@@ -1,11 +1,12 @@
-﻿using System;
-namespace Mortgage_Calculator
-{
-	public class mortgageType
-	{
-		public mortgageType()
-		{
-		}
-	}
-}
+﻿
+    namespace Mortgage_Calculator
+    {
+        public enum MortgageType
+        {
+            Repayment,
+            Interest_Only
+        }
+    }
+
+
 
