@@ -1,15 +1,11 @@
 ﻿using System;
 namespace Mortgage_Calculator
 {
-	public class MonthlyAmount
+	public class monthlyPayment
 	{
-		private double _amount;
-		public double Amount
+		public monthlyPayment()
 		{
-			get { return _amount; }
-			set { _amount = value; }
 		}
-		
 	}
 }
 

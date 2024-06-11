@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Mortgage_Calculator
 {
 	public class Results
 	{
+
 		public List<PaymentItem> PaymentItems;
 
 		public double TotalAmount
