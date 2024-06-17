@@ -5,9 +5,9 @@ namespace Mortgage_Calculator
 	{
         public static Results CalcResults(UserInput input, MortgageType t)
         {
-            var totalAmount = input.Amount;
-            var interestRate = input.InterestRate;
-            var termYears = input.Term;
+            int totalAmount = input.Amount;
+            double interestRate = input.InterestRate;
+            int termYears = input.Term;
 
             if(t == MortgageType.Interest_Only)
             {
@@ -23,7 +23,7 @@ namespace Mortgage_Calculator
                     1 - (1 + (interestRate * CONSTANTS.ONE_YEAR)) - CONSTANTS.ONE_YEAR * termYears;
             }
 
-            return 
+            
             //TODO Implement
 
             //Interest-only payment calc
