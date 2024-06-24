@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Mortgage_Calculator
 {
 	public class Results
 	{
-
 		public List<PaymentItem> PaymentItems;
 
 		public double TotalAmount
@@ -12,7 +12,7 @@ namespace Mortgage_Calculator
 			get
 			{
 				double sum = 0;
-				foreach(var pi in PaymentItems)
+                foreach (var pi in PaymentItems)
 				{
 					sum = sum + pi.Amount;
 				}
@@ -22,12 +22,16 @@ namespace Mortgage_Calculator
 			}
 		}
 
-		private MonthlyAmount _monthlyRepaymentAmount;
-		public MonthlyAmount MonthlyRepaymentAmount
+		private List<MonthlyAmount> _monthlyRepayments;
+		public List<MonthlyAmount> MonthlyRepayments
 		{
-			get { return _monthlyRepaymentAmount; }
-			set { _monthlyRepaymentAmount = value; }
+			get { return _monthlyRepayments; }
+			set { _monthlyRepayments = value; }
 		}
+
+		
+
+
 	}
 }
 

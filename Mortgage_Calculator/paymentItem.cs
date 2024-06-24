@@ -17,6 +17,19 @@ namespace Mortgage_Calculator
 			set { _year = value; }
 		}
 
+		private int _remainingAmount;
+		public int RemainingAmount
+		{
+			get { return _remainingAmount; }
+			set { _remainingAmount = value; }
+		}
+
+		private string _warningIndicator;
+		public string WarningIndicator
+		{
+			get { return _warningIndicator; }
+			set { _warningIndicator = value; }
+		}
 
 	}
 }
