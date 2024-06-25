@@ -7,6 +7,3 @@ namespace Mortgage_Calculator
         Standard
     }
 }
-
-
-//ss
