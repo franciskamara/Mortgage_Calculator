@@ -29,10 +29,17 @@ namespace Mortgage_Calculator
             }
             for (int month = 1; month <= totalMonths; month++)//Loop as many times as totalMonths
             {
-                repayments.Add(monthlyRepayment);//List the month repayments
+                repayments.Add(monthlyRepayment);//List the monthly repayments
             }
 
-            return new Results();
+            double totalAmountRepaid = repayments.Sum();//Sum total of monthly repayments of Loan
+
+            Results results = new()
+            {
+                MonthlyRepayments = repayments,//Monthly repayments added to List
+                TotalAmount = totalAmountRepaid//Monthly repayment Sum total added to Total amount property
+            };
+            return results;//Return data to Results properties 
 
         }
     }
