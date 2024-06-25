@@ -10,5 +10,5 @@ public class CONSTANTS
     public static int OPTION_MORTGAGE_TYPE_REPAYMENT = 1;
     public static int OPTION_MORTGAGE_TYPE_INTERESTONLY = 2;
 
-    public static int ONE_YEAR = 12;
+    public static int TWELVE_MONTHS = 12;
 }
