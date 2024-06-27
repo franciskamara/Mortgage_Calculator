@@ -23,14 +23,13 @@ public class UIMethods
             Console.WriteLine(
                 "What do you want to do?\n1.Calculate one mortgage \n2.Calculate and compare two mortgages");
             Console.Write("Select: ");
-            int userCalculatorSelect = default;
 
-            if (int.TryParse(Console.ReadLine(), out userCalculatorSelect))
+            if (int.TryParse(Console.ReadLine(), out int userCalculatorSelect))
             {
                 if (userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_SINGLE_MORTGAGE ||
                     userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_AND_COMPARE_TWO_MORTGAGES)
                 {
-                    Console.Clear();
+                    ClearConsole();
                     return userCalculatorSelect;
                 }
             }
@@ -49,6 +48,9 @@ public class UIMethods
         ClearConsole();
     }
 
+    /// <summary>
+    /// Clear the console 
+    /// </summary>
     public static void ClearConsole()
     {
         Console.Clear();
@@ -114,6 +116,10 @@ public class UIMethods
         }
     }
 
+    /// <summary>
+    /// User selects the mortgage type 
+    /// </summary>
+    /// <returns>Chosen mortgage type</returns>
     public static int MortgageType()
     {
         while (true)
@@ -121,12 +127,12 @@ public class UIMethods
             ClearConsole();
             Console.WriteLine(
                 "Select the mortgage type. " +
-                "\n1. Repayment: repay capital and interest together. " +
+                "\n1. Standard: repay capital and interest. " +
                 "\n2. Interest only: repay the interest. Capital paid off at the end of term. ");
             Console.Write("Select: ");
             if (int.TryParse(Console.ReadLine(), out int mortgageType))
             {
-                if (mortgageType == CONSTANTS.OPTION_MORTGAGE_TYPE_REPAYMENT ||
+                if (mortgageType == CONSTANTS.OPTION_MORTGAGE_TYPE_STANDARD ||
                     mortgageType == CONSTANTS.OPTION_MORTGAGE_TYPE_INTERESTONLY)
                 {
                     return mortgageType;
@@ -143,7 +149,7 @@ public class UIMethods
     /// <returns>User input</returns>
     public static decimal InterestRateInput()
     {
-        Console.Write("Interest rate: % ");
+        Console.Write("Interest rate: %");
         string input = Console.ReadLine();
         decimal interest = string.IsNullOrEmpty(input) ? 5 : decimal.Parse(input);
 

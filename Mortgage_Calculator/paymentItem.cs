@@ -17,8 +17,8 @@ namespace Mortgage_Calculator
 			set { _year = value; }
 		}
 
-		private int _remainingAmount;
-		public int RemainingAmount
+		private double _remainingAmount;
+		public double RemainingAmount
 		{
 			get { return _remainingAmount; }
 			set { _remainingAmount = value; }

@@ -5,41 +5,56 @@ namespace Mortgage_Calculator
     {
         public static Results CalculateRepayments(UserInput input, MortgageType t)
         {
-            int totalAmount = input.Amount;
+            double totalAmount = input.Amount;
             double interestRateDecimal = input.InterestRatePercentage / 100;
             int termYears = input.Term;
             int totalMonths = termYears * CONSTANTS.TWELVE_MONTHS;//Total months of Loan term calc
             double monthlyRepayment;
-            List<double> repayments = new();
+
+            List<PaymentItem> repayments = new();
+            List<double> monthlyRepayments = new();
 
             if (t == MortgageType.Interest_Only)
             {
-                //Interest-only payment calc
-                //((Amount x InterestRate) / 12months) x totalMonths
-                monthlyRepayment = (totalAmount * interestRateDecimal) / CONSTANTS.TWELVE_MONTHS;//Monthly repayment calc
+                //Interest-only monthly repayment calculation
+                //Interest-Only = ((Amount x InterestRate) / 12months) x totalMonths
+                monthlyRepayment = ((totalAmount * interestRateDecimal) / CONSTANTS.TWELVE_MONTHS) * totalMonths;
             }
             else
             {
-                //Repayment calc
+                //Standard repayment calculation
                 //Repayment = Amount x (monthlyInterestRate x (1 + (monthlyInterestRate * 12months))) /
                 // (1 + (monthlyInterestRate x totalMonths) - 1)
                 double monthlyInterestRate = interestRateDecimal / CONSTANTS.TWELVE_MONTHS;//Monthly interest rate calc
                 monthlyRepayment = totalAmount * (monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, totalMonths)) /
-                                  (Math.Pow(1 + monthlyInterestRate, totalMonths) - 1);//Standard repayment calc       
+                                  (Math.Pow(1 + monthlyInterestRate, totalMonths) - 1);      
             }
+
+            double remainingAmount = totalAmount;//Total amount is remaining amount 
+
             for (int month = 1; month <= totalMonths; month++)//Loop as many times as totalMonths
             {
-                repayments.Add(monthlyRepayment);//List the monthly repayments
+                remainingAmount -= monthlyRepayment;//Remaining (Total) amount after every monthly loop
+                double amountIncreaseByThreePercent = monthlyRepayment * CONSTANTS.THREE_PERCENT;//Monthly repayment if interest rises by 3%
+
+                monthlyRepayments.Add(monthlyRepayment);
+                repayments.Add(new PaymentItem
+                {
+                    Amount = monthlyRepayment,
+                    Year = DateTime.Now.AddMonths(month - 1),
+                    RemainingAmount = remainingAmount,
+                    WarningIndicator = $"Hello: Be aware that if your montlhy repayment where to increase by 3% at anytime, it will be {amountIncreaseByThreePercent}." +
+                    $"Ensure you have enoough for this change."
+                }); //Add data to Payment Items class
             }
 
-            double totalAmountRepaid = repayments.Sum();//Sum total of monthly repayments of Loan
-
-            Results results = new()
+            Results results = new()//New results local variable
             {
-                MonthlyRepayments = repayments,//Monthly repayments added to List
-                TotalAmount = totalAmountRepaid//Monthly repayment Sum total added to Total amount property
+                MonthlyRepayments = monthlyRepayments,
+                _paymentItems = repayments
             };
-            return results;//Return data to Results properties 
+
+            return results;//Return results
 
         }
     }
