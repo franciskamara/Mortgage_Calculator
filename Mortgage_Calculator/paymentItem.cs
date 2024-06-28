@@ -25,12 +25,18 @@ namespace Mortgage_Calculator
 		}
 
 		private string _warningIndicator;
-		public string WarningIndicator
+        internal static object _paymentItems;
+
+        public string WarningIndicator
 		{
 			get { return _warningIndicator; }
 			set { _warningIndicator = value; }
 		}
 
-	}
+        public static explicit operator PaymentItem(int v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 
