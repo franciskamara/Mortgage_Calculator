@@ -26,10 +26,12 @@ namespace Mortgage_Calculator
 
         public void AddPaymentItemsToGraph(List<PaymentItem> paymentItems)
         {
-            if (paymentItems != null)
-            {
-                _paymentItems.AddRange(_paymentItems);
-            }
+
+            _paymentItems = paymentItems;
+     //       if (paymentItems != null)
+      //      {
+     //           _paymentItems.AddRange(_paymentItems);
+      //      }
         }
 
         public static void RemainingAmountDisplay(PaymentItem pi)//Display the Total amount
@@ -38,7 +40,7 @@ namespace Mortgage_Calculator
             Console.WriteLine($"Remaining mortgage amount: {amount}");
         }
 
-        public void GraphDisplay()
+        public void GraphDisplay()//Display graph, with Months and Amount 
         {
             foreach (var item in PaymentItems)
             {
@@ -46,7 +48,7 @@ namespace Mortgage_Calculator
             }
         }
 
-        public void ThreePercentWarningIndicator(PaymentItem item)
+        public static void ThreePercentWarningIndicator(PaymentItem item)//Display warning message of 3% increase
         {
             Console.WriteLine(item.WarningIndicator);
         }

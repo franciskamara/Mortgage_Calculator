@@ -78,15 +78,18 @@ public class UIMethods
     /// Loan/deposit amount input
     /// </summary>
     /// <returns>amount inputted</returns>
-    public static int LoanAmountInput()
+    public static double LoanAmountInput()
     {
         while (true)
         {
+            UserInput input = new();
+            double amount = input.Amount;
+
             try
             {
                 ClearConsole();
                 Console.Write("Loan amount: £");
-                int amount = int.Parse(Console.ReadLine());
+                amount = int.Parse(Console.ReadLine());
 
                 return amount;
             }
@@ -103,11 +106,14 @@ public class UIMethods
     /// <returns>Term in years</returns>
     public static int TermTime()
     {
+        UserInput input = new();
+        int term = input.Term;
+
         while (true)
         {
             ClearConsole();
             Console.Write("Term of agreement (In years): ");
-            if (int.TryParse(Console.ReadLine(), out int term))
+            if (int.TryParse(Console.ReadLine(), out term))
             {
                 return term;
             }
