@@ -61,8 +61,8 @@ public class UIMethods
     /// </summary>
     public static void PrintCalculateSingleMortgageMessage()
     {
-        Console.Clear();
-        Console.WriteLine("Calculate a single mortgage");
+        ClearConsole();
+        Console.WriteLine("Calculate a single mortgage \n");
     }
 
     /// <summary>
@@ -70,8 +70,8 @@ public class UIMethods
     /// </summary>
     public static void PrintCalculateDoubleMortgageMessage()
     {
-        Console.Clear();
-        Console.WriteLine("Calculate and compare two mortgages");
+        ClearConsole();
+        Console.WriteLine("Calculate and compare two mortgages \n");
     }
 
     /// <summary>
@@ -82,14 +82,14 @@ public class UIMethods
     {
         while (true)
         {
-            UserInput input = new();
-            double amount = input.Amount;
+            //UserInput input = new();
+            //double amount = input.Amount;
 
             try
             {
                 ClearConsole();
                 Console.Write("Loan amount: £");
-                amount = int.Parse(Console.ReadLine());
+                double amount = int.Parse(Console.ReadLine());
 
                 return amount;
             }
@@ -106,14 +106,14 @@ public class UIMethods
     /// <returns>Term in years</returns>
     public static int TermTime()
     {
-        UserInput input = new();
-        int term = input.Term;
+        //UserInput input = new();
+        //int term = input.Term;
 
         while (true)
         {
             ClearConsole();
             Console.Write("Term of agreement (In years): ");
-            if (int.TryParse(Console.ReadLine(), out term))
+            if (int.TryParse(Console.ReadLine(), out int term))
             {
                 return term;
             }
