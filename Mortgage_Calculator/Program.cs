@@ -19,12 +19,21 @@
 
                 inputs.Term = UIMethods.TermTime();//Assign Term input to userInput property: Term
 
-                type.ToString();//enum placement !!!!
-                //UIMethods.MortgageType();
+                inputs.Type = UIMethods.SelectMortgageType();// Assign MortgageType input to userInput property: Type
 
-                inputs.InterestRatePercentage = UIMethods.InterestRateInput();//Assign Interest Rate input to userInput property: Interest Rate
+                inputs.InterestRatePercentage = (double)UIMethods.InterestRateInput();//Assign Interest Rate input to userInput property: Interest Rate
 
                 inputs.Deposit = UIMethods.DepositInput();//Assign Deposit input to userInput property: Deposit
+
+
+                Results test = LogicMethod.CalculateRepayments(inputs, type);
+                UIMethods.ClearConsole();
+                Console.WriteLine($"Repayment total: £{test.TotalAmount}");
+                foreach (var item in test._paymentItems)
+                {
+                    Console.WriteLine($"Payment Items: {test.ToString}");
+                }
+
 
             }
             if (mortgageCalcSelect == CONSTANTS.OPTION_CALCULATE_AND_COMPARE_TWO_MORTGAGES)

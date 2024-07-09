@@ -28,10 +28,10 @@ namespace Mortgage_Calculator
         {
 
             _paymentItems = paymentItems;
-     //       if (paymentItems != null)
-      //      {
-     //           _paymentItems.AddRange(_paymentItems);
-      //      }
+            //       if (paymentItems != null)
+            //      {
+            //           _paymentItems.AddRange(_paymentItems);
+            //      }
         }
 
         public static void RemainingAmountDisplay(PaymentItem pi)//Display the Total amount

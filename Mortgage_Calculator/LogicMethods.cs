@@ -18,7 +18,7 @@ namespace Mortgage_Calculator
             {
                 //Interest-only monthly repayment calculation
                 //Interest-Only = ((Amount x InterestRate) / 12months) x totalMonths
-                monthlyRepayment = ((totalAmount * interestRateDecimal) / CONSTANTS.TWELVE_MONTHS) * totalMonths;
+                monthlyRepayment = ((totalAmount * interestRateDecimal) / CONSTANTS.TWELVE_MONTHS);
             }
             else
             {
@@ -27,12 +27,12 @@ namespace Mortgage_Calculator
                 // (1 + (monthlyInterestRate x totalMonths) - 1)
                 double monthlyInterestRate = interestRateDecimal / CONSTANTS.TWELVE_MONTHS;//Monthly interest rate calc
                 monthlyRepayment = totalAmount * (monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, totalMonths)) /
-                                  (Math.Pow(1 + monthlyInterestRate, totalMonths) - 1);      
+                                  (Math.Pow(1 + monthlyInterestRate, totalMonths) - 1);
             }
 
             double remainingAmount = totalAmount;//Total amount is remaining amount 
 
-            for (int month = 1; month <= totalMonths; month++)//Loop as many times as totalMonths
+            for (int month = 1; month <= totalMonths; month++)//Loop as many times as totalMonths (x totalMonths)
             {
                 remainingAmount -= monthlyRepayment;//Remaining (Total) amount after every monthly loop
                 double amountIncreaseByThreePercent = monthlyRepayment * CONSTANTS.THREE_PERCENT;//Monthly repayment if interest rises by 3%

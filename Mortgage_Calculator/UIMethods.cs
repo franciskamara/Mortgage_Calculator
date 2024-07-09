@@ -126,26 +126,29 @@ public class UIMethods
     /// User selects the mortgage type 
     /// </summary>
     /// <returns>Chosen mortgage type</returns>
-    public static int MortgageType()
+    public static MortgageType SelectMortgageType()
     {
         while (true)
         {
             ClearConsole();
             Console.WriteLine(
-                "Select the mortgage type. " +
+                "Select the mortgage type by number entry. " +
                 "\n1. Standard: repay capital and interest. " +
                 "\n2. Interest only: repay the interest. Capital paid off at the end of term. ");
             Console.Write("Select: ");
-            if (int.TryParse(Console.ReadLine(), out int mortgageType))
+            if (int.TryParse(Console.ReadLine(), out int mortgageTypeSelect))
             {
-                if (mortgageType == CONSTANTS.OPTION_MORTGAGE_TYPE_STANDARD ||
-                    mortgageType == CONSTANTS.OPTION_MORTGAGE_TYPE_INTERESTONLY)
+                if (mortgageTypeSelect == CONSTANTS.OPTION_MORTGAGE_TYPE_STANDARD ||
+                    mortgageTypeSelect == CONSTANTS.OPTION_MORTGAGE_TYPE_INTERESTONLY)
                 {
-                    return mortgageType;
+                    if (mortgageTypeSelect == CONSTANTS.OPTION_MORTGAGE_TYPE_STANDARD)
+                        return MortgageType.Standard;
+                    else
+                        return MortgageType.Interest_Only;
                 }
-
                 InvalidInputMessage();
             }
+            InvalidInputMessage();
         }
     }
 
@@ -155,10 +158,36 @@ public class UIMethods
     /// <returns>User input</returns>
     public static decimal InterestRateInput()
     {
+        ClearConsole();
         Console.Write("Interest rate: %");
         string input = Console.ReadLine();
         decimal interest = string.IsNullOrEmpty(input) ? 5 : decimal.Parse(input);
 
         return interest;
     }
+
+    /// <summary>
+    /// User inputting the deposit amount (optional)
+    /// </summary>
+    /// <returns>Deposit input</returns>
+    public static double DepositInput()
+    {
+        while (true)
+        {
+        ClearConsole();
+        Console.Write("Input deposit (optional): ");
+            string input = Console.ReadLine();
+        if (double.TryParse(input, out double depositInput))
+        {
+            return depositInput;
+        }
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            return 0;
+        }
+        InvalidInputMessage();
+        }
+
+    }
+
 }
