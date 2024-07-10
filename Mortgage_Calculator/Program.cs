@@ -28,11 +28,20 @@
 
                 Results test = LogicMethod.CalculateRepayments(inputs, type);
                 UIMethods.ClearConsole();
-                Console.WriteLine($"Repayment total: £{test.TotalAmount}");
-                foreach (var item in test._paymentItems)
+                Console.WriteLine($"Repayment total: £{test.TotalAmount}\n");
+                Console.WriteLine("Payment Items \n_____________");
+                for (int i = 0; i <= test.PaymentItems.Count; i++)//Print monthly repayments from list
                 {
-                    Console.WriteLine($"Payment Items: {test.ToString}");
+                    Console.WriteLine($"{test.PaymentItems[i].Year}: £{test.PaymentItems[i].Amount} ");
                 }
+
+                //foreach (PaymentItem item in test._paymentItems)
+                //{
+                //    Console.WriteLine($"Payment Items: {item.Year} {item.Amount} ");
+                //}
+
+                Console.WriteLine($"Total repayment months is{test.MonthlyRepayments.Count} months");
+                Console.WriteLine($"{test.}");
 
 
             }

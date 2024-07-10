@@ -17,7 +17,7 @@ namespace Mortgage_Calculator
         {
             get
             {
-                foreach (var pi in PaymentItems)
+                foreach (PaymentItem pi in PaymentItems)
                 {
                     _totalAmount = _totalAmount + pi.Amount;
                 }
