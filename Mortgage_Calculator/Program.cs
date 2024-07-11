@@ -40,8 +40,8 @@
                 //    Console.WriteLine($"Payment Items: {item.Year} {item.Amount} ");
                 //}
 
-                Console.WriteLine($"Total repayment months is{test.MonthlyRepayments.Count} months");
-                Console.WriteLine($"{test.}");
+                Console.WriteLine($"Total repayment months is {test.MonthlyRepayments.Count} months");//Print total number of payments
+                Console.WriteLine($"{test.WarningIndicator}");
 
 
             }
