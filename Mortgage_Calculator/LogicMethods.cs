@@ -45,9 +45,10 @@ namespace Mortgage_Calculator
                 }); //Add data to Payment Items class
             }
             double potentialIncreaseRepayment = monthlyRepayment * CONSTANTS.THREE_PERCENT;//Monthly repayment if interest rises by 3%
+            double roundedValue = Math.Round(potentialIncreaseRepayment, 2);
             Results results = new()//New results local variable
             {
-                WarningIndicator = $"Hello, be aware that if your monthly repayment where to increase by 3% at anytime, it will be £{potentialIncreaseRepayment}. Ensure you have enoough for this change.",
+                WarningIndicator = $"Hello, be aware that if your monthly repayment where to increase by 3% at anytime, it will be £{roundedValue:N2}. Ensure you have enoough for this change.",
                 MonthlyRepayments = monthlyRepayments,
                 PaymentItems = repayments
             };
