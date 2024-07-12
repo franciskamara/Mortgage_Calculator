@@ -17,7 +17,7 @@ namespace Mortgage_Calculator
             set { _endDate = value; }
         }
 
-        private List<PaymentItem> _paymentItems;
+        private List<PaymentItem>? _paymentItems;
         public List<PaymentItem> PaymentItems
         {
             get { return _paymentItems; }
@@ -48,9 +48,9 @@ namespace Mortgage_Calculator
             }
         }
 
-        public static void ThreePercentWarningIndicator(PaymentItem item)//Display warning message of 3% increase
+        public static void ThreePercentWarningIndicator(Results resultItem)//Display warning message of 3% increase
         {
-            Console.WriteLine(item.WarningIndicator);
+            Console.WriteLine(resultItem.WarningIndicator);
         }
 
 

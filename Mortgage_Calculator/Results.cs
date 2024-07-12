@@ -5,8 +5,8 @@ namespace Mortgage_Calculator
 {
     public class Results
     {
-        public List<PaymentItem> _paymentItems;
-        private List<PaymentItem> PaymentItems
+        private List<PaymentItem> _paymentItems;
+        public List<PaymentItem> PaymentItems
         {
             get { return _paymentItems; }
             set { _paymentItems = value; }
@@ -19,7 +19,7 @@ namespace Mortgage_Calculator
             {
                 foreach (PaymentItem pi in PaymentItems)
                 {
-                    _totalAmount = _totalAmount + pi.Amount;
+                    _totalAmount += pi.Amount;
                 }
                 return _totalAmount;
                 // return PaymentItems.Sum(pi => pi.Amount);
@@ -27,6 +27,14 @@ namespace Mortgage_Calculator
             }
             set { _totalAmount = value; }//Set the sum
         }
+
+        private string _warningIndicator;
+        public string WarningIndicator
+        {
+            get { return _warningIndicator; }
+            set { _warningIndicator = value; }
+        }
+
 
         private List<double> _monthlyRepayments;
         public List<double> MonthlyRepayments

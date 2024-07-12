@@ -87,7 +87,7 @@ public class UIMethods
 
             try
             {
-                ClearConsole();
+                //ClearConsole();
                 Console.Write("Loan amount: £");
                 double amount = int.Parse(Console.ReadLine());
 
@@ -190,4 +190,18 @@ public class UIMethods
 
     }
 
+    /// <summary>
+    /// Message for user to make the first set of inputs 
+    /// </summary>
+    public static void MessageFirstInputSet()
+    { Console.WriteLine("Make the first set of inputs.\n"); }
+
+    /// <summary>
+    /// Message for user to make the second set of inputs 
+    /// </summary>
+    public static void MessageSecondInputSet()
+    {
+        ClearConsole();
+        Console.WriteLine("Make the second set of inputs.\n");
+    }
 }

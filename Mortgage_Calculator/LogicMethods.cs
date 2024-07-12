@@ -35,7 +35,6 @@ namespace Mortgage_Calculator
             for (int month = 1; month <= totalMonths; month++)//Loop as many times as totalMonths (x totalMonths)
             {
                 remainingAmount -= monthlyRepayment;//Remaining (Total) amount after every monthly loop
-                double amountIncreaseByThreePercent = monthlyRepayment * CONSTANTS.THREE_PERCENT;//Monthly repayment if interest rises by 3%
 
                 monthlyRepayments.Add(monthlyRepayment);
                 repayments.Add(new PaymentItem
@@ -43,15 +42,14 @@ namespace Mortgage_Calculator
                     Amount = monthlyRepayment,
                     Year = DateTime.Now.AddMonths(month - 1),
                     RemainingAmount = remainingAmount,
-                    WarningIndicator = $"Hello: Be aware that if your montlhy repayment where to increase by 3% at anytime, it will be {amountIncreaseByThreePercent}." +
-                    $"Ensure you have enoough for this change."
                 }); //Add data to Payment Items class
             }
-
+            double potentialIncreaseRepayment = monthlyRepayment * CONSTANTS.THREE_PERCENT;//Monthly repayment if interest rises by 3%
             Results results = new()//New results local variable
             {
+                WarningIndicator = $"Hello, be aware that if your monthly repayment where to increase by 3% at anytime, it will be £{potentialIncreaseRepayment}. Ensure you have enoough for this change.",
                 MonthlyRepayments = monthlyRepayments,
-                _paymentItems = repayments
+                PaymentItems = repayments
             };
 
             return results;//Return results
