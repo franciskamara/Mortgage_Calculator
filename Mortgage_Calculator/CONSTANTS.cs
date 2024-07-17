@@ -10,6 +10,6 @@ public class CONSTANTS
     public static int OPTION_MORTGAGE_TYPE_STANDARD = 1;
     public static int OPTION_MORTGAGE_TYPE_INTERESTONLY = 2;
 
-    public static int TWELVE_MONTHS = 12;
-    public static double THREE_PERCENT = 1.03;
+    public static int MONTHS_OF_YEAR = 12;
+    public static double INTEREST_RATE = 1.03;
 }

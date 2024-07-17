@@ -12,8 +12,8 @@
             {
                 UIMethods.PrintCalculateSingleMortgageMessage();
 
-                UserInput inputs = new();//Call userInput class properties
-                MortgageType type = new();
+                UserInput inputs = new();//Call UserInput class properties
+                MortgageType type = new();//Call MortgageType class properties
 
                 inputs.Amount = UIMethods.LoanAmountInput();//Assign Amount input to userInput property: Amount
 
@@ -28,7 +28,7 @@
                 //--------------
                 Results resultSet = LogicMethod.CalculateRepayments(inputs, type);
                 UIMethods.ClearConsole();
-                Console.WriteLine($"Repayment total: £{resultSet.TotalAmount:N2}\n");
+                Console.WriteLine($"Total repayment of loan: £{resultSet.TotalAmount:N2}\n");
                 Console.WriteLine("Payment Items \n_____________");
                 for (int i = 0; i < 1; i++)
                 {
@@ -37,11 +37,6 @@
                 //for (int i = 0; i <= resultSet.PaymentItems.Count; i++)//Print monthly repayments from list
                 //{
                 //    Console.WriteLine($"{resultSet.PaymentItems[i].Year}: £{resultSet.PaymentItems[i].Amount} ");
-                //}
-
-                //foreach (PaymentItem item in test._paymentItems)
-                //{
-                //    Console.WriteLine($"Payment Items: {item.Year} {item.Amount} ");
                 //}
 
                 Console.WriteLine($"Total repayment months is {resultSet.MonthlyRepayments.Count}");//Print total number of payments
@@ -85,7 +80,7 @@
                 Console.WriteLine("First set of results\n");
                 Results firstResultSet = LogicMethod.CalculateRepayments(firstInputs, type);
                 //UIMethods.ClearConsole();
-                Console.WriteLine($"Repayment total: £{firstResultSet.TotalAmount:N2}\n");
+                Console.WriteLine($"Total repayment of loan: £{firstResultSet.TotalAmount:N2}\n");
                 Console.WriteLine("Payment Items \n-------------");
                 for (int i = 0; i < 1; i++)
                 {
@@ -96,11 +91,6 @@
                 //    Console.WriteLine($"{firstResultSet.PaymentItems[i].Year}: £{firstResultSet.PaymentItems[i].Amount} ");
                 //}
 
-                //foreach (PaymentItem item in test._paymentItems)
-                //{
-                //    Console.WriteLine($"Payment Items: {item.Year} {item.Amount} ");
-                //}
-
                 Console.WriteLine($"Total repayment months is {firstResultSet.MonthlyRepayments.Count}");//Print total number of payments
                 Console.WriteLine($"{firstResultSet.WarningIndicator}");
 
@@ -108,7 +98,7 @@
                 Console.WriteLine("\nSecond set of results\n");
                 Results secondResultSet = LogicMethod.CalculateRepayments(secondInputs, type);
                 //UIMethods.ClearConsole();
-                Console.WriteLine($"Repayment total: £{secondResultSet.TotalAmount:N2}\n");
+                Console.WriteLine($"Total repayment of loan: £{secondResultSet.TotalAmount:N2}\n");
                 Console.WriteLine("Payment Items \n-------------");
                 for (int i = 0; i < 1; i++)
                 {
@@ -117,11 +107,6 @@
                 //for (int i = 0; i <= secondResultSet.PaymentItems.Count; i++)//Print monthly repayments from list
                 //{
                 //    Console.WriteLine($"{secondResultSet.PaymentItems[i].Year}: £{secondResultSet.PaymentItems[i].Amount} ");
-                //}
-
-                //foreach (PaymentItem item in test._paymentItems)
-                //{
-                //    Console.WriteLine($"Payment Items: {item.Year} {item.Amount} ");
                 //}
 
                 Console.WriteLine($"Total repayment months is {secondResultSet.MonthlyRepayments.Count}");//Print total number of payments
