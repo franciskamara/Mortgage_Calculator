@@ -1,18 +1,28 @@
 ﻿@page "/counter"
+@using Mortgage_Calculator
+<PageTitle>Mortgage Calculator</PageTitle>
 
-<PageTitle>Counter</PageTitle>
-
-<h1>Counter</h1>
+<h1>Mortgage Calculator</h1>
+<nav>
+    <div class="topnav">
+        <a class="active" href="#home">Calculate mortgage</a>&nbsp
+        <a href="#news">Calculate and compare mortgages</a>
+    </div>
+    <br />
+</nav>
 
 <p role="status">Current count: @currentCount</p>
-
+<InputNumber @bind-Value="userInput.Deposit"></InputNumber>
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
+
+    private UserInput userInput =new();
     private int currentCount = 0;
 
     private void IncrementCount()
     {
+      //  Results firstResultSet = LogicMethod.CalculateRepayments(userInput, type);
         currentCount++;
     }
 }
