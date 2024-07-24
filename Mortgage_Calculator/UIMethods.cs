@@ -27,7 +27,7 @@ public class UIMethods
             if (int.TryParse(Console.ReadLine(), out int userCalculatorSelect))
             {
                 if (userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_SINGLE_MORTGAGE ||
-                    userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_AND_COMPARE_TWO_MORTGAGES)
+                    userCalculatorSelect == CONSTANTS.OPTION_CALCULATE_AND_COMPARE_MORTGAGES)
                 {
                     ClearConsole();
                     return userCalculatorSelect;

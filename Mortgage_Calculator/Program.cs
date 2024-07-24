@@ -28,8 +28,8 @@
                 //--------------
                 Results resultSet = LogicMethod.CalculateRepayments(inputs, type);
                 UIMethods.ClearConsole();
-                Console.WriteLine($"Total repayment of loan: £{resultSet.TotalAmount:N2}\n");
-                Console.WriteLine("Payment Items \n_____________");
+                Console.WriteLine($"Total amount: £{resultSet.TotalAmount:N2}\n");
+                Console.WriteLine("Monthly repayments \n_____________");
                 for (int i = 0; i < 1; i++)
                 {
                     Console.WriteLine($"{resultSet.PaymentItems[i].Year}: £{resultSet.PaymentItems[i].Amount:N2} ");
@@ -39,10 +39,10 @@
                 //    Console.WriteLine($"{resultSet.PaymentItems[i].Year}: £{resultSet.PaymentItems[i].Amount} ");
                 //}
 
-                Console.WriteLine($"Total repayment months is {resultSet.MonthlyRepayments.Count}");//Print total number of payments
+                Console.WriteLine($"Total months: {resultSet.MonthlyRepayments.Count}");//Print total number of payments
                 Console.WriteLine($"{resultSet.WarningIndicator}");
             }
-            if (mortgageCalcSelect == CONSTANTS.OPTION_CALCULATE_AND_COMPARE_TWO_MORTGAGES)
+            if (mortgageCalcSelect == CONSTANTS.OPTION_CALCULATE_AND_COMPARE_MORTGAGES)
             {
                 UIMethods.PrintCalculateDoubleMortgageMessage();
 
@@ -77,11 +77,11 @@
 
                 //-----------
                 UIMethods.ClearConsole();
-                Console.WriteLine("First set of results\n");
+                Console.WriteLine("First mortgage\n");
                 Results firstResultSet = LogicMethod.CalculateRepayments(firstInputs, type);
                 //UIMethods.ClearConsole();
-                Console.WriteLine($"Total repayment of loan: £{firstResultSet.TotalAmount:N2}\n");
-                Console.WriteLine("Payment Items \n-------------");
+                Console.WriteLine($"Total amount: £{firstResultSet.TotalAmount:N2}\n");
+                Console.WriteLine("Monthly repayments \n-------------");
                 for (int i = 0; i < 1; i++)
                 {
                     Console.WriteLine($"{firstResultSet.PaymentItems[i].Year}: £{firstResultSet.PaymentItems[i].Amount:N2} ");
@@ -91,15 +91,15 @@
                 //    Console.WriteLine($"{firstResultSet.PaymentItems[i].Year}: £{firstResultSet.PaymentItems[i].Amount} ");
                 //}
 
-                Console.WriteLine($"Total repayment months is {firstResultSet.MonthlyRepayments.Count}");//Print total number of payments
+                Console.WriteLine($"Total months: {firstResultSet.MonthlyRepayments.Count}");//Print total number of payments
                 Console.WriteLine($"{firstResultSet.WarningIndicator}");
 
                 //------------
-                Console.WriteLine("\nSecond set of results\n");
+                Console.WriteLine("\nSecond mortgage\n");
                 Results secondResultSet = LogicMethod.CalculateRepayments(secondInputs, type);
                 //UIMethods.ClearConsole();
-                Console.WriteLine($"Total repayment of loan: £{secondResultSet.TotalAmount:N2}\n");
-                Console.WriteLine("Payment Items \n-------------");
+                Console.WriteLine($"Total amount: £{secondResultSet.TotalAmount:N2}\n");
+                Console.WriteLine("Monthly repayments \n-------------");
                 for (int i = 0; i < 1; i++)
                 {
                     Console.WriteLine($"{secondResultSet.PaymentItems[i].Year}: £{secondResultSet.PaymentItems[i].Amount:N2} ");
@@ -109,7 +109,7 @@
                 //    Console.WriteLine($"{secondResultSet.PaymentItems[i].Year}: £{secondResultSet.PaymentItems[i].Amount} ");
                 //}
 
-                Console.WriteLine($"Total repayment months is {secondResultSet.MonthlyRepayments.Count}");//Print total number of payments
+                Console.WriteLine($"Total months: {secondResultSet.MonthlyRepayments.Count}");//Print total number of payments
                 Console.WriteLine($"{secondResultSet.WarningIndicator}");
             }
 
