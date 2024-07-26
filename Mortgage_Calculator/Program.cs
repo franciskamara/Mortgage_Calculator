@@ -30,14 +30,14 @@
                 UIMethods.ClearConsole();
                 Console.WriteLine($"Total amount: £{resultSet.TotalAmount:N2}\n");
                 Console.WriteLine("Monthly repayments \n_____________");
-                for (int i = 0; i < 1; i++)
-                {
-                    Console.WriteLine($"{resultSet.PaymentItems[i].Year}: £{resultSet.PaymentItems[i].Amount:N2} ");
-                }
-                //for (int i = 0; i <= resultSet.PaymentItems.Count; i++)//Print monthly repayments from list
+                //for (int i = 0; i < 1; i++)
                 //{
-                //    Console.WriteLine($"{resultSet.PaymentItems[i].Year}: £{resultSet.PaymentItems[i].Amount} ");
+                //    Console.WriteLine($"{resultSet.PaymentItems[i].Year}: £{resultSet.PaymentItems[i].Amount:N2} ");
                 //}
+                for (int i = 0; i <= resultSet.PaymentItems.Count; i++)//Print monthly repayments from list
+                {
+                    Console.WriteLine($"{resultSet.PaymentItems[i].Year}: £{resultSet.PaymentItems[i].Amount} ");
+                }
 
                 Console.WriteLine($"Total months: {resultSet.MonthlyRepayments.Count}");//Print total number of payments
                 Console.WriteLine($"{resultSet.WarningIndicator}");

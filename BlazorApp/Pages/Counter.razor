@@ -5,16 +5,16 @@
 <h1>Mortgage Calculator</h1>
 <nav>
     <div class="topnav">
-        <a class="active" href="#homeSingleMort" @onclick="() => calcOption = 1">Calculate mortgage</a>&nbsp
-        <a href="#compareMort" @onclick="() => calcOption = 2">Calculate and compare mortgages</a>
+        <a class="active" @onclick="() => calcOption = 1">Calculate mortgage</a>&nbsp
+        <a class="active" @onclick="() => calcOption = 2">Calculate and compare mortgages</a>
     </div>
     <br />
 </nav>
 @if (calcOption == 1)
 {
-    <p>Calculate a single mortgage</p>
+    <p>Single mortgage</p>
 
-    <form action="/action_page.php">
+    <form>
         <label>Loan amount: </label>
         <InputNumber @bind-Value="userInput.Amount"></InputNumber>
         <br /><br />
@@ -27,51 +27,96 @@
             <br />Interest only: repay the interest. Capital paid off at the end of term.
         </label>
         <br />
-        <select name="mTypeSelectStatement" id="mTypeSelect">
+        <InputSelect @bind-Value="mTypeSelect" name="mTypeSelectStatement" id="mTypeSelect">
             <optgroup label="Select the mortgage type"></optgroup>
             <option value="1">Standard repayment</option>
             <option value="2">Interest Only repayment</option>
-        </select>
+        </InputSelect>
         <br /><br />
         <label>Interest rate: %</label>
         <InputNumber @bind-Value="userInput.InterestRatePercentage"></InputNumber>
         <br /><br />
-        <label>Input deposit (optional):</label>
+        <label>Deposit (optional):</label>
         <InputNumber @bind-Value="userInput.Deposit"></InputNumber>
         <br /><br />
 
-
-
+        <button class="btn btn-primary" @onclick="DisplayResults">Results</button>
     </form>
 }
 @if (calcOption == 2)
 {
-    <p>imputes needed for calc 2</p>
+    <p>Compare mortgages</p>
+
+    <form>
+        <h5>First mortgage</h5>
+        <label>Loan amount: </label>
+        <InputNumber @bind-Value="userInput.Amount"></InputNumber>
+        <br /><br />
+        <label>How many years for the loan? </label>
+        <InputNumber @bind-Value="userInput.Term"></InputNumber>
+        <br /><br />
+        <label for="mTypeSelect">
+            Select the mortgage type.
+            <br />Standard: repay capital and interest.
+            <br />Interest only: repay the interest. Capital paid off at the end of term.
+        </label>
+        <br />
+        <InputSelect @bind-Value="mTypeSelect" name="mTypeSelectStatement" id="mTypeSelect">
+            <optgroup label="Select the mortgage type"></optgroup>
+            <option value="1">Standard repayment</option>
+            <option value="2">Interest Only repayment</option>
+        </InputSelect>
+        <br /><br />
+        <label>Interest rate: %</label>
+        <InputNumber @bind-Value="userInput.InterestRatePercentage"></InputNumber>
+        <br /><br />
+        <label>Deposit (optional):</label>
+        <InputNumber @bind-Value="userInput.Deposit"></InputNumber>
+        <br /><br />
+
+        <h5>Second mortgage</h5>
+
+        <label>Loan amount: </label>
+        <InputNumber @bind-Value="userInputCompare.Amount"></InputNumber>
+        <br /><br />
+        <label>How many years for the loan? </label>
+        <InputNumber @bind-Value="userInputCompare.Term"></InputNumber>
+        <br /><br />
+        <label for="mTypeSelectCompare">
+            Select the mortgage type.
+            <br />Standard: repay capital and interest.
+            <br />Interest only: repay the interest. Capital paid off at the end of term.
+        </label>
+        <br />
+        <InputSelect @bind-Value="mTypeSelectCompare" name="mTypeSelectStatement" id="mTypeSelectCompare">
+            <optgroup label="Select the mortgage type"></optgroup>
+            <option value="1">Standard repayment</option>
+            <option value="2">Interest Only repayment</option>
+        </InputSelect>
+        <br /><br />
+        <label>Interest rate: %</label>
+        <InputNumber @bind-Value="userInputCompare.InterestRatePercentage"></InputNumber>
+        <br /><br />
+        <label>Deposit (optional):</label>
+        <InputNumber @bind-Value="userInputCompare.Deposit"></InputNumber>
+        <br /><br />
+
+        <button class="btn btn-primary" @onclick="DisplayResults">Results</button>
+    </form>
 }
-<p role="status">Current count: @currentCount</p>
-<InputNumber @bind-Value="userInput.Deposit"></InputNumber>
-<button class="btn btn-primary" @onclick="DisplayResults">Click me</button>
+@*<p role="status">Current count: @currentCount</p>*@
+@*<InputNumber @bind-Value="userInput.Deposit"></InputNumber>*@
 
 
 @code {
 
     private UserInput userInput = new();
+    private UserInput userInputCompare = new();
     private MortgageType mTypeSelect = new();
-    private int currentCount = 0;
-
+    private MortgageType mTypeSelectCompare = new();
     private int calcOption = 0;
 
-    private void MortgageTypeSelect()
-    {
-        if (mTypeSelect == MortgageType.Standard)
-        {
-            mTypeSelect = MortgageType.Standard;
-        }
-        if (mTypeSelect == MortgageType.Interest_Only)
-        {
-            mTypeSelect = MortgageType.Interest_Only;
-        }
-    }
+    //private int currentCount = 0;
 
     private void DisplayResults()
     {
@@ -85,8 +130,10 @@
         else
         {
             //do calc 2
+            Results firstResultSet = LogicMethod.CalculateRepayments(userInput, mTypeSelect);
+            Results sencondResultSet = LogicMethod.CalculateRepayments(userInputCompare, mTypeSelectCompare);
         }
-        currentCount++;
+        //currentCount++;
     }
 }
 

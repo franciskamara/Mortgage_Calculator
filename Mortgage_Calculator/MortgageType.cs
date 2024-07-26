@@ -3,7 +3,7 @@ namespace Mortgage_Calculator
 {
     public enum MortgageType
     {
-        Interest_Only,
-        Standard 
+        Standard = 1,
+        Interest_Only = 2
     }
 }
