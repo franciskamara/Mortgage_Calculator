@@ -29,8 +29,10 @@
         <br />
         <InputSelect @bind-Value="mTypeSelect" name="mTypeSelectStatement" id="mTypeSelect">
             <optgroup label="Select the mortgage type"></optgroup>
-            <option value="1">Standard repayment</option>
-            <option value="2">Interest Only repayment</option>
+            @foreach (MortgageType type in Enum.GetValues(typeof(MortgageType)))
+            {
+                <option value="@type">@type.ToString()</option>
+            }
         </InputSelect>
         <br /><br />
         <label>Interest rate: %</label>
@@ -42,7 +44,25 @@
 
         <button class="btn btn-primary" @onclick="DisplayResults">Results</button>
     </form>
+  
+        @if (resultSet != null)
+        {
+            <p>Total Amount:  @resultSet.TotalAmount</p>
+            <p>Total months: @resultSet.MonthlyRepayments.Count</p>
+            <p>Monthly payments</p>
+            <ul>
+                @foreach (PaymentItem item in resultSet.PaymentItems)
+                {
+                        @*<p> @item.Year - @item.RemainingAmount</p>*@
+                        <li>@item.Year - @item.RemainingAmount</li>
+                }
+            </ul>
+            <p>Warning Indicator: @resultSet.WarningIndicator</p>
+
+        }
+  
 }
+
 @if (calcOption == 2)
 {
     <p>Compare mortgages</p>
@@ -63,8 +83,10 @@
         <br />
         <InputSelect @bind-Value="mTypeSelect" name="mTypeSelectStatement" id="mTypeSelect">
             <optgroup label="Select the mortgage type"></optgroup>
-            <option value="1">Standard repayment</option>
-            <option value="2">Interest Only repayment</option>
+            @foreach (MortgageType type in Enum.GetValues(typeof(MortgageType)))
+            {
+                <option value="@type">@type.ToString()</option>
+            }
         </InputSelect>
         <br /><br />
         <label>Interest rate: %</label>
@@ -82,7 +104,7 @@
         <label>How many years for the loan? </label>
         <InputNumber @bind-Value="userInputCompare.Term"></InputNumber>
         <br /><br />
-        <label for="mTypeSelectCompare">
+        <label for="mTypeSelect">
             Select the mortgage type.
             <br />Standard: repay capital and interest.
             <br />Interest only: repay the interest. Capital paid off at the end of term.
@@ -90,8 +112,10 @@
         <br />
         <InputSelect @bind-Value="mTypeSelectCompare" name="mTypeSelectStatement" id="mTypeSelectCompare">
             <optgroup label="Select the mortgage type"></optgroup>
-            <option value="1">Standard repayment</option>
-            <option value="2">Interest Only repayment</option>
+            @foreach (MortgageType type in Enum.GetValues(typeof(MortgageType)))
+            {
+                <option value="@type">@type.ToString()</option>
+            }
         </InputSelect>
         <br /><br />
         <label>Interest rate: %</label>
@@ -108,15 +132,18 @@
 @*<InputNumber @bind-Value="userInput.Deposit"></InputNumber>*@
 
 
+
+
 @code {
 
     private UserInput userInput = new();
     private UserInput userInputCompare = new();
-    private MortgageType mTypeSelect = new();
-    private MortgageType mTypeSelectCompare = new();
+    private MortgageType mTypeSelect = MortgageType.Standard;
+    private MortgageType mTypeSelectCompare = MortgageType.Standard;
     private int calcOption = 0;
-
-    //private int currentCount = 0;
+    private Results resultSet = new();
+    private Results resultSetCompare = new();
+    private Graph graph = new();
 
     private void DisplayResults()
     {
@@ -125,13 +152,13 @@
         if (calcOption == 1)
         {
             //do calc 1
-            Results resultSet = LogicMethod.CalculateRepayments(userInput, mTypeSelect);
+            resultSet = LogicMethod.CalculateRepayments(userInput, mTypeSelect);
         }
         else
         {
             //do calc 2
-            Results firstResultSet = LogicMethod.CalculateRepayments(userInput, mTypeSelect);
-            Results sencondResultSet = LogicMethod.CalculateRepayments(userInputCompare, mTypeSelectCompare);
+            resultSet = LogicMethod.CalculateRepayments(userInput, mTypeSelect);
+            resultSetCompare = LogicMethod.CalculateRepayments(userInputCompare, mTypeSelectCompare);
         }
         //currentCount++;
     }

@@ -29,6 +29,7 @@
                 Results resultSet = LogicMethod.CalculateRepayments(inputs, type);
                 UIMethods.ClearConsole();
                 Console.WriteLine($"Total amount: £{resultSet.TotalAmount:N2}\n");
+                Console.WriteLine($"Total months: {resultSet.MonthlyRepayments.Count}");//Print total number of payments
                 Console.WriteLine("Monthly repayments \n_____________");
                 //for (int i = 0; i < 1; i++)
                 //{
@@ -39,7 +40,6 @@
                     Console.WriteLine($"{resultSet.PaymentItems[i].Year}: £{resultSet.PaymentItems[i].Amount} ");
                 }
 
-                Console.WriteLine($"Total months: {resultSet.MonthlyRepayments.Count}");//Print total number of payments
                 Console.WriteLine($"{resultSet.WarningIndicator}");
             }
             if (mortgageCalcSelect == CONSTANTS.OPTION_CALCULATE_AND_COMPARE_MORTGAGES)

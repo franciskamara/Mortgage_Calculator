@@ -42,7 +42,7 @@ namespace Mortgage_Calculator
 
         public void GraphDisplay()//Display graph, with Months and Amount 
         {
-            foreach (var item in PaymentItems)
+            foreach (PaymentItem item in PaymentItems)
             {
                 Console.WriteLine($"Date: {item.Year.AddMonths}, Amount: {item.Amount}");
             }
