@@ -21,19 +21,9 @@
         <label>How many years for the loan? </label>
         <InputNumber @bind-Value="userInput.Term"></InputNumber>
         <br /><br />
-        <label for="mTypeSelect">
-            Select the mortgage type.
-            <br />Standard: repay capital and interest.
-            <br />Interest only: repay the interest. Capital paid off at the end of term.
-        </label>
-        <br />
-        <InputSelect @bind-Value="mTypeSelect" name="mTypeSelectStatement" id="mTypeSelect">
-            <optgroup label="Select the mortgage type"></optgroup>
-            @foreach (MortgageType type in Enum.GetValues(typeof(MortgageType)))
-            {
-                <option value="@type">@type.ToString()</option>
-            }
-        </InputSelect>
+
+        <MortgageTypeSelect @selection="mTypeSelect"></MortgageTypeSelect>
+
         <br /><br />
         <label>Interest rate: %</label>
         <InputNumber @bind-Value="userInput.InterestRatePercentage"></InputNumber>
@@ -44,23 +34,21 @@
 
         <button class="btn btn-primary" @onclick="DisplayResults">Results</button>
     </form>
-  
-        @if (resultSet != null)
-        {
-            <p>Total Amount:  @resultSet.TotalAmount</p>
-            <p>Total months: @resultSet.MonthlyRepayments.Count</p>
-            <p>Monthly payments</p>
-            <ul>
-                @foreach (PaymentItem item in resultSet.PaymentItems)
-                {
-                        @*<p> @item.Year - @item.RemainingAmount</p>*@
-                        <li>@item.Year - @item.RemainingAmount</li>
-                }
-            </ul>
-            <p>Warning Indicator: @resultSet.WarningIndicator</p>
 
-        }
-  
+    @if (resultSet != null)
+    {
+        <p>Total Amount:  @resultSet.TotalAmount</p>
+        <p>Total months: @resultSet.MonthlyRepayments.Count</p>
+        <p>Monthly payments</p>
+        <ul>
+            @foreach (PaymentItem item in resultSet.PaymentItems)
+            {
+                <li>@item.Year - @item.RemainingAmount</li>
+            }
+        </ul>
+        <p>Warning Indicator: @resultSet.WarningIndicator</p>
+
+    }
 }
 
 @if (calcOption == 2)
@@ -75,19 +63,9 @@
         <label>How many years for the loan? </label>
         <InputNumber @bind-Value="userInput.Term"></InputNumber>
         <br /><br />
-        <label for="mTypeSelect">
-            Select the mortgage type.
-            <br />Standard: repay capital and interest.
-            <br />Interest only: repay the interest. Capital paid off at the end of term.
-        </label>
-        <br />
-        <InputSelect @bind-Value="mTypeSelect" name="mTypeSelectStatement" id="mTypeSelect">
-            <optgroup label="Select the mortgage type"></optgroup>
-            @foreach (MortgageType type in Enum.GetValues(typeof(MortgageType)))
-            {
-                <option value="@type">@type.ToString()</option>
-            }
-        </InputSelect>
+
+        <MortgageTypeSelect @selection="mTypeSelect"></MortgageTypeSelect>
+
         <br /><br />
         <label>Interest rate: %</label>
         <InputNumber @bind-Value="userInput.InterestRatePercentage"></InputNumber>
@@ -102,21 +80,9 @@
         <InputNumber @bind-Value="userInputCompare.Amount"></InputNumber>
         <br /><br />
         <label>How many years for the loan? </label>
-        <InputNumber @bind-Value="userInputCompare.Term"></InputNumber>
-        <br /><br />
-        <label for="mTypeSelect">
-            Select the mortgage type.
-            <br />Standard: repay capital and interest.
-            <br />Interest only: repay the interest. Capital paid off at the end of term.
-        </label>
-        <br />
-        <InputSelect @bind-Value="mTypeSelectCompare" name="mTypeSelectStatement" id="mTypeSelectCompare">
-            <optgroup label="Select the mortgage type"></optgroup>
-            @foreach (MortgageType type in Enum.GetValues(typeof(MortgageType)))
-            {
-                <option value="@type">@type.ToString()</option>
-            }
-        </InputSelect>
+
+        <MortgageTypeSelect @selection="mTypeSelectCompare"></MortgageTypeSelect>
+
         <br /><br />
         <label>Interest rate: %</label>
         <InputNumber @bind-Value="userInputCompare.InterestRatePercentage"></InputNumber>
@@ -128,10 +94,6 @@
         <button class="btn btn-primary" @onclick="DisplayResults">Results</button>
     </form>
 }
-@*<p role="status">Current count: @currentCount</p>*@
-@*<InputNumber @bind-Value="userInput.Deposit"></InputNumber>*@
-
-
 
 
 @code {
