@@ -1,4 +1,5 @@
 ﻿<!-- Dropdown for Mortgage Type -->
+@using Mortgage_Calculator
 <div>
     <label for="mTypeSelect">
         Select the mortgage type.
@@ -6,7 +7,7 @@
         <br />Interest only: repay the interest. Capital paid off at the end of term.
     </label>
     <br>
-    <InputSelect @bind-Value="mTypeSelect" name="mTypeSelectStatement" id="mTypeSelect">
+    <InputSelect @bind-Value="selection" name="mTypeSelectStatement" id="mTypeSelect">
         <optgroup label="Select the mortgage type"></optgroup>
         <option value=1>Select mortgage type</option>
         @foreach (MortgageType type in Enum.GetValues(typeof(MortgageType)))
@@ -18,6 +19,7 @@
 
 
 @code {
-    private MortgageType mTypeSelect = MortgageType.Undefined;
+    [Parameter]
+    public MortgageType selection { get; set; } = MortgageType.Standard;
 }
 

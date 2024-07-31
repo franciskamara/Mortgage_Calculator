@@ -5,7 +5,7 @@ namespace Mortgage_Calculator
 {
     public class Results
     {
-        private List<PaymentItem> _paymentItems;
+        private List<PaymentItem> _paymentItems = new();
         public List<PaymentItem> PaymentItems
         {
             get { return _paymentItems; }
