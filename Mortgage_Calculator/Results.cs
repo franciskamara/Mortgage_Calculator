@@ -36,7 +36,7 @@ namespace Mortgage_Calculator
         }
 
 
-        private List<double> _monthlyRepayments;
+        private List<double> _monthlyRepayments = new();
         public List<double> MonthlyRepayments
         {
             get { return _monthlyRepayments; }

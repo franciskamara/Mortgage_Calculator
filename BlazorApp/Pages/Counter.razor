@@ -35,11 +35,19 @@
         <button class="btn btn-primary" @onclick="DisplayResults">Results</button>
     </form>
 
-    @if (resultSet != null)
+    @if (resultSet != null)//Results Output
     {
-        <p>Total Amount:  @resultSet.TotalAmount</p>
-        <p>Total months: @resultSet.MonthlyRepayments.Count</p>
-        <p>Monthly payments</p>
+        <p title="Total repayment amount">Total Amount:  @resultSet.TotalAmount</p>
+        if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
+        {
+            <p>Total months: @resultSet.MonthlyRepayments.Count</p>
+        }
+        else
+        {
+            <p>0 months</p>
+        }
+
+        <p title="List of montlhy repayments">Monthly Repayments</p>
         <ul>
             @foreach (PaymentItem item in resultSet.PaymentItems)
             {
@@ -47,8 +55,8 @@
             }
         </ul>
         <p>Warning Indicator: @resultSet.WarningIndicator</p>
-
     }
+
 }
 
 @if (calcOption == 2)
@@ -93,16 +101,62 @@
 
         <button class="btn btn-primary" @onclick="DisplayResults">Results</button>
     </form>
+
+    @if (resultSet != null)//First results output
+    {
+        <h5>First results output</h5>
+        <p title="Total repayment amount">Total Amount:  @resultSet.TotalAmount</p>
+        if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
+        {
+            <p>Total months: @resultSet.MonthlyRepayments.Count</p>
+        }
+        else
+        {
+            <p>0 months</p>
+        }
+
+        <p title="List of montlhy repayments">Monthly Repayments</p>
+        <ul>
+            @foreach (PaymentItem item in resultSet.PaymentItems)
+            {
+                <li>@item.Year - @item.RemainingAmount</li>
+            }
+        </ul>
+        <p>Warning Indicator: @resultSet.WarningIndicator</p>
+    }
+
+    @if (resultSetCompare != null)//Second results output
+    {
+        <h5>Second results output</h5>
+        <p title="Total repayment amount">Total Amount:  @resultSetCompare.TotalAmount</p>
+        if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
+        {
+            <p>Total months: @resultSetCompare.MonthlyRepayments.Count</p>
+        }
+        else
+        {
+            <p>0 months</p>
+        }
+
+        <p title="List of montlhy repayments">Monthly Repayments</p>
+        <ul>
+            @foreach (PaymentItem item in resultSetCompare.PaymentItems)
+            {
+                <li>@item.Year - @item.RemainingAmount</li>
+            }
+        </ul>
+        <p title="Message for 3% increase in interest rate">Warning Indicator: @resultSetCompare.WarningIndicator</p>
+    }
 }
 
+@code
+{
 
-@code {
-
+    private int calcOption = 0;
     private UserInput userInput = new();
     private UserInput userInputCompare = new();
     private MortgageType mTypeSelect = MortgageType.Standard;
     private MortgageType mTypeSelectCompare = MortgageType.Standard;
-    private int calcOption = 0;
     private Results resultSet = new();
     private Results resultSetCompare = new();
     private Graph graph = new();
