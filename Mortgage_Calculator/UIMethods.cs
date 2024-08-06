@@ -89,7 +89,7 @@ public class UIMethods
             {
                 //ClearConsole();
                 Console.Write("Loan amount: £");
-                double amount = int.Parse(Console.ReadLine());
+                double amount = double.Parse(Console.ReadLine());
 
                 return amount;
             }

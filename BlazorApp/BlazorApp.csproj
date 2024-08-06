@@ -9,11 +9,6 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
-    <ProjectReference Include="..\Mortgage_Calculator\Mortgage_Calculator.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Remove="Shared\MortgageTypeSelect.razor" />
   </ItemGroup>
   <ItemGroup>
@@ -23,5 +18,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BootstrapBlazor" Version="8.8.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mortgage_Calculator\Mortgage_Calculator.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>
