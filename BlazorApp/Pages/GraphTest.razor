@@ -1,82 +1,86 @@
 ﻿@page "/lineChart"
 @using Mortgage_Calculator
+@using BlazorBootstrap
+
+
 
 <h3>Line Graph</h3>
 <LineChart @ref="lineChart" />
 
 @code {
 private LineChart lineChart = default!;
-    private LineChartOptions lineChartOptions = default!;
-    private ChartData chartData = default!;
-    private Results resultSet = default!; // Assuming you get this from your calculation method
-    private Results resultSetcompare = default!;
+        private LineChartOptions lineChartOptions = default!;
+        private ChartData chartData = default!;
+        private Results resultSet = default!; // Assuming you get this from your calculation method
+        private Results resultSetcompare = default!;
 
-    protected override void OnInitialized()
-    {
-        var colors = ColorUtility.CategoricalTwelveColors;
-
-        // Sample Results object for demonstration
-        resultSet = GetResults();
-
-        List<string> labels = new List<string>();
-        Dictionary<int, double> annualPayments = new Dictionary<int, double>();
-
-        if (resultSet != null && resultSet.PaymentItems != null)
+        protected override void OnInitialized()
         {
-            foreach (var payment in resultSet.PaymentItems)
+            var colors = ColorUtility.CategoricalTwelveColors;
+
+            // Sample Results object for demonstration
+            resultSet = GetResults();
+
+            List<string> labels = new List<string>();
+            Dictionary<int, double> annualPayments = new Dictionary<int, double>();
+
+            if (resultSet != null && resultSet.PaymentItems != null)
             {
-                int year = payment.Year.Year;
-                if (!annualPayments.ContainsKey(year))
+                foreach (PaymentItem payment in resultSet.PaymentItems)
                 {
-                    annualPayments[year] = 0;
+                    int year = payment.Year.Year;
+                    if (!annualPayments.ContainsKey(year))
+                    {
+                        annualPayments[year] = 0;
+                    }
+                    annualPayments[year] += payment.Amount;
                 }
-                annualPayments[year] += payment.Amount;
-            }
 
-            foreach (var year in annualPayments.Keys)
-            {
-                labels.Add(year.ToString());
-            }
-        }
-
-        var dataset = new LineChartDataset
-        {
-            Label = "Annual Payments",
-            Data = annualPayments.Values.Cast<double?>().ToList(),
-            BackgroundColor = colors[0],
-            BorderColor = colors[0],
-            BorderWidth = 2,
-            HoverBorderWidth = 4,
-        };
-
-        chartData = new ChartData
-        {
-            Labels = labels,
-            Datasets = new List<IChartDataset> { dataset }
-        };
-
-        lineChartOptions = new LineChartOptions
-        {
-            Responsive = true,
-            Interaction = new Interaction { Mode = InteractionMode.Index },
-            Scales = new Scales
-            {
-                X = new ChartAxis
+                foreach (var year in annualPayments.Keys)
                 {
-                    Title = new ChartAxisTitle { Text = "Years", Display = true }
+                    labels.Add(year.ToString());
+                }
+            }
+
+            var dataset = new LineChartDataset
+            {
+                Label = "Annual Payments",
+                Data = annualPayments.Values.Cast<double?>().ToList(),
+                BackgroundColor = colors[0],
+                BorderColor = colors[0],
+                BorderWidth = 2,
+                HoverBorderWidth = 4,
+            };
+
+            chartData = new ChartData
+            {
+                Labels = labels,
+                Datasets = new List<IChartDataset> { dataset }
+            };
+
+            lineChartOptions = new LineChartOptions
+            {
+                Responsive = true,
+                Interaction = new Interaction { Mode = InteractionMode.Index },
+                Scales = new Scales
+                {
+                    X = new ChartAxis
+                    {
+                        Title = new ChartAxisTitle { Text = "Years", Display = true }
+                    },
+                    Y = new ChartAxis
+                    {
+                        Title = new ChartAxisTitle { Text = "Amount", Display = true }
+                    }
                 },
-                Y = new ChartAxis
+                Plugins = new ChartPlugins
                 {
-                    Title = new ChartAxisTitle { Text = "Amount", Display = true }
+                    Title = new ChartTitle
+                    {
+                        Display = true,
+                        Text = "Annual Mortgage Payments"
+                    }
                 }
-            },
-            Plugins = new ChartPlugins
-            {
-                Title = new ChartTitle
-                {
-                    Display = true,
-                    Text = "Annual Mortgage Payments"
-                }
-            }
-        };
+            };
+        }
     }

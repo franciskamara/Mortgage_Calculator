@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorApp.Data;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using BlazorApp.Data;
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
-builder.Services.AddBootstrapBlazor();
+builder.Services.AddBlazorBootstrap();
 
 var app = builder.Build();
 
@@ -31,4 +30,3 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 app.Run();
-
