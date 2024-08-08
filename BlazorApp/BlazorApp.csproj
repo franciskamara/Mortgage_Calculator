@@ -12,11 +12,6 @@
     <Content Remove="Shared\MortgageTypeSelect.razor" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Shared\MortgageTypeSelect.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Blazor.Bootstrap" Version="2.2.0" />
   </ItemGroup>

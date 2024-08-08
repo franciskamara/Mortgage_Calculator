@@ -1,5 +1,6 @@
 ﻿@page "/counter"
 @using Mortgage_Calculator
+
 <PageTitle>Mortgage Calculator</PageTitle>
 
 <h2>Mortgage Calculator</h2>
@@ -37,9 +38,9 @@
     </form>
 
     <div title="Display result">
-        <h3>Calculation results</h3>
         @if (resultSet.PaymentItems.Count > 0)//Results output
         {
+            <h3>Calculation results</h3>
             <p title="Total repayment amount">Total Amount:  @resultSet.TotalAmount</p>
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
@@ -108,7 +109,7 @@
 
     <div title="Results display">
 
-        @if (resultSet != null)//First results output
+        @if (resultSet.PaymentItems.Count > 0)//First results output
         {
             <h5>First mortgage results</h5>
             <p title="Total repayment amount">Total Amount:  @resultSet.TotalAmount</p>
@@ -131,7 +132,7 @@
             <p>Warning Indicator: @resultSet.WarningIndicator</p>
         }
 
-        @if (resultSetCompare != null)//Second results output
+        @if (resultSetCompare.PaymentItems.Count > 0)//Second results output
 
         {
             <h5>Second mortgage results</h5>
