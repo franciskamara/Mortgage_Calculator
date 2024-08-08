@@ -1,6 +1,6 @@
-﻿using BlazorApp.Data;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using BlazorApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,3 +30,4 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 app.Run();
+
