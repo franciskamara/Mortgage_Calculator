@@ -25,9 +25,4 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Update="Properties\launchSettings 2.json">
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
 </Project>
