@@ -1,7 +1,6 @@
 ﻿@page "/counter"
 @using Mortgage_Calculator
 
-
 <PageTitle>Mortgage Calculator</PageTitle>
 
 <h2>Mortgage Calculator</h2>
@@ -94,6 +93,8 @@
         <InputNumber @bind-Value="userInputCompare.Amount"></InputNumber>
         <br /><br />
         <label>How many years for the loan? </label>
+        <InputNumber @bind-Value="userInput.Term"></InputNumber>
+        <br /><br />
 
         <MortgageTypeSelect selection="mTypeSelectCompare"></MortgageTypeSelect>
 

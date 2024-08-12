@@ -9,9 +9,6 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
-    <Content Remove="Shared\MortgageTypeSelect.razor" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Shared\MortgageTypeSelect.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </EmbeddedResource>
