@@ -28,23 +28,23 @@ namespace Mortgage_Calculator
         {
 
             _paymentItems = paymentItems;
-            //       if (paymentItems != null)
-            //      {
-            //           _paymentItems.AddRange(_paymentItems);
-            //      }
         }
 
         public static void RemainingAmountDisplay(PaymentItem pi)//Display the Total amount
         {
             double amount = pi.RemainingAmount;
-            Console.WriteLine($"Remaining mortgage amount: {amount}");
+            Console.WriteLine($"Remaining amount: {amount}");
         }
 
-        public void GraphDisplay()//Display graph, with Months and Amount 
+        public void GraphDisplay()//Display graph
         {
-            foreach (PaymentItem item in PaymentItems)
+            if (_paymentItems?.Count > 0)
             {
-                Console.WriteLine($"Date: {item.Year.AddMonths}, Amount: {item.Amount}");
+                foreach (PaymentItem item in _paymentItems)
+                {
+                    Console.WriteLine($"Date: {item.Year.ToString("yyyy-MM-dd")}, Amount: {item.Amount}");
+                }
+
             }
         }
 

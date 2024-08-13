@@ -38,9 +38,10 @@
     </form>
 
     <div title="Display result">
-        @if (resultSet.PaymentItems.Count > 0)//Results output
+        @if (resultSet?.PaymentItems?.Count > 0)//Results output
         {
             <h3>Calculation results</h3>
+            <GraphTest ResultSet="resultSet"></GraphTest>
             <p title="Total repayment amount">Total Amount:  @resultSet.TotalAmount</p>
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
@@ -110,8 +111,7 @@
     </form>
 
     <div title="Results display">
-
-        @if (resultSet.PaymentItems.Count > 0)//First results output
+        @if (resultSet?.PaymentItems?.Count > 0)//First results output
         {
             <h5>First mortgage results</h5>
             <GraphTest ResultSet="resultSet"></GraphTest>
@@ -135,7 +135,7 @@
             <p>Warning Indicator: @resultSet.WarningIndicator</p>
         }
 
-        @if (resultSetCompare.PaymentItems.Count > 0)//Second results output
+        @if (resultSetCompare?.PaymentItems?.Count > 0)//Second results output
 
         {
             <h5>Second mortgage results</h5>
