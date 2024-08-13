@@ -3,22 +3,30 @@
 @using Color = System.Drawing.Color
 @using Mortgage_Calculator
 
+<h3>Results</h3>
+
+
 @code {
     private LineChart lineChart = default!;
     private LineChartOptions lineChartOptions = default!;
     private ChartData chartData = default!;
 
+    [Parameter]
+    public Results resultSet { get; set; } = default!;
+    public Results resultSetCompare { get; set; } = default!;
+
+
     protected override void OnInitialized()
     {
         var colors = ColorBuilder.CategoricalTwelveColors;
 
-        var labels = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-        var datasets = new List<IChartDataset>();
+        List<string> labels = resultSet.PaymentItems.Select(pi => pi.Year.ToString("yyyy")).ToList();
+        List<IChartDataset> datasets = new List<IChartDataset>();
 
         var dataset1 = new LineChartDataset()
         {
-            Label = "Windows",
-            Data = new List<double> { 7265791, 5899643, 6317759, 6315641, 5338211, 8496306, 7568556, 8538933, 8274297, 8657298, 7548388, 7764845 },
+            Label = "Mortgage 1",
+            Data = resultSet.MonthlyRepayments,
             BackgroundColor = new List<string> { colors[0] },
             BorderColor = new List<string> { colors[0] },
             BorderWidth = new List<double> { 2 },
@@ -29,33 +37,24 @@
         };
         datasets.Add(dataset1);
 
-        var dataset2 = new LineChartDataset()
+        if (resultSetCompare?.MonthlyRepayments?.Count > 0)
         {
-            Label = "macOS",
-            Data = new List<double> { 1809499, 1816642, 2122410, 1809499, 1850793, 1846743, 1954797, 2391313, 1983430, 2469918, 2633303, 2821149 },
-            BackgroundColor = new List<string> { colors[1] },
-            BorderColor = new List<string> { colors[1] },
-            BorderWidth = new List<double> { 2 },
-            HoverBorderWidth = new List<double> { 4 },
-            PointBackgroundColor = new List<string> { colors[1] },
-            PointRadius = new List<int> { 0 }, // hide points
-            PointHoverRadius = new List<int> { 4 },
-        };
-        datasets.Add(dataset2);
+            var dataset2 = new LineChartDataset()
+            {
+                Label = "Mortgage 2",
+                Data = resultSetCompare.MonthlyRepayments,
+                BackgroundColor = new List<string> { colors[1] },
+                BorderColor = new List<string> { colors[1] },
+                BorderWidth = new List<double> { 2 },
+                HoverBorderWidth = new List<double> { 4 },
+                PointBackgroundColor = new List<string> { colors[1] },
+                PointRadius = new List<int> { 0 }, // hide points
+                PointHoverRadius = new List<int> { 4 },
+            };
+            datasets.Add(dataset2);
 
-        var dataset3 = new LineChartDataset()
-        {
-            Label = "Other",
-            Data = new List<double> { 1081241, 1100363, 1118136, 1073255, 1120315, 1395736, 1488788, 1489466, 1489947, 1414739, 1735811, 1820171 },
-            BackgroundColor = new List<string> { colors[2] },
-            BorderColor = new List<string> { colors[2] },
-            BorderWidth = new List<double> { 2 },
-            HoverBorderWidth = new List<double> { 4 },
-            PointBackgroundColor = new List<string> { colors[2] },
-            PointRadius = new List<int> { 0 }, // hide points
-            PointHoverRadius = new List<int> { 4 },
-        };
-        datasets.Add(dataset3);
+        }
+
 
         chartData = new ChartData
         {
@@ -67,13 +66,13 @@
         lineChartOptions.Responsive = true;
         lineChartOptions.Interaction = new Interaction { Mode = InteractionMode.Index };
 
-        lineChartOptions.Scales.X.Title.Text = "2019";
+        lineChartOptions.Scales.X.Title.Text = "Years";
         lineChartOptions.Scales.X.Title.Display = true;
 
-        lineChartOptions.Scales.Y.Title.Text = "Visitors";
+        lineChartOptions.Scales.Y.Title.Text = "Amount";
         lineChartOptions.Scales.Y.Title.Display = true;
 
-        lineChartOptions.Plugins.Title.Text = "Operating system";
+        lineChartOptions.Plugins.Title.Text = "Reapyments over time";
         lineChartOptions.Plugins.Title.Display = true;
     }
 
