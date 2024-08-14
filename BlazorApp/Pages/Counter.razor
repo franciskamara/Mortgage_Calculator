@@ -41,7 +41,7 @@
         @if (resultSet?.PaymentItems?.Count > 0)//Results output
         {
             <h3>Calculation results</h3>
-            <GraphTest ResultSet="resultSet"></GraphTest>
+            <GraphTest resultSet = "resultSet"></GraphTest>
             <p title="Total repayment amount">Total Amount:  @resultSet.TotalAmount</p>
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
@@ -114,7 +114,7 @@
         @if (resultSet?.PaymentItems?.Count > 0)//First results output
         {
             <h5>First mortgage results</h5>
-            <GraphTest ResultSet="resultSet"></GraphTest>
+            <GraphTest resultSet = "resultSet"></GraphTest>
             <p title="Total repayment amount">Total Amount:  @resultSet.TotalAmount</p>
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
@@ -139,7 +139,7 @@
 
         {
             <h5>Second mortgage results</h5>
-            <GraphTest ResultSetCompare="resultSetCompare"></GraphTest>
+            <GraphTest resultSetCompare = "resultSetCompare"></GraphTest>
             <p title="Total repayment amount">Total Amount:  @resultSetCompare.TotalAmount</p>
             if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
             {
