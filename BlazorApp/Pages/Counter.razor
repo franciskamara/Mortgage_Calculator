@@ -14,9 +14,10 @@
 </nav>
 @if (calcOption == 1)
 {
-    <p>Single mortgage</p>
+    <div title="Single mortgage form">
+        <h5>Single mortgage</h5>
+        <br />
 
-    <form title="Single mortgage form">
         <label>Loan amount: </label>
         <InputNumber @bind-Value="userInput.Amount"></InputNumber>
         <br /><br />
@@ -35,13 +36,14 @@
         <br /><br />
 
         <button class="btn btn-primary" @onclick="DisplayResults">Results</button>
-    </form>
+    </div>
 
-    <div title="Display result">
+    <div title="Results display">
         @if (resultSet?.PaymentItems?.Count > 0)//Results output
         {
-            <h3>Calculation results</h3>
-            <GraphTest resultSet = "resultSet"></GraphTest>
+            <br />
+            <h5>Mortgage calculation</h5>
+            <Graphtest22 resultSet="resultSet"></Graphtest22>
             <p title="Total repayment amount">Total Amount:  @resultSet.TotalAmount</p>
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
@@ -51,26 +53,30 @@
             {
                 <p>0 months</p>
             }
-
-            <p title="List of montlhy repayments">Monthly Repayments</p>
+            <p title="List of monthly repayments">Monthly Repayments</p>
             <ul>
-                @foreach (PaymentItem item in resultSet.PaymentItems)
-                {
-                    <li>@item.Year - @item.RemainingAmount</li>
+                <button type="button" class="collapsible">Open Monthly Repayments list</button>
+                <div class="content">
+                    @foreach (var paymentItem in resultSet.PaymentItems)
+                    {
+                    <li>@paymentItem.Year.ToString("MM/yyyy"): £@Math.Round(paymentItem.Amount, 2)</li>
                 }
+            </div>
             </ul>
+
             <p>Warning Indicator: @resultSet.WarningIndicator</p>
         }
-    </div>
+        </div>
 
-}
+    }
 
 @if (calcOption == 2)
 {
-    <p>Compare mortgages</p>
+    <div title="Comparison mortgages form">
+        <h5>Compare mortgages</h5>
+        <br /><br />
+        <h6>First mortgage</h6>
 
-    <form title="Comparison mortgages form">
-        <h5>First mortgage</h5>
         <label>Loan amount: </label>
         <InputNumber @bind-Value="userInput.Amount"></InputNumber>
         <br /><br />
@@ -88,13 +94,13 @@
         <InputNumber @bind-Value="userInput.Deposit"></InputNumber>
         <br /><br />
 
-        <h5>Second mortgage</h5>
+        <h6>Second mortgage</h6>
 
         <label>Loan amount: </label>
         <InputNumber @bind-Value="userInputCompare.Amount"></InputNumber>
         <br /><br />
         <label>How many years for the loan? </label>
-        <InputNumber @bind-Value="userInput.Term"></InputNumber>
+        <InputNumber @bind-Value="userInputCompare.Term"></InputNumber>
         <br /><br />
 
         <MortgageTypeSelect selection="mTypeSelectCompare"></MortgageTypeSelect>
@@ -108,13 +114,13 @@
         <br /><br />
 
         <button class="btn btn-primary" @onclick="DisplayResults">Results</button>
-    </form>
+    </div>
 
     <div title="Results display">
         @if (resultSet?.PaymentItems?.Count > 0)//First results output
         {
-            <h5>First mortgage results</h5>
-            <GraphTest resultSet = "resultSet"></GraphTest>
+            <h6>First mortgage results</h6>
+
             <p title="Total repayment amount">Total Amount:  @resultSet.TotalAmount</p>
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
@@ -138,8 +144,8 @@
         @if (resultSetCompare?.PaymentItems?.Count > 0)//Second results output
 
         {
-            <h5>Second mortgage results</h5>
-            <GraphTest resultSetCompare = "resultSetCompare"></GraphTest>
+            <h6>Second mortgage results</h6>
+
             <p title="Total repayment amount">Total Amount:  @resultSetCompare.TotalAmount</p>
             if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
             {
