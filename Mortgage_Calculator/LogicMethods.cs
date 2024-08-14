@@ -48,7 +48,7 @@ namespace Mortgage_Calculator
             double roundedValue = Math.Round(potentialIncreaseRepayment, 2);
             Results results = new()//New results local variable
             {
-                WarningIndicator = $"Hello, be aware that if your monthly repayment where to increase by 3% at anytime, it will be £{roundedValue:N2}. Ensure you have enoough for this change.",
+                WarningIndicator = $"Hello, be aware that if your monthly repayment where to increase by 3% at anytime, it will be £{roundedValue:N2}. Ensure you have enough for this change.",
                 MonthlyRepayments = monthlyRepayments,
                 PaymentItems = repayments
             };

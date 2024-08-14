@@ -3,9 +3,6 @@
 @using Color = System.Drawing.Color
 @using Mortgage_Calculator
 
-<h3>Results</h3>
-
-
 @code {
     private LineChart lineChart = default!;
     private LineChartOptions lineChartOptions = default!;
@@ -37,7 +34,7 @@
         };
         datasets.Add(dataset1);
 
-        if (resultSetCompare?.MonthlyRepayments?.Count > 0)
+        if (resultSetCompare != null && resultSetCompare.PaymentItems != null)//resultSetCompare?.MonthlyRepayments?.Count > 0)
         {
             var dataset2 = new LineChartDataset()
             {

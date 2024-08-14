@@ -8,7 +8,7 @@
     <div class="topnav">
         <a class="active" @onclick="() => calcOption = 1">Calculate mortgage</a>
         &nbsp
-        <a class="active" @onclick="() => calcOption = 2">Calculate and compare mortgages</a>
+        <a class="active" @onclick="() => calcOption = 2">Compare mortgages</a>
     </div>
     <br />
 </nav>
@@ -43,32 +43,39 @@
         {
             <br />
             <h5>Mortgage calculation</h5>
-            <Graphtest22 resultSet="resultSet"></Graphtest22>
-            <p title="Total repayment amount">Total Amount:  @resultSet.TotalAmount</p>
+            //<Graphtest22 resultSet="resultSet"></Graphtest22>
+            <p title="Total repayment amount">Total Amount:  £@resultSet.TotalAmount.ToString("N2")</p>
+
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
-                <p>Total months: @resultSet.MonthlyRepayments.Count</p>
+                <p>Total repayment months: @resultSet.MonthlyRepayments.Count</p>
             }
             else
             {
                 <p>0 months</p>
             }
-            <p title="List of monthly repayments">Monthly Repayments</p>
-            <ul>
-                <button type="button" class="collapsible">Open Monthly Repayments list</button>
-                <div class="content">
-                    @foreach (var paymentItem in resultSet.PaymentItems)
+
+            <details>
+                <summary title="List of monthly repayments">
+                    Monthly Repayments
+                </summary>
+                <ul>
+                    @foreach (PaymentItem paymentItem in resultSet.PaymentItems)
                     {
-                    <li>@paymentItem.Year.ToString("MM/yyyy"): £@Math.Round(paymentItem.Amount, 2)</li>
-                }
+                        <li>@paymentItem.Year.ToString("MM/yyyy"): £@paymentItem.Amount.ToString("N2")</li>
+                    }
+                </ul>
+            </details>
+            <br />
+
+            <div style="border: 2px solid yellow; padding: 4px;">
+                <br />
+            <p>Warning: @resultSet.WarningIndicator</p>
             </div>
-            </ul>
-
-            <p>Warning Indicator: @resultSet.WarningIndicator</p>
         }
-        </div>
+    </div>
 
-    }
+}
 
 @if (calcOption == 2)
 {
@@ -121,24 +128,34 @@
         {
             <h6>First mortgage results</h6>
 
-            <p title="Total repayment amount">Total Amount:  @resultSet.TotalAmount</p>
+            <p title="Total repayment amount">Total Amount:  £@resultSet.TotalAmount.ToString("N2")</p>
+
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
-                <p>Total months: @resultSet.MonthlyRepayments.Count</p>
+                <p>Total repayment months: @resultSet.MonthlyRepayments.Count</p>
             }
             else
             {
                 <p>0 months</p>
             }
 
-            <p title="List of montlhy repayments">Monthly Repayments</p>
-            <ul>
-                @foreach (PaymentItem item in resultSet.PaymentItems)
-                {
-                    <li>@item.Year - @item.RemainingAmount</li>
-                }
-            </ul>
-            <p>Warning Indicator: @resultSet.WarningIndicator</p>
+            <details>
+                <summary title="List of monthly repayments">
+                    Monthly Repayments
+                </summary>
+                <ul>
+                    @foreach (PaymentItem paymentItem in resultSet.PaymentItems)
+                    {
+                        <li>@paymentItem.Year.ToString("MM/yyyy"): @paymentItem.Amount.ToString("N2")</li>
+                    }
+                </ul>
+            </details>
+            <br />
+
+            <div style="border: 2px solid yellow; padding: 4px;">
+                <br />
+                <p>Warning: @resultSet.WarningIndicator</p>
+            </div>
         }
 
         @if (resultSetCompare?.PaymentItems?.Count > 0)//Second results output
@@ -146,25 +163,35 @@
         {
             <h6>Second mortgage results</h6>
 
-            <p title="Total repayment amount">Total Amount:  @resultSetCompare.TotalAmount</p>
+            <p title="Total repayment amount">Total Amount:  £@resultSetCompare.TotalAmount.ToString("N2")</p>
+
             if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
             {
-                <p>Total months: @resultSetCompare.MonthlyRepayments.Count</p>
+                <p>Total repayment months: @resultSetCompare.MonthlyRepayments.Count</p>
             }
             else
             {
                 <p>0 months</p>
             }
 
-            <p title="List of montlhy repayments">Monthly Repayments</p>
-            <ul>
-                @foreach (PaymentItem item in resultSetCompare.PaymentItems)
-                {
-                    <li>@item.Year - @item.RemainingAmount</li>
-                }
-            </ul>
-            <p title="Message for 3% increase in interest rate">Warning Indicator: @resultSetCompare.WarningIndicator</p>
-        }
+            <details>
+                <summary title="List of monthly repayments">
+                    Monthly Repayments
+                </summary>
+                <ul>
+                    @foreach (PaymentItem paymentItem in resultSetCompare.PaymentItems)
+                    {
+                        <li>@paymentItem.Year.ToString("MM/yyyy"): @paymentItem.Amount.ToString("N2")</li>
+                    }
+                </ul>
+            </details>
+            <br />
+
+            <div style="border: 2px solid yellow; padding: 4px;">
+                <br />
+                <p>Warning: @resultSetCompare.WarningIndicator</p>
+            </div>
+         }
     </div>
 }
 
