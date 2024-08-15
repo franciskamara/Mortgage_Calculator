@@ -44,7 +44,9 @@
             <br />
             <h5>Mortgage calculation</h5>
             //<Graphtest22 resultSet="resultSet"></Graphtest22>
-            <p title="Total repayment amount">Total Amount:  £@resultSet.TotalAmount.ToString("N2")</p>
+            <p title="Total repayment amount">Total amount of mortgae repayment:  £@resultSet.TotalAmount.ToString("N2")</p>
+
+            <p>Monthly repayment to pay: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
 
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
@@ -56,21 +58,23 @@
             }
 
             <details>
-                <summary title="List of monthly repayments">
-                    Monthly Repayments
+                <summary Title: Annual remaining amount>
+                    Remaining amount
                 </summary>
                 <ul>
-                    @foreach (PaymentItem paymentItem in resultSet.PaymentItems)
+                    @foreach (PaymentItem item in resultSet.PaymentItems)
                     {
-                        <li>@paymentItem.Year.ToString("MM/yyyy"): £@paymentItem.Amount.ToString("N2")</li>
+                        <li>@item.Year - @item.RemainingAmount</li>
                     }
                 </ul>
             </details>
+
+
             <br />
 
             <div style="border: 2px solid yellow; padding: 4px;">
                 <br />
-            <p>Warning: @resultSet.WarningIndicator</p>
+                <p>Warning: @resultSet.WarningIndicator</p>
             </div>
         }
     </div>
@@ -126,6 +130,7 @@
     <div title="Results display">
         @if (resultSet?.PaymentItems?.Count > 0)//First results output
         {
+            <br />
             <h6>First mortgage results</h6>
 
             <p title="Total repayment amount">Total Amount:  £@resultSet.TotalAmount.ToString("N2")</p>
@@ -158,12 +163,14 @@
             </div>
         }
 
+        <br />
         @if (resultSetCompare?.PaymentItems?.Count > 0)//Second results output
 
         {
             <h6>Second mortgage results</h6>
 
             <p title="Total repayment amount">Total Amount:  £@resultSetCompare.TotalAmount.ToString("N2")</p>
+
 
             if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
             {
@@ -191,7 +198,7 @@
                 <br />
                 <p>Warning: @resultSetCompare.WarningIndicator</p>
             </div>
-         }
+        }
     </div>
 }
 
