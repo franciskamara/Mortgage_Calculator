@@ -62,11 +62,11 @@
                     Remaining amount
                 </summary>
                 <ul>
-                    @foreach (PaymentItem item in resultSet.PaymentItems)
-                    {
-                        <li>@item.Year - @item.RemainingAmount</li>
-                    }
-                </ul>
+                @foreach (PaymentItem item in resultSet.PaymentItems)
+                {
+                    <li>@item.Year - @item.RemainingAmount</li>
+                }
+            </ul>
             </details>
 
 

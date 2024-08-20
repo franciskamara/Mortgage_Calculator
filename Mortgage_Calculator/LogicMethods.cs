@@ -5,11 +5,13 @@ namespace Mortgage_Calculator
     {
         public static Results CalculateRepayments(UserInput input, MortgageType t)
         {
-            double totalAmount = input.Amount;
             double interestRateDecimal = input.InterestRatePercentage / 100;
             int termYears = input.Term;
             int totalMonths = termYears * CONSTANTS.MONTHS_OF_YEAR;//Total months of Loan term calc
+            double deposit = input.Deposit;
+            double totalAmount = input.Amount - deposit;
             double monthlyRepayment;
+
 
             List<PaymentItem> repayments = new();
             List<double> monthlyRepayments = new();
@@ -31,8 +33,7 @@ namespace Mortgage_Calculator
             }
 
             double remainingAmount = totalAmount;//Total amount is remaining amount 
-
-            for (int month = 1; month <= totalMonths; month++)//Loop as many times as totalMonths (x totalMonths)
+            for (int month = 2; month <= totalMonths; month++)//Loop as many times as totalMonths (x totalMonths)
             {
                 remainingAmount -= monthlyRepayment;//Remaining (Total) amount after every monthly loop
 
