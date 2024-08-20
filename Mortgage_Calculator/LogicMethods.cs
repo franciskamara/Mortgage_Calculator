@@ -33,7 +33,7 @@ namespace Mortgage_Calculator
             }
 
             double remainingAmount = totalAmount;//Total amount is remaining amount 
-            for (int month = 2; month <= totalMonths; month++)//Loop as many times as totalMonths (x totalMonths)
+            for (int month = 1; month <= totalMonths; month++)//Loop as many times as totalMonths (x totalMonths)
             {
                 remainingAmount -= monthlyRepayment;//Remaining (Total) amount after every monthly loop
 
@@ -41,7 +41,7 @@ namespace Mortgage_Calculator
                 repayments.Add(new PaymentItem
                 {
                     Amount = monthlyRepayment,
-                    Year = DateTime.Now.AddMonths(month - 1),
+                    Year = DateTime.Now.AddMonths(month),
                     RemainingAmount = remainingAmount,
                 }); //Add data to Payment Items class
             }
