@@ -35,7 +35,6 @@ namespace Mortgage_Calculator
             double remainingAmount = monthlyRepayment * totalMonths;//Total amount is remaining amount
             repayments.Add(new PaymentItem
             {
-                //Amount = monthlyRepayment,
                 Date = DateTime.Now,
                 RemainingAmount = remainingAmount,
             });

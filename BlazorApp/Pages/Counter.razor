@@ -44,9 +44,9 @@
             <br />
             <h5>Mortgage calculation</h5>
             //<Graphtest22 resultSet="resultSet"></Graphtest22>
-            <p title="Total repayment amount">Total Amount:  £@resultSet.TotalAmount.ToString("N2")</p>
+            <p title="Total repayment amount">Total amount:  £@resultSet.TotalAmount.ToString("N2")</p>//Total repayment amount
 
-            <p>Monthly repayment to pay: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
+            <p>Monthly repayment amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
 
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
@@ -58,8 +58,8 @@
             }
 
             <details>
-                <summary Title: Annual remaining amount>
-                    Remaining amount
+                <summary title="List of annual remaining repayments">
+                    Remaining amount:
                 </summary>
                 <ul>
                     @foreach (PaymentItem item in resultSet.PaymentItems)
@@ -137,9 +137,11 @@
             <br />
             <h6>First mortgage results</h6>
 
-            <p title="Total repayment amount">Total Amount:  £@resultSet.TotalAmount.ToString("N2")</p>
+            <p title="Total repayment amount">Total amount:  £@resultSet.TotalAmount.ToString("N2")</p>//Total Amount
 
-            if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
+            <p>Monthly repayment amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
+
+            if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)//Total repaymnet months
             {
                 <p>Total repayment months: @resultSet.MonthlyRepayments.Count</p>
             }
@@ -149,13 +151,16 @@
             }
 
             <details>
-                <summary title="List of monthly repayments">
-                    Monthly Repayments
+                <summary title="List of annual remaining repayments">
+                    Remaining amount:
                 </summary>
                 <ul>
-                    @foreach (PaymentItem paymentItem in resultSet.PaymentItems)
+                    @foreach (PaymentItem item in resultSet.PaymentItems)
                     {
-                        <li>@paymentItem.Date.ToString("MM/yyyy"): @paymentItem.Amount.ToString("N2")</li>
+                        if (item.Date.Month == 12)//Check if the month is December
+                        {
+                            <li>@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
+                        }
                     }
                 </ul>
             </details>
@@ -173,8 +178,9 @@
         {
             <h6>Second mortgage results</h6>
 
-            <p title="Total repayment amount">Total Amount:  £@resultSetCompare.TotalAmount.ToString("N2")</p>
+            <p title="Total repayment amount">Total amount:  £@resultSetCompare.TotalAmount.ToString("N2")</p>
 
+            <p>Monthly repayment amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
 
             if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
             {
@@ -186,13 +192,17 @@
             }
 
             <details>
-                <summary title="List of monthly repayments">
-                    Monthly Repayments
+                <summary title="List of annual remaining repayments">
+                    Remaining amount:
                 </summary>
                 <ul>
-                    @foreach (PaymentItem paymentItem in resultSetCompare.PaymentItems)
+                    @foreach (PaymentItem item in resultSetCompare.PaymentItems)
                     {
-                        <li>@paymentItem.Date.ToString("MM/yyyy"): @paymentItem.Amount.ToString("N2")</li>
+                        if (item.Date.Month == 12)//Check if the month is December
+                        {
+                            <li>@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
+
+                        }
                     }
                 </ul>
             </details>
