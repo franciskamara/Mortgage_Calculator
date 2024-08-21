@@ -9,7 +9,7 @@ namespace Mortgage_Calculator
             int termYears = input.Term;
             int totalMonths = termYears * CONSTANTS.MONTHS_OF_YEAR;//Total months of Loan term calc
             double deposit = input.Deposit;
-            double totalAmount = input.Amount - deposit;
+            double totalRequestedAmount = input.Amount - deposit;
             double monthlyRepayment;
 
 
@@ -20,7 +20,7 @@ namespace Mortgage_Calculator
             {
                 //Interest-only monthly repayment calculation
                 //Interest-Only = ((Amount x InterestRate) / 12months) x totalMonths
-                monthlyRepayment = ((totalAmount * interestRateDecimal) / CONSTANTS.MONTHS_OF_YEAR);
+                monthlyRepayment = ((totalRequestedAmount * interestRateDecimal) / CONSTANTS.MONTHS_OF_YEAR);
             }
             else
             {
@@ -28,7 +28,7 @@ namespace Mortgage_Calculator
                 //Repayment = Amount x (monthlyInterestRate x (1 + (monthlyInterestRate * 12months))) /
                 // (1 + (monthlyInterestRate x totalMonths) - 1)
                 double monthlyInterestRate = interestRateDecimal / CONSTANTS.MONTHS_OF_YEAR;//Monthly interest rate calc
-                monthlyRepayment = totalAmount * (monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, totalMonths)) /
+                monthlyRepayment = totalRequestedAmount * (monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, totalMonths)) /
                                   (Math.Pow(1 + monthlyInterestRate, totalMonths) - 1);
             }
 

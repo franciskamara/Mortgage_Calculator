@@ -43,7 +43,9 @@
         {
             <br />
             <h5>Mortgage calculation</h5>
-            //<Graphtest22 resultSet="resultSet"></Graphtest22>
+
+            <Graphtest22 resultSet="resultSet"></Graphtest22>
+
             <p title="Total repayment amount">Total amount:  £@resultSet.TotalAmount.ToString("N2")</p>//Total repayment amount
 
             <p>Monthly repayment amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
@@ -70,13 +72,10 @@
                         }
                     }
                 </ul>
-
             </details>
-
-
             <br />
 
-            <div style="border: 2px solid yellow; padding: 4px;">
+            <div style="border: 4px solid yellow; padding: 4px;">
                 <br />
                 <p>Warning: @resultSet.WarningIndicator</p>
             </div>
@@ -166,7 +165,7 @@
             </details>
             <br />
 
-            <div style="border: 2px solid yellow; padding: 4px;">
+            <div style="border: 4px solid yellow; padding: 4px;">
                 <br />
                 <p>Warning: @resultSet.WarningIndicator</p>
             </div>
@@ -208,7 +207,7 @@
             </details>
             <br />
 
-            <div style="border: 2px solid yellow; padding: 4px;">
+            <div style="border: 4px solid yellow; padding: 4px;">
                 <br />
                 <p>Warning: @resultSetCompare.WarningIndicator</p>
             </div>
@@ -241,7 +240,6 @@
             resultSet = LogicMethod.CalculateRepayments(userInput, mTypeSelect);
             resultSetCompare = LogicMethod.CalculateRepayments(userInputCompare, mTypeSelectCompare);
         }
-        //currentCount++;
     }
 }
 
