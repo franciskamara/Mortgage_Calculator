@@ -37,7 +37,7 @@
                 //}
                 for (int i = 0; i <= resultSet.PaymentItems.Count; i++)//Print monthly repayments from list
                 {
-                    Console.WriteLine($"{resultSet.PaymentItems[i].Year}: £{resultSet.PaymentItems[i].Amount} ");
+                    Console.WriteLine($"{resultSet.PaymentItems[i].Date}: £{resultSet.PaymentItems[i].Amount} ");
                 }
 
                 Console.WriteLine($"{resultSet.WarningIndicator}");
@@ -84,7 +84,7 @@
                 Console.WriteLine("Monthly repayments \n-------------");
                 for (int i = 0; i < 1; i++)
                 {
-                    Console.WriteLine($"{firstResultSet.PaymentItems[i].Year}: £{firstResultSet.PaymentItems[i].Amount:N2} ");
+                    Console.WriteLine($"{firstResultSet.PaymentItems[i].Date}: £{firstResultSet.PaymentItems[i].Amount:N2} ");
                 }
                 //for (int i = 0; i <= firstResultSet.PaymentItems.Count; i++)//Print monthly repayments from list
                 //{
@@ -102,7 +102,7 @@
                 Console.WriteLine("Monthly repayments \n-------------");
                 for (int i = 0; i < 1; i++)
                 {
-                    Console.WriteLine($"{secondResultSet.PaymentItems[i].Year}: £{secondResultSet.PaymentItems[i].Amount:N2} ");
+                    Console.WriteLine($"{secondResultSet.PaymentItems[i].Date}: £{secondResultSet.PaymentItems[i].Amount:N2} ");
                 }
                 //for (int i = 0; i <= secondResultSet.PaymentItems.Count; i++)//Print monthly repayments from list
                 //{

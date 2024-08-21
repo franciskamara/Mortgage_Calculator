@@ -17,7 +17,7 @@
     {
         var colors = ColorBuilder.CategoricalTwelveColors;
 
-        List<string> labels = resultSet.PaymentItems.Select(pi => pi.Year.ToString("yyyy")).ToList();
+        List<string> labels = resultSet.PaymentItems.Select(pi => pi.Date.ToString("yyyy")).ToList();
         List<IChartDataset> datasets = new List<IChartDataset>();
 
         var dataset1 = new LineChartDataset()

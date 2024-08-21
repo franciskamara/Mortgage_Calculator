@@ -42,7 +42,7 @@ namespace Mortgage_Calculator
             {
                 foreach (PaymentItem item in _paymentItems)
                 {
-                    Console.WriteLine($"Date: {item.Year.ToString("yyyy-MM-dd")}, Amount: {item.Amount}");
+                    Console.WriteLine($"Date: {item.Date.ToString("yyyy-MM-dd")}, Amount: {item.Amount}");
                 }
 
             }

@@ -64,9 +64,13 @@
                 <ul>
                     @foreach (PaymentItem item in resultSet.PaymentItems)
                     {
-                        <li>@item.Year - @item.RemainingAmount</li>
+                        if (item.Date.Month == 12)//Check if the month is December
+                        {
+                            <li>@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
+                        }
                     }
                 </ul>
+
             </details>
 
 
@@ -151,7 +155,7 @@
                 <ul>
                     @foreach (PaymentItem paymentItem in resultSet.PaymentItems)
                     {
-                        <li>@paymentItem.Year.ToString("MM/yyyy"): @paymentItem.Amount.ToString("N2")</li>
+                        <li>@paymentItem.Date.ToString("MM/yyyy"): @paymentItem.Amount.ToString("N2")</li>
                     }
                 </ul>
             </details>
@@ -188,7 +192,7 @@
                 <ul>
                     @foreach (PaymentItem paymentItem in resultSetCompare.PaymentItems)
                     {
-                        <li>@paymentItem.Year.ToString("MM/yyyy"): @paymentItem.Amount.ToString("N2")</li>
+                        <li>@paymentItem.Date.ToString("MM/yyyy"): @paymentItem.Amount.ToString("N2")</li>
                     }
                 </ul>
             </details>
