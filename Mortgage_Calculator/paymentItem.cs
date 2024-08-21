@@ -10,11 +10,11 @@ namespace Mortgage_Calculator
 			set { _amount = value; }
 		}
 
-		private DateTime _year;
-		public DateTime Year
+		private DateTime _date;
+		public DateTime Date
 		{
-			get { return _year; }
-			set { _year = value; }
+			get { return _date; }
+			set { _date = value; }
 		}
 
 		private double _remainingAmount;
