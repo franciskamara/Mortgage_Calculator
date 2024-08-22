@@ -44,9 +44,9 @@
             <br />
             <h5>Mortgage calculation</h5>
 
-            <Graphtest22 resultSet="resultSet"></Graphtest22>
+            <div><Graphtest22 resultSet="resultSet"></Graphtest22></div>
 
-            <p title="Total repayment amount">Total amount:  £@resultSet.TotalAmount.ToString("N2")</p>//Total repayment amount
+            <p title="Total repayment amount">Total amount: £@resultSet.TotalAmount.ToString("N2")</p>//Total repayment amount
 
             <p>Monthly repayment amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
 
