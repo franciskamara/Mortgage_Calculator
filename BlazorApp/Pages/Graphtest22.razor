@@ -88,13 +88,13 @@
 
     private async Task ShowHorizontalLineChartAsync()
     {
-        lineChartOptions.IndexAxis = "y";
+        lineChartOptions.IndexAxis = "Amount (£)";
         await lineChart.UpdateAsync(chartData, lineChartOptions);
     }
 
     private async Task ShowVerticalLineChartAsync()
     {
-        lineChartOptions.IndexAxis = "x";
+        lineChartOptions.IndexAxis = "Remaining amount";
         await lineChart.UpdateAsync(chartData, lineChartOptions);
     }
 
@@ -120,10 +120,13 @@
 
         List<double> displaydata = new();
 
-        foreach(var p in resultSet.PaymentItems)
-    {
-            displaydata.Add(p.Amount); 
-    }
+        foreach (PaymentItem pi in resultSet.PaymentItems)
+        {
+            if (pi.Date.Month == 12)
+            {
+                displaydata.Add(pi.RemainingAmount);
+            }
+        }
 
 
         return new LineChartDataset()
@@ -164,9 +167,23 @@
 
     private string GetNextDataLabel()
     {
-        labelsCount += 1;
-        return $"Day {labelsCount}";
+        while (labelsCount < resultSet.PaymentItems.Count)
+        {
+            PaymentItem paymentItem = resultSet.PaymentItems[labelsCount];
+
+            // Check if the current PaymentItem is for December
+            if (paymentItem.Date.Month == 12)
+            {
+                labelsCount++;
+                return $"Dec/{paymentItem.Date.Year}";
+            }
+
+            labelsCount++;
+        }
+
+        return string.Empty; // Return an empty string if no more December labels are found
     }
+
 
     #endregion Data Preparation
 }

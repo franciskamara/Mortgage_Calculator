@@ -28,20 +28,21 @@ namespace Mortgage_Calculator
             set { _totalAmount = value; }//Set the sum
         }
 
-        private string _warningIndicator;
-        public string WarningIndicator
-        {
-            get { return _warningIndicator; }
-            set { _warningIndicator = value; }
-        }
-
-
         private List<double> _monthlyRepayments = new();
         public List<double> MonthlyRepayments
         {
             get { return _monthlyRepayments; }
             set { _monthlyRepayments = value; }
         }
+
+        private string _warningIndicator;
+        public string WarningIndicator
+        {
+            get { return _warningIndicator; }
+            set { _warningIndicator = value; }
+        }
     }
+
+
 }
 
