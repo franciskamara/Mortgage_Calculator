@@ -20,8 +20,14 @@
 
     protected override void OnInitialized()
     {
-        chartData = new ChartData { Labels = GetDefaultDataLabels(6), Datasets = GetDefaultDataSets(3) };
-        lineChartOptions = new() { Responsive = true, Interaction = new Interaction { Mode = InteractionMode.Index } };
+        chartData = new ChartData
+        {
+            Labels = GetDataLabels(), Datasets = GetDataSets(1)
+        };
+        lineChartOptions = new()
+        {
+            Responsive = true, Interaction = new Interaction { Mode = InteractionMode.Index }
+        };
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -67,7 +73,7 @@
     {
         if (chartData is null || chartData.Datasets is null) return;
 
-        var chartDataset = GetRandomLineChartDataset();
+        var chartDataset = GetLineChartDataset();
         chartData = await lineChart.AddDatasetAsync(chartData, chartDataset, lineChartOptions);
     }
 
@@ -100,19 +106,19 @@
 
     #region Data Preparation
 
-    private List<IChartDataset> GetDefaultDataSets(int numberOfDatasets)
+    private List<IChartDataset> GetDataSets(int numberOfDatasets)
     {
         var datasets = new List<IChartDataset>();
 
         for (var index = 0; index < numberOfDatasets; index++)
         {
-            datasets.Add(GetRandomLineChartDataset());
+            datasets.Add(GetLineChartDataset());
         }
 
         return datasets;
     }
 
-    private LineChartDataset GetRandomLineChartDataset()
+    private LineChartDataset GetLineChartDataset()
     {
         var c = ColorBuilder.CategoricalTwelveColors[datasetsCount].ToColor();
 
@@ -154,16 +160,24 @@
         return data;
     }
 
-    private List<string> GetDefaultDataLabels(int numberOfLabels)
+    private List<string> GetDataLabels()
     {
-        var labels = new List<string>();
-        for (var index = 0; index < numberOfLabels; index++)
+        List<string> labels = new();//List of labels to be used
+
+        int loanTermYears = resultSet.PaymentItems.Count / CONSTANTS.MONTHS_OF_YEAR;//Payment items in months multiplied by 12 month
+
+        for (int i = 0; i < loanTermYears; i++)
         {
-            labels.Add(GetNextDataLabel());
+            if (i == 0 || (i + 1) % 5 == 0)
+            {
+                var yearLabel = $"Year {i + 1}";
+                labels.Add(yearLabel);
+            }
         }
 
         return labels;
     }
+
 
     private string GetNextDataLabel()
     {
@@ -171,7 +185,7 @@
         {
             PaymentItem paymentItem = resultSet.PaymentItems[labelsCount];
 
-            // Check if the current PaymentItem is for December
+            //Check if the current PaymentItem is for December
             if (paymentItem.Date.Month == 12)
             {
                 labelsCount++;
@@ -181,7 +195,7 @@
             labelsCount++;
         }
 
-        return string.Empty; // Return an empty string if no more December labels are found
+        return string.Empty;//Return an empty string if no more December labels are found
     }
 
 
