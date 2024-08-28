@@ -26,8 +26,39 @@
         };
         lineChartOptions = new()
         {
-            Responsive = true, Interaction = new Interaction { Mode = InteractionMode.Index }
+            Responsive = true,
+            Interaction = new Interaction { Mode = InteractionMode.Index },
+
+            // Set up axis titles
+            Scales = new Scales
+            {
+                X = new ChartAxes
+                {
+                    Title = new ChartAxesTitle
+                    {
+                        Display = true,
+                        Text = "Years"  // X-axis title
+                    }
+                },
+                Y = new ChartAxes
+                {
+                    Title = new ChartAxesTitle
+                    {
+                        Display = true,
+                        Text = "Amount (£)"  // Y-axis title
+                    }
+                }
+            },
+            Plugins = new LineChartPlugins
+            {
+                Title = new ChartPluginsTitle
+                {
+                    Display = true,
+                    Text = "Mortgage Repayment Over Time" // Chart title
+                }
+            }
         };
+
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -94,7 +125,7 @@
 
     private async Task ShowHorizontalLineChartAsync()
     {
-        lineChartOptions.IndexAxis = "Amount (£)";
+        lineChartOptions.IndexAxis = "Term Years";
         await lineChart.UpdateAsync(chartData, lineChartOptions);
     }
 
@@ -149,33 +180,22 @@
         };
     }
 
-    private List<double> GetRandomData()
-    {
-        var data = new List<double>();
-        for (var index = 0; index < labelsCount; index++)
-        {
-            data.Add(random.Next(200));
-        }
-
-        return data;
-    }
-
     private List<string> GetDataLabels()
     {
-        List<string> labels = new();//List of labels to be used
+        List<string> labels = new();// List of labels to be used
 
-        int loanTermYears = resultSet.PaymentItems.Count / CONSTANTS.MONTHS_OF_YEAR;//Payment items in months multiplied by 12 month
+        int loanTermYears = resultSet.PaymentItems.Count / CONSTANTS.MONTHS_OF_YEAR;// Payment items in months multiplied by 12 month
 
         for (int i = 0; i < loanTermYears; i++)
         {
-            if (i == 0 || (i + 1) % 5 == 0)
+            if (i == 0 || (i + 1) % 5 == 0)// Print every 5th year label 
             {
                 string yearLabel = $"Year {i + 1}";
                 labels.Add(yearLabel);
             }
             else
             {
-                labels.Add(string.Empty);//Put nothing the the other lines
+                labels.Add(string.Empty);// Put nothing the the other lines
             }
         }
 
@@ -189,7 +209,7 @@
         {
             PaymentItem paymentItem = resultSet.PaymentItems[labelsCount];
 
-            //Check if the current PaymentItem is for December
+            // Check if the current PaymentItem is for December
             if (paymentItem.Date.Month == 12)
             {
                 labelsCount++;
@@ -199,7 +219,7 @@
             labelsCount++;
         }
 
-        return string.Empty;//Return an empty string if no more December labels are found
+        return string.Empty;// Return an empty string if no more December labels are found
     }
 
 
