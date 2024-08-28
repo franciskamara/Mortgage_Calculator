@@ -13,6 +13,9 @@
     [Parameter]
     public Results resultSet { get; set; }
 
+    [Parameter]
+    public Results resultSet2 { get; set; }
+
     private int datasetsCount = 0;
     private int labelsCount = 0;
 
@@ -20,16 +23,21 @@
 
     protected override void OnInitialized()
     {
+        int numDS = 1;
+        if (resultSet2 != null)
+            numDS = 2;
+
         chartData = new ChartData
         {
-            Labels = GetDataLabels(), Datasets = GetDataSets(1)
+            Labels = GetDataLabels(),
+            Datasets = GetDataSets(numDS)
         };
         lineChartOptions = new()
         {
             Responsive = true,
             Interaction = new Interaction { Mode = InteractionMode.Index },
 
-            // Set up axis titles
+            // Axis titles
             Scales = new Scales
             {
                 X = new ChartAxes
@@ -37,7 +45,7 @@
                     Title = new ChartAxesTitle
                     {
                         Display = true,
-                        Text = "Years"  // X-axis title
+                        Text = "Years (End of)"  // X-axis title
                     }
                 },
                 Y = new ChartAxes
@@ -104,7 +112,7 @@
     {
         if (chartData is null || chartData.Datasets is null) return;
 
-        var chartDataset = GetLineChartDataset();
+        var chartDataset = GetLineChartDataset(resultSet);
         chartData = await lineChart.AddDatasetAsync(chartData, chartDataset, lineChartOptions);
     }
 
@@ -123,40 +131,32 @@
         chartData = await lineChart.AddDataAsync(chartData, GetNextDataLabel(), data);
     }
 
-    private async Task ShowHorizontalLineChartAsync()
-    {
-        lineChartOptions.IndexAxis = "Term Years";
-        await lineChart.UpdateAsync(chartData, lineChartOptions);
-    }
-
-    private async Task ShowVerticalLineChartAsync()
-    {
-        lineChartOptions.IndexAxis = "Remaining amount";
-        await lineChart.UpdateAsync(chartData, lineChartOptions);
-    }
-
     #region Data Preparation
 
-    private List<IChartDataset> GetDataSets(int numberOfDatasets)
+    private List<IChartDataset> GetDataSets(int numDS)
     {
         var datasets = new List<IChartDataset>();
 
-        for (var index = 0; index < numberOfDatasets; index++)
+        // Add the first dataset
+        datasets.Add(GetLineChartDataset(resultSet));
+
+        // Add the second dataset if needed
+        if (numDS == 2 && resultSet2 != null)
         {
-            datasets.Add(GetLineChartDataset());
+            datasets.Add(GetLineChartDataset(resultSet2));
         }
 
         return datasets;
     }
 
-    private LineChartDataset GetLineChartDataset()
+
+    private LineChartDataset GetLineChartDataset(Results resultSet)
     {
         var c = ColorBuilder.CategoricalTwelveColors[datasetsCount].ToColor();
 
         datasetsCount += 1;
 
         List<double> displaydata = new();
-
         foreach (PaymentItem pi in resultSet.PaymentItems)
         {
             if (pi.Date.Month == 12)
@@ -165,11 +165,10 @@
             }
         }
 
-
         return new LineChartDataset()
         {
             Label = $"Mortgage {datasetsCount}",
-            Data = displaydata,//TODO
+            Data = displaydata, //TODO
             BackgroundColor = new List<string> { c.ToRgbString() },
             BorderColor = new List<string> { c.ToRgbString() },
             BorderWidth = new List<double> { 2 },
@@ -188,7 +187,7 @@
 
         for (int i = 0; i < loanTermYears; i++)
         {
-            if (i == 0 || (i + 1) % 5 == 0)// Print every 5th year label 
+            if (i == 0 || (i + 1) % 5 == 0)// Print every 5th year label
             {
                 string yearLabel = $"Year {i + 1}";
                 labels.Add(yearLabel);

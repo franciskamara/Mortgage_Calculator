@@ -136,6 +136,10 @@
             <br />
             <h5>Mortgage Calculation Results</h5>// Header: Mortgage Calculation results
 
+            <div><LineChartOutput resultSet="resultSet" resultSetCompare="resultSet2"></LineChartOutput></div>// Line chart output
+
+            <h6>First Mortgage Results</h6>
+
             <p title="Total repayment amount">Total Amount:  £@resultSet.TotalAmount.ToString("N2")</p>//Total Amount
 
             <p>Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
@@ -179,7 +183,7 @@
 
             <p title="Total repayment amount">Total Amount:  £@resultSetCompare.TotalAmount.ToString("N2")</p>
 
-            <p>Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
+            <p>Monthly Repayment Amount: £@resultSetCompare.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
 
             if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
             {
