@@ -39,21 +39,20 @@
     </div>
 
     <div title="Results display">
-        @if (resultSet?.PaymentItems?.Count > 0)//Results output
+        @if (resultSet?.PaymentItems?.Count > 0)// Results output
         {
             <br />
-            <h5>Mortgage calculation</h5>
+            <h5>Mortgage Calculation Results</h5>// Header: Mortgage Calculation results 
 
-            <p title="Line chart title">Annual Remaining Amount</p>
-            <div><Graphtest22 resultSet="resultSet"></Graphtest22></div>
+            <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>// Line chart output 
 
-            <p title="Total repayment amount">Total amount: £@resultSet.TotalAmount.ToString("N2")</p>//Total repayment amount
+            <p title="Total Repayment Amount">Total Amount: £@resultSet.TotalAmount.ToString("N2")</p>//Total repayment amount
 
-            <p>Monthly repayment amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
+            <p>Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
 
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
-                <p>Total repayment months: @resultSet.MonthlyRepayments.Count</p>
+                <p>Total Repayment Months: @resultSet.MonthlyRepayments.Count</p>
             }
             else
             {
@@ -62,7 +61,7 @@
 
             <details>
                 <summary title="List of annual remaining repayments">
-                    Remaining annual repayment amounts:
+                    Remaining Annual Repayment Amounts:
                 </summary>
                 <ul>
                     @foreach (PaymentItem item in resultSet.PaymentItems)
@@ -135,15 +134,15 @@
         @if (resultSet?.PaymentItems?.Count > 0)//First results output
         {
             <br />
-            <h6>First mortgage results</h6>
+            <h5>Mortgage Calculation Results</h5>// Header: Mortgage Calculation results
 
-            <p title="Total repayment amount">Total amount:  £@resultSet.TotalAmount.ToString("N2")</p>//Total Amount
+            <p title="Total repayment amount">Total Amount:  £@resultSet.TotalAmount.ToString("N2")</p>//Total Amount
 
-            <p>Monthly repayment amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
+            <p>Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
 
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)//Total repaymnet months
             {
-                <p>Total repayment months: @resultSet.MonthlyRepayments.Count</p>
+                <p>Total Repayment Months: @resultSet.MonthlyRepayments.Count</p>
             }
             else
             {
@@ -152,7 +151,7 @@
 
             <details>
                 <summary title="List of annual remaining repayments">
-                    Remaining annual repayment amounts:
+                    Remaining Annual Repayment Amounts:
                 </summary>
                 <ul>
                     @foreach (PaymentItem item in resultSet.PaymentItems)
@@ -176,15 +175,15 @@
         @if (resultSetCompare?.PaymentItems?.Count > 0)//Second results output
 
         {
-            <h6>Second mortgage results</h6>
+            <h6>Second Mortgage Results</h6>
 
-            <p title="Total repayment amount">Total amount:  £@resultSetCompare.TotalAmount.ToString("N2")</p>
+            <p title="Total repayment amount">Total Amount:  £@resultSetCompare.TotalAmount.ToString("N2")</p>
 
-            <p>Monthly repayment amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
+            <p>Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
 
             if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
             {
-                <p>Total repayment months: @resultSetCompare.MonthlyRepayments.Count</p>
+                <p>Total Repayment Months: @resultSetCompare.MonthlyRepayments.Count</p>
             }
             else
             {
@@ -193,7 +192,7 @@
 
             <details>
                 <summary title="List of annual remaining repayments">
-                    Remaining annual repayment amounts:
+                    Remaining Annual Repayment Amounts:
                 </summary>
                 <ul>
                     @foreach (PaymentItem item in resultSetCompare.PaymentItems)
