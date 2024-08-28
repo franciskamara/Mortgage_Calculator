@@ -14,7 +14,7 @@
     public Results resultSet { get; set; }
 
     [Parameter]
-    public Results resultSet2 { get; set; }
+    public Results resultSetCompare { get; set; }
 
     private int datasetsCount = 0;
     private int labelsCount = 0;
@@ -24,7 +24,7 @@
     protected override void OnInitialized()
     {
         int numDS = 1;
-        if (resultSet2 != null)
+        if (resultSetCompare != null)
             numDS = 2;
 
         chartData = new ChartData
@@ -137,13 +137,12 @@
     {
         var datasets = new List<IChartDataset>();
 
-        // Add the first dataset
-        datasets.Add(GetLineChartDataset(resultSet));
+        datasets.Add(GetLineChartDataset(resultSet));// Add the first dataset
 
         // Add the second dataset if needed
-        if (numDS == 2 && resultSet2 != null)
+        if (numDS == 2 && resultSetCompare != null)
         {
-            datasets.Add(GetLineChartDataset(resultSet2));
+            datasets.Add(GetLineChartDataset(resultSetCompare));
         }
 
         return datasets;
@@ -218,7 +217,7 @@
             labelsCount++;
         }
 
-        return string.Empty;// Return an empty string if no more December labels are found
+        return string.Empty;
     }
 
 
