@@ -51,12 +51,12 @@
                 Total Repayment Amount: £@resultSet.TotalAmount.ToString("N2")
             </font>// Total repayment amount
             <br />
-            double principle = userInput.Amount - userInput.Deposit;// Capital repayment display
+            double capital = userInput.Amount - userInput.Deposit;// Capital repayment display
             <font size="0" style="margin-top:-1" title="Capital repayment value">
-                The capital repayment is £@principle.ToString("N2")
+                The capital repayment is £@capital.ToString("N2")
             </font>// Interest repayment amount 
             <br />
-            double interestRepaymentTotal = resultSet.TotalAmount - userInput.Amount;
+                double interestRepaymentTotal = resultSet.TotalAmount - capital;
             <font style="margin-top:-1" size="0" title="Interest repayment value">
                 The Interest rate repayment is £@interestRepaymentTotal.ToString("N2");
             </font>
