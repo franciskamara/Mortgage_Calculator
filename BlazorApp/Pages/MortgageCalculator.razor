@@ -42,45 +42,62 @@
         @if (resultSet?.PaymentItems?.Count > 0)// Results output
         {
             <br />
-            <h5>Mortgage Calculation Results</h5>// Header: Mortgage Calculation results 
+            <h5>Mortgage Calculation Results</h5>// Header: Mortgage Calculation results
 
-            <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>// Line chart output 
+            <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>// Line chart output
 
-            <p title="Total Repayment Amount">Total Amount: £@resultSet.TotalAmount.ToString("N2")</p>//Total repayment amount
+            // Total repayment, capital and interest only values
+            <font style="margin-bottom:0" size="-1" title="Total Repayment Amount">
+                Total Repayment Amount: £@resultSet.TotalAmount.ToString("N2")
+            </font>// Total repayment amount
+            <br />
+            double principle = userInput.Amount - userInput.Deposit;// Capital repayment display
+            <font size="0" style="margin-top:-1" title="Capital repayment value">
+                The capital repayment is £@principle.ToString("N2")
+            </font>// Interest repayment amount 
+            <br />
+            double interestRepaymentTotal = resultSet.TotalAmount - userInput.Amount;
+            <font style="margin-top:-1" size="0" title="Interest repayment value">
+                The Interest rate repayment is £@interestRepaymentTotal.ToString("N2");
+            </font>
 
-            <p>Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
+            <br />
+            <font size="-1">Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </font>//Display one month's repayment value
 
+            <br />
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
-                <p>Total Repayment Months: @resultSet.MonthlyRepayments.Count</p>
+                <font size="-1">Total Repayment Months: @resultSet.MonthlyRepayments.Count</font>
             }
             else
             {
-                <p>0 months</p>
-            }
+                <font size="-1">
+                    0 months</font">
+                }
 
-            <details>
-                <summary title="List of annual remaining repayments">
-                    Remaining Annual Repayment Amounts:
-                </summary>
-                <ul>
-                    @foreach (PaymentItem item in resultSet.PaymentItems)
-                    {
-                        if (item.Date.Month == 12)//Check if the month is December
-                        {
-                            <li>@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
-                        }
-                    }
-                </ul>
-            </details>
-            <br />
-
-            <div style="border: 4px solid yellow; padding: 4px;">
                 <br />
-                <p>Warning: @resultSet.WarningIndicator</p>
-            </div>
-        }
-    </div>
+                <details>
+                    <summary title="List of annual remaining repayments">
+                        <font size="-1">Remaining Annual Repayment Amounts:</font>
+                    </summary>
+                    <ul>
+                        @foreach (PaymentItem item in resultSet.PaymentItems)
+                        {
+                            if (item.Date.Month == 12)//Check if the month is December
+                            {
+                                <li>@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
+                            }
+                        }
+                    </ul>
+                </details>
+                <br />
+
+                <div style="border: 4px solid yellow; padding: 4px;">
+                    <br />
+                    <p>Warning: @resultSet.WarningIndicator</p>
+                </div>
+            }
+</div>
 
 }
 
@@ -140,7 +157,7 @@
 
             <h6>First Mortgage Results</h6>
 
-            <p title="Total repayment amount">Total Amount:  £@resultSet.TotalAmount.ToString("N2")</p>//Total Amount
+            <p title="Total repayment amount">Total Repayment Amount:  £@resultSet.TotalAmount.ToString("N2")</p>//Total Amount
 
             <p>Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
 
@@ -181,7 +198,7 @@
         {
             <h6>Second Mortgage Results</h6>
 
-            <p title="Total repayment amount">Total Amount:  £@resultSetCompare.TotalAmount.ToString("N2")</p>
+            <p title="Total repayment amount">Total Repayment Amount:  £@resultSetCompare.TotalAmount.ToString("N2")</p>
 
             <p>Monthly Repayment Amount: £@resultSetCompare.MonthlyRepayments[0].ToString("N2") </p>//Display one month's repayment value
 
