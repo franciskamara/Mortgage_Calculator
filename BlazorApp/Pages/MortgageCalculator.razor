@@ -25,7 +25,7 @@
         <InputNumber @bind-Value="userInput.Term"></InputNumber>
         <br /><br />
 
-        <MortgageTypeSelect selection="mTypeSelect"></MortgageTypeSelect>
+        <MortgageTypeSelect @bind-selection="mTypeSelect"></MortgageTypeSelect>
 
         <br /><br />
         <label>Interest rate: %</label>
@@ -56,10 +56,10 @@
                 The capital repayment is £@principle.ToString("N2")
             </font>// Display capital repayment amount
             <br />
-            double interestRepaymentTotal = resultSet.TotalAmount - userInput.Amount;
+            double interestRepaymentTotal = resultSet.TotalAmount - principle;
             <font style="margin-top:-1" size="0" title="Interest repayment value">
                 The Interest rate repayment is £@interestRepaymentTotal.ToString("N2");
-            </font>// Display Interest rate value 
+            </font>// Display Interest rate value
 
             <br />
             <font size="-1">Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </font>//Display one month's repayment value
@@ -77,7 +77,7 @@
 
                 <details>
                     <summary title="List of annual remaining repayments">
-                        Remaining amount:
+                        <font size="-1">Remaining amount at end of each year:</font>
                     </summary>
                     <ul>
                         @foreach (PaymentItem item in resultSet.PaymentItems)

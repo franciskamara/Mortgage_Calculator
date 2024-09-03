@@ -21,5 +21,14 @@
 @code {
     [Parameter]
     public MortgageType selection { get; set; } = MortgageType.Standard;
+
+    [Parameter]
+    public EventCallback<Enum> selectionChanged { get; set; }
+
+    async Task Updateselection()
+    {
+        
+        await selectionChanged.InvokeAsync(selection);
+    }
 }
 
