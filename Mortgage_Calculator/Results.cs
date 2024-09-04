@@ -16,7 +16,8 @@ namespace Mortgage_Calculator
         public double TotalAmount
         {
             get
-            {
+            { 
+                _totalAmount = 0;// Reset _totalAmount to 0 each time the property is accessed
                 foreach (PaymentItem pi in PaymentItems)
                 {
                     _totalAmount += pi.Amount;

@@ -39,62 +39,73 @@
     </div>
 
     <div title="Results display">
-        @if (resultSet?.PaymentItems?.Count > 0)//Results output
+        @if (resultSet?.PaymentItems?.Count > 0)// Results output
         {
             <br />
             <h5>Mortgage Calculation Results</h5>// Header: Mortgage Calculation results
 
+            <!-- Line chart output -->
             <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>// Line chart output
 
-            // Total repayment, capital and interest only values
-            <font style="margin-bottom:0" size="-1" title="Total Repayment Amount">
-                Total Repayment Amount: £@resultSet.TotalAmount.ToString("N2")
-            </font>// Total repayment amount
-            <br />
-            double principle = userInput.Amount - userInput.Deposit;// Capital repayment display
-            <font size="0" style="margin-top:-1" title="Capital repayment value">
-                The capital repayment is £@principle.ToString("N2")
-            </font>// Display capital repayment amount
-            <br />
+            // Calculate capital repayment
+            double principle = userInput.Amount - userInput.Deposit;
+
+            // Calculate interest repayment
             double interestRepaymentTotal = resultSet.TotalAmount - principle;
-            <font style="margin-top:-1" size="0" title="Interest repayment value">
-                The Interest rate repayment is £@interestRepaymentTotal.ToString("N2");
-            </font>// Display Interest rate value
 
-            <br />
-            <font size="-1">Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2") </font>//Display one month's repayment value
+            <!-- Total repayment, capital, and interest only values -->
+            <font style="margin-bottom:0; display: block;" size="2" title="Total Repayment Amount">
+                Total Repayment Amount: £@resultSet.TotalAmount.ToString("N2")
+            </font><!-- Total repayment amount -->
 
-            <br />
+            <font style="margin-top:-1; display: block;" size="0" title="Capital Repayment Value">
+                The capital repayment is £@principle.ToString("N2")
+            </font><!-- Capital repayment amount -->
+
+            <font style="margin-top:-1; display: block;" size="0" title="Interest Repayment Value">
+                The interest repayment is £@interestRepaymentTotal.ToString("N2")
+            </font> <!-- Interest repayment amount -->
+ 
+            <font size="2" title="Monthly Repayment Value">
+                Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2")
+            </font> <!--One month's repayment amount -->
+                <br />
             if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
             {
-                <font size="-1">Total Repayment Months: @resultSet.MonthlyRepayments.Count</font>
+                <font size="2.5" title="Total repayment months">
+                    Total Repayment Months: @resultSet.MonthlyRepayments.Count
+                </font>
             }
             else
             {
-                <font size="-1">
-                    0 months</font">
+                <font size="2">
+                    0 months
+                    </font">
                 }
 
                 <details>
                     <summary title="List of annual remaining repayments">
-                        <font size="-1">Remaining amount at end of each year:</font>
+                        <font size="2">
+                            Remaining amount at end of each year - 
+                        </font>
                     </summary>
                     <ul>
                         @foreach (PaymentItem item in resultSet.PaymentItems)
                         {
                             if (item.Date.Month == 12)//Check if the month is December
                             {
-                                <li>@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
+                                <li size="1">@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
                             }
                         }
                     </ul>
                 </details>
                 <br />
 
-                <div style="border: 4px solid yellow; padding: 4px;">
-                    <br />
-                    <p>Warning: @resultSet.WarningIndicator</p>
-                </div>
+                <div style="border: 4px solid yellow; padding: 2px;">
+                    <font size="3">
+                        Warning: @resultSet.WarningIndicator
+                    </font>
+                </div><!--Warning Indicator message-->
             }
 </div>
 

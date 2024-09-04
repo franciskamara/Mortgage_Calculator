@@ -7,9 +7,8 @@
         <br />Interest only: repay the interest. Capital paid off at the end of term.
     </label>
     <br>
-    <InputSelect @bind-Value="selection" name="mTypeSelectStatement" id="mTypeSelect">
-        <optgroup label="Select the mortgage type"></optgroup>
-        <option value=1>Select mortgage type</option>
+    <InputSelect @bind-Value="selection" @onchange="Updateselection" name="mTypeSelectStatement" id="mTypeSelect">
+        <option disabled selected>Select mortgage type</option>
         @foreach (MortgageType type in Enum.GetValues(typeof(MortgageType)))
         {
             <option value="@type">@type.ToString()</option>
@@ -17,18 +16,18 @@
     </InputSelect>
 </div>
 
-
 @code {
     [Parameter]
     public MortgageType selection { get; set; } = MortgageType.Standard;
 
     [Parameter]
-    public EventCallback<Enum> selectionChanged { get; set; }
+    public EventCallback<MortgageType> selectionChanged { get; set; }
 
-    async Task Updateselection()
+    async Task Updateselection(ChangeEventArgs e)
     {
-        
+        selection = (MortgageType)Enum.Parse(typeof(MortgageType), e.Value.ToString());
         await selectionChanged.InvokeAsync(selection);
     }
 }
+
 
