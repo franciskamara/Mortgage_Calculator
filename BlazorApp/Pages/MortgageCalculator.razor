@@ -5,7 +5,8 @@
 
 <h2>Mortgage Calculator</h2>
 
-<nav style="width: 100%; background-color: #34495e; padding: 10px; box-shadow: 0px 4px 6px rgba(0,0,0,0.1); ">
+<!--Navbar setup and styling-->
+<nav style="width: 100%; background-color: #34495e; color: rgba(255, 255, 255, 0.5); padding: 10px; ">
     <div class="topnav" style="text-align: left;">
         <a class="nav-link" style="color:white; cursor:pointer; text-decoration:none; hover" @onclick="() => calcOption = 1">Calculate a mortgage</a>
         &nbsp
@@ -24,8 +25,8 @@
         .nav-link:hover {
             background-color: #555;
             color: white;
-            border-radius: 50%;
-            padding: 10px 30px;
+            border-radius: 0;
+            padding: 10px 15px;
             transform: scale(1.1); /* Slightly enlarge the link */
         }
 </style>
@@ -365,7 +366,7 @@
     private int calcOption = 0;
     private UserInput userInput = new();
     private UserInput userInputCompare = new();
-    private MortgageType mTypeSelect = default!;
+    private MortgageType mTypeSelect = MortgageType.Standard;
     private MortgageType mTypeSelectCompare = MortgageType.Standard;
     private Results resultSet = new();
     private Results resultSetCompare = new();
