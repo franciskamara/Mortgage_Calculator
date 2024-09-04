@@ -4,38 +4,61 @@
 <PageTitle>Mortgage Calculator</PageTitle>
 
 <h2>Mortgage Calculator</h2>
-<nav>
-    <div class="topnav">
-        <a class="active" @onclick="() => calcOption = 1">Calculate mortgage</a>
+
+<nav style="width: 100%; background-color: #34495e; padding: 10px; box-shadow: 0px 4px 6px rgba(0,0,0,0.1); ">
+    <div class="topnav" style="text-align: left;">
+        <a class="nav-link" style="color:white; cursor:pointer; text-decoration:none; hover" @onclick="() => calcOption = 1">Calculate a mortgage</a>
         &nbsp
-        <a class="active" @onclick="() => calcOption = 2">Compare mortgages</a>
+        <a class="nav-link" style="color: white; cursor: pointer; text-decoration: none" @onclick="() => calcOption = 2">Compare mortgages</a>
     </div>
     <br />
 </nav>
-@if (calcOption == 1)
+
+<style>
+    .nav-link {
+        display: inline-block;
+        border-radius: 50%; /* Make circular on hover */
+        transition: all 0.3s ease; /* Smooth transition */
+    }
+
+        .nav-link:hover {
+            background-color: #555;
+            color: white;
+            border-radius: 50%;
+            padding: 10px 30px;
+            transform: scale(1.1); /* Slightly enlarge the link */
+        }
+</style>
+
+
+@if (calcOption == 1)// Option for single mortgage calculation
 {
+    <br />
     <div title="Single mortgage form">
+
         <h5>Single mortgage</h5>
         <br />
 
         <label>Loan amount: </label>
         <InputNumber @bind-Value="userInput.Amount"></InputNumber>
         <br /><br />
+
         <label>How many years for the loan? </label>
         <InputNumber @bind-Value="userInput.Term"></InputNumber>
         <br /><br />
 
         <MortgageTypeSelect @bind-selection="mTypeSelect"></MortgageTypeSelect>
-
         <br /><br />
+
         <label>Interest rate: %</label>
         <InputNumber @bind-Value="userInput.InterestRatePercentage"></InputNumber>
         <br /><br />
+
         <label>Deposit (optional):</label>
         <InputNumber @bind-Value="userInput.Deposit"></InputNumber>
         <br /><br />
 
-        <button class="btn btn-primary" @onclick="DisplayResults">Results</button>
+        <button style="background-color:green" class="btn btn-primary" @onclick="DisplayResults">Results</button>
     </div>
 
     <div title="Results display">
@@ -81,7 +104,7 @@
             }
             else
             {
-                <font size="2">
+                <font size="2.5">
                     0 months
                     </font">
                 }
@@ -89,8 +112,8 @@
                 <!-- 5) End of Year repayment balance -->
                 <details>
                     <summary title="List of annual remaining repayments">
-                        <font size="2">
-                            Remaining amount at end of each year -
+                        <font size="2.5">
+                            Remaining amount at the end of each year of the term time -
                         </font>
                     </summary>
                     <ul>
@@ -99,8 +122,7 @@
                             if (item.Date.Month == 12)//Check if the month is December
                             {
                                 <font size="2.5">
-
-                                <li size="1">@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
+                                <li>@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
                     </font>
                 }
             }
@@ -110,9 +132,11 @@
 
                         <!-- 6) Warning indicator of repayment increase, 3% -->
                         <div style="border: 4px solid yellow; padding: 2px;">
+                            <br />
                             <font size="3">
                                 Warning: @resultSet.WarningIndicator
                             </font>
+                            <br />
                         </div><!--Warning Indicator message-->
                     }
     </div>
@@ -122,51 +146,58 @@
 @if (calcOption == 2)
 {
     <div title="Comparison mortgages form">
+
+        <br />
         <h5>Compare mortgages</h5>
-        <br /><br />
+        <br />
+
         <h6>First mortgage</h6>
+        <br />
 
         <label>Loan amount: </label>
         <InputNumber @bind-Value="userInput.Amount"></InputNumber>
         <br /><br />
+
         <label>How many years for the loan? </label>
         <InputNumber @bind-Value="userInput.Term"></InputNumber>
         <br /><br />
 
         <MortgageTypeSelect selection="mTypeSelect"></MortgageTypeSelect>
+        <br />
 
-        <br /><br />
         <label>Interest rate: %</label>
         <InputNumber @bind-Value="userInput.InterestRatePercentage"></InputNumber>
         <br /><br />
         <label>Deposit (optional):</label>
         <InputNumber @bind-Value="userInput.Deposit"></InputNumber>
-        <br /><br />
+        <br /><br /><br />
 
         <h6>Second mortgage</h6>
+        <br />
 
         <label>Loan amount: </label>
         <InputNumber @bind-Value="userInputCompare.Amount"></InputNumber>
         <br /><br />
+
         <label>How many years for the loan? </label>
         <InputNumber @bind-Value="userInputCompare.Term"></InputNumber>
         <br /><br />
 
         <MortgageTypeSelect selection="mTypeSelectCompare"></MortgageTypeSelect>
+        <br />
 
-        <br /><br />
         <label>Interest rate: %</label>
         <InputNumber @bind-Value="userInputCompare.InterestRatePercentage"></InputNumber>
         <br /><br />
         <label>Deposit (optional):</label>
         <InputNumber @bind-Value="userInputCompare.Deposit"></InputNumber>
-        <br /><br />
+        <br /><br /><br />
 
-        <button class="btn btn-primary" @onclick="DisplayResults">Results</button>
+        <button style="background-color:green" class="btn btn-primary" @onclick="DisplayResults">Results</button>
     </div>
 
     <div title="Results display">
-        @if (resultSet?.PaymentItems?.Count > 0)//First results output
+        @if (resultSet?.PaymentItems?.Count > 0)//First Results output
         {
             <br />
             <h5>Mortgage Calculation Results</h5>// Header: Mortgage Calculation results
@@ -175,7 +206,7 @@
             <div><LineChartOutput resultSet="resultSet" resultSetCompare="resultSetCompare"></LineChartOutput></div>// Line chart output
 
             <br />
-            <h7>Mortgage 1 Results</h7>// Header: First mortgage result output
+            <h6>Mortgage 1 Results</h6>// Header: First mortgage result output
 
             // Calculate capital repayment
             double principle = userInput.Amount - userInput.Deposit;
@@ -211,7 +242,7 @@
             }
             else
             {
-                <font size="2">
+                <font size="2.5">
                     0 months
                     </font">
                 }
@@ -219,8 +250,8 @@
                 <!-- 5) End of Year repayment balance -->
                 <details>
                     <summary title="List of annual remaining repayments">
-                        <font size="2">
-                            Remaining amount at end of each year -
+                        <font size="2.5">
+                            Remaining amount at the end of each year of the term time -
                         </font>
                     </summary>
                     <ul>
@@ -229,7 +260,7 @@
                             if (item.Date.Month == 12)//Check if the month is December
                             {
                                 <font size="2.5">
-                                <li size="1">@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
+                                <li>@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
                     </font>
                 }
             }
@@ -239,19 +270,21 @@
 
                         <!-- 6) Warning indicator of repayment increase, 3% -->
                         <div style="border: 4px solid yellow; padding: 2px;">
+                            <br />
                             <font size="3">
                                 Warning: @resultSet.WarningIndicator
                             </font>
+                            <br />
                         </div><!--Warning Indicator message-->
                     }
 
         <br />
-        @if (resultSetCompare?.PaymentItems?.Count > 0)//Second results output
+        @if (resultSetCompare?.PaymentItems?.Count > 0)//Second Results output
 
         {
             <!-- 1) Line chart output -->
 
-            <h7>Mortgage 2 Results</h7>// Header: Second mortgage result output
+            <h6>Mortgage 2 Results</h6>// Header: Second mortgage result output
 
             // Calculate capital repayment
             double principle = userInputCompare.Amount - userInputCompare.Deposit;
@@ -287,7 +320,7 @@
             }
             else
             {
-                <font size="2">
+                <font size="2.5">
                     0 months
                     </font">
                 }
@@ -295,8 +328,8 @@
                 <!-- 5) End of Year repayment balance -->
                 <details>
                     <summary title="List of annual remaining repayments">
-                        <font size="2">
-                            Remaining amount at end of each year -
+                        <font size="2.5">
+                            Remaining amount at the end of each year of the term time -
                         </font>
                     </summary>
                     <ul>
@@ -306,7 +339,7 @@
                             {
                                 <font size="2.5">
 
-                                <li size="1">@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
+                                <li>@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
                     </font>
                 }
             }
@@ -316,9 +349,11 @@
 
                         <!-- 6) Warning indicator of repayment increase, 3% -->
                         <div style="border: 4px solid yellow; padding: 2px;">
+                            <br />
                             <font size="3">
                                 Warning: @resultSetCompare.WarningIndicator
                             </font>
+                            <br />
                         </div><!--Warning Indicator message-->
                     }
     </div>
@@ -330,7 +365,7 @@
     private int calcOption = 0;
     private UserInput userInput = new();
     private UserInput userInputCompare = new();
-    private MortgageType mTypeSelect = MortgageType.Standard;
+    private MortgageType mTypeSelect = default!;
     private MortgageType mTypeSelectCompare = MortgageType.Standard;
     private Results resultSet = new();
     private Results resultSetCompare = new();
