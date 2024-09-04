@@ -12,7 +12,7 @@ namespace Mortgage_Calculator
             set { _paymentItems = value; }
         }
 
-        private double _totalAmount;
+        private double _totalAmount = 0;
         public double TotalAmount
         {
             get
