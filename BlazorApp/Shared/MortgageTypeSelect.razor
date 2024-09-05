@@ -8,7 +8,7 @@
     </label>
     <br>
     <InputSelect @bind-Value="selection" @onchange="Updateselection" name="mTypeSelectStatement" id="mTypeSelect">
-        <option disabled selected>Select mortgage type</option>
+        <option value=""> --Select mortgage type-- </option>
         @foreach (MortgageType type in Enum.GetValues(typeof(MortgageType)))
         {
             <option value="@type">@type.ToString()</option>
@@ -23,11 +23,25 @@
     [Parameter]
     public EventCallback<MortgageType> selectionChanged { get; set; }
 
-    async Task Updateselection(ChangeEventArgs e)
+    private async Task Updateselection()
     {
-        selection = (MortgageType)Enum.Parse(typeof(MortgageType), e.Value.ToString());
         await selectionChanged.InvokeAsync(selection);
     }
+
+
+    //private MortgageType _select = MortgageType.Standard;
+    //public MortgageType Select
+    //{
+    //    get
+    //    {
+    //        return _select;
+    //    }
+    //    set
+    //    {
+
+    //        _select = value;
+    //    }
+    //}
 }
 
 
