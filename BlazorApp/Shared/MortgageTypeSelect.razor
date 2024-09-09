@@ -7,7 +7,7 @@
         <br />Interest only: repay the interest. Capital paid off at the end of term.
     </label>
     <br>
-    <InputSelect @bind-Value="selection" @onchange="Updateselection" name="mTypeSelectStatement" id="mTypeSelect">
+    <InputSelect @bind-Value ="selection" @bind-Value:after="Updateselection" @onchange="Updateselection" name="mTypeSelectStatement" id="mTypeSelect">
         <option value=""> --Select mortgage type-- </option>
         @foreach (MortgageType type in Enum.GetValues(typeof(MortgageType)))
         {
