@@ -438,8 +438,16 @@
     }
 
     void setCalcOption(int option)
-{
+    {
         calcOption = option;
-}
+
+        <!-- Default inputs when swtiching from Single mortgage to Compare mortgages-->
+        userInputCompare.Amount = userInput.Amount;
+        userInputCompare.Deposit = userInput.Deposit;
+        userInputCompare.InterestRatePercentage = userInput.InterestRatePercentage;
+        userInputCompare.Term = userInput.Term;
+        userInputCompare.Type = userInput.Type;
+
+    }
 }
 
