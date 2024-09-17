@@ -3,7 +3,7 @@
 
 <PageTitle>Mortgage Calculator</PageTitle>
 
-@*<a style="font-size:x-small" href="/home">Click to go back </a>*@ 
+@*<a style="font-size:x-small" href="/home">Click to go back </a>*@
 
 <h2>Mortgage Calculator</h2>
 
@@ -119,47 +119,62 @@
             {
                 <p class="fs-6">
                     0 months
-                    </p>
-                }
+                </p>
+            }
 
-                <!-- 5) End of Year repayment balance List -->
-                <details class="display-block">
-                    <summary title="List of annual remaining repayments">
-                        <p class="fs-7">
-                            Remaining amount at end of each year of term complete length:
-                        </p>
-                    </summary>
-                    <font size="2">
-                        <ul>
+            <!-- 5) End of Year repayment balance -->
+            <details class="display-block">
+                <summary title="List of annual remaining repayments">
+                    <font size="3" class="fs-7" style="color: ">
+                        Remaining debt breakdown
+                    </font>
+                </summary>
+                <font size="2">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Year End &nbsp</th>
+                                <th scope="col">Remaining Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             @foreach (PaymentItem item in resultSet.PaymentItems)
                             {
-                                if (item.Date.Month == 12)//Check if the month is December
+                                if (item.Date.Month == 12) // Check if the month is December
                                 {
-                                    @if (mTypeSelect == MortgageType.Standard)
-                                    {
-                                        <!-- For standard mortgage, display remaining balance -->
-                                        <li>@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
-                                    }
-                                    else
-                                    {
-                                        <!-- For interest-only mortgage, display only principal -->
-                                        <li>@item.Date.ToString("MM/yyyy") - £@principle.ToString("N2")</li>
-                                    }
+                                    int firstYear = resultSet.PaymentItems[0].Date.Year;
+                                    <tr>
+                                        <th scope="row">
+                                            Year @(item.Date.Year - firstYear + 1) 
+                                        </th>
+                                        @*<th scope="row">@item.Date.ToString("MM/yyyy") &nbsp</th>*@
+                                        @if (mTypeSelect == MortgageType.Standard)
+                                        {
+                                            <!-- For standard mortgage, display remaining balance -->
+                                            <td>£@item.RemainingAmount.ToString("N2")</td>
+                                        }
+                                        else
+                                        {
+                                            <!-- For interest-only mortgage, display only principal -->
+                                            <td>£@userInput.Amount.ToString("N2")</td>
+                                        }
+                                    </tr>
                                 }
                             }
-                        </ul>
-                     </font>
-                        </details>
-                        <br />
+                        </tbody>
+                    </table>
+                </font>
+            </details>
+            <br />
 
-                        <!-- 6) Warning indicator of repayment increase, 3% -->
-                        <div class="alert alert-warning" role="alert">
-                            <p class="fs-6">
-                                Warning: @resultSet.WarningIndicator
-                            </p>
-                        </div>
-                    }
+            <!-- 6) Warning indicator of repayment increase, 3% -->
+            <div class="alert alert-warning" role="alert">
+                <p class="fs-6">
+                    Warning: @resultSet.WarningIndicator
+                </p>
             </div>
+        }
+    </div>
 }
 
 @if (calcOption == 2)
@@ -276,32 +291,47 @@
                 </font">
             }
 
-            <!-- 5) End of Year repayment balance List -->
+            <!-- 5) End of Year repayment balance -->
             <details class="display-block">
                 <summary title="List of annual remaining repayments">
-                    <p class="fs-7">
-                        Remaining amount at end of each year of term complete length:
-                    </p>
+                    <font size="3" class="fs-7" style="color: ">
+                        Remaining debt breakdown
+                    </font>
                 </summary>
                 <font size="2">
-                    <ul>
-                        @foreach (PaymentItem item in resultSet.PaymentItems)
-                        {
-                            if (item.Date.Month == 12)//Check if the month is December
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Year End &nbsp</th>
+                                <th scope="col">Remaining Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (PaymentItem item in resultSet.PaymentItems)
                             {
-                                @if (mTypeSelect == MortgageType.Standard)
+                                if (item.Date.Month == 12) // Check if the month is December
                                 {
-                                    <!-- For standard mortgage, display remaining balance -->
-                                    <li>@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
-                                }
-                                else
-                                {
-                                    <!-- For interest-only mortgage, display only principal -->
-                                    <li>@item.Date.ToString("MM/yyyy") - £@principle.ToString("N2")</li>
+                                    int firstYear = resultSet.PaymentItems[0].Date.Year;
+                                    <tr>
+                                        <th scope="row">
+                                            Year @(item.Date.Year - firstYear + 1)
+                                        </th>
+                                        @*<th scope="row">@item.Date.ToString("MM/yyyy") &nbsp</th>*@
+                                        @if (mTypeSelect == MortgageType.Standard)
+                                        {
+                                            <!-- For standard mortgage, display remaining balance -->
+                                            <td>£@item.RemainingAmount.ToString("N2")</td>
+                                        }
+                                        else
+                                        {
+                                            <!-- For interest-only mortgage, display only principal -->
+                                            <td>£@userInput.Amount.ToString("N2")</td>
+                                        }
+                                    </tr>
                                 }
                             }
-                        }
-                    </ul>
+                        </tbody>
+                    </table>
                 </font>
             </details>
             <br />
@@ -370,32 +400,47 @@
                 </font">
             }
 
-            <!-- 5) End of Year repayment balance List -->
+            <!-- 5) End of Year repayment balance -->
             <details class="display-block">
                 <summary title="List of annual remaining repayments">
-                    <p class="fs-7">
-                        Remaining amount at end of each year of term complete length:
-                    </p>
+                    <font size="3" class="fs-7" style="color: ">
+                        Remaining debt breakdown
+                    </font>
                 </summary>
                 <font size="2">
-                    <ul>
-                        @foreach (PaymentItem item in resultSetCompare.PaymentItems)
-                        {
-                            if (item.Date.Month == 12)//Check if the month is December
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Year End &nbsp</th>
+                                <th scope="col">Remaining Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (PaymentItem item in resultSetCompare.PaymentItems)
                             {
-                                @if (mTypeSelectCompare == MortgageType.Standard)
+                                if (item.Date.Month == 12) // Check if the month is December
                                 {
-                                    <!-- For standard mortgage, display remaining balance -->
-                                    <li>@item.Date.ToString("MM/yyyy") - £@item.RemainingAmount.ToString("N2")</li>
-                                }
-                                else
-                                {
-                                    <!-- For interest-only mortgage, display only principal -->
-                                    <li>@item.Date.ToString("MM/yyyy") - £@principle.ToString("N2")</li>
+                                    int firstYear = resultSetCompare.PaymentItems[0].Date.Year;
+                                    <tr>
+                                        <th scope="row">
+                                            Year @(item.Date.Year - firstYear + 1)
+                                        </th>
+                                        @*<th scope="row">@item.Date.ToString("MM/yyyy") &nbsp</th>*@
+                                        @if (mTypeSelectCompare == MortgageType.Standard)
+                                        {
+                                            <!-- For standard mortgage, display remaining balance -->
+                                            <td>£@item.RemainingAmount.ToString("N2")</td>
+                                        }
+                                        else
+                                        {
+                                            <!-- For interest-only mortgage, display only principal -->
+                                            <td>£@userInputCompare.Amount.ToString("N2")</td>
+                                        }
+                                    </tr>
                                 }
                             }
-                        }
-                    </ul>
+                        </tbody>
+                    </table>
                 </font>
             </details>
             <br />
