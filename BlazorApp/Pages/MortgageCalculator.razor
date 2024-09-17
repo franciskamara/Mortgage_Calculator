@@ -64,6 +64,7 @@
         <button style="background-color:green" class="btn btn-primary" @onclick="DisplayResults">Results</button>
     </div>
 
+    <!-- RESULTS OUTPUT -->
     <div title="Results display">
         @if (resultSet?.PaymentItems?.Count > 0)// Results output
         {
@@ -73,13 +74,13 @@
             <!-- 1) Line chart output -->
             <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>// Line chart output
 
+            <!-- 2) Total repayment, Capital, and Interest Only values -->
+
             // Calculate capital repayment
             double principle = userInput.Amount - userInput.Deposit;
 
             // Calculate interest repayment
             double interestRepaymentTotal = resultSet.TotalAmount - principle;
-
-            <!-- 2) Total repayment, capital, and interest only values -->
             <font style="margin-bottom:0; display: block;" size="2.5" title="Total Repayment Amount">
                 Total Repayment Amount: £@resultSet.TotalAmount.ToString("N2")
             </font><!-- Total repayment amount -->
@@ -152,16 +153,13 @@
                         <br />
 
                         <!-- 6) Warning indicator of repayment increase, 3% -->
-                        <div style="border: 4px solid yellow; padding: 2px;">
-                            <br />
-                            <font size="3">
+                        <div class="alert alert-warning" role="alert">
+                            <p class="fs-6">
                                 Warning: @resultSet.WarningIndicator
-                            </font>
-                            <br />
-                        </div><!--Warning Indicator message-->
+                            </p>
+                        </div>
                     }
-    </div>
-
+            </div>
 }
 
 @if (calcOption == 2)
@@ -309,13 +307,11 @@
                         <br />
 
                         <!-- 6) Warning indicator of repayment increase, 3% -->
-                        <div style="border: 4px solid yellow; padding: 2px;">
-                            <br />
-                            <font size="3">
+                        <div class="alert alert-warning" role="alert">
+                            <p class="fs-6">
                                 Warning: @resultSet.WarningIndicator
-                            </font>
-                            <br />
-                        </div><!--Warning Indicator message-->
+                            </p>
+                        </div>
                     }
 
         <!-- SECOND RESULT OUTPUT -->
@@ -406,13 +402,11 @@
                         <br />
 
                         <!-- 6) Warning indicator of repayment increase, 3% -->
-                        <div style="border: 4px solid yellow; padding: 2px;">
-                            <br />
-                            <font size="3">
+                        <div class="alert alert-warning" role="alert">
+                            <p class="fs-6">
                                 Warning: @resultSetCompare.WarningIndicator
-                            </font>
-                            <br />
-                        </div><!--Warning Indicator message-->
+                            </p>
+                        </div>
                     }
     </div>
 }
