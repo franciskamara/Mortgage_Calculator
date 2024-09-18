@@ -32,17 +32,12 @@ namespace Mortgage_Calculator
                                   (Math.Pow(1 + monthlyInterestRate, totalMonths) - 1);
             }
 
-<<<<<<< Updated upstream
-            double remainingAmount = monthlyRepayment * totalMonths;//Total amount is remaining amount
-=======
-            //Total amount for Standard and Interest Only repayments 
             double remainingAmount;
             if (t == MortgageType.Standard)
-                remainingAmount = monthlyRepayment * totalMonths;// Total amount is remaining amount
+                remainingAmount = monthlyRepayment * totalMonths;//Total amount is remaining amount
             else
-                remainingAmount = input.Amount - input.Deposit;// Total amount is capital amount 
+                remainingAmount = input.Amount - input.Deposit;
 
->>>>>>> Stashed changes
             repayments.Add(new PaymentItem
             {
                 Date = DateTime.Now,
@@ -50,7 +45,10 @@ namespace Mortgage_Calculator
             });
             for (int month = 1; month <= totalMonths; month++)//Loop as many times as totalMonths (x totalMonths)
             {
-                remainingAmount -= monthlyRepayment;//Remaining (Total) amount after every monthly loop
+                if (t == MortgageType.Standard)
+                {
+                    remainingAmount -= monthlyRepayment;//Remaining (Total) amount after every monthly loop
+                }
 
                 monthlyRepayments.Add(monthlyRepayment);
                 repayments.Add(new PaymentItem
@@ -64,7 +62,7 @@ namespace Mortgage_Calculator
             double roundedValue = Math.Round(potentialIncreaseRepayment, 2);
             Results results = new()//New results local variable
             {
-                WarningIndicator = $"Hello, be aware that if your monthly repayment where to increase by 3% at anytime, it will be £{roundedValue:N2}. Have the amount to cover this.",
+                WarningIndicator = $"Hello, be aware that if your monthly repayment where to increase by 3% at anytime, it will be £{roundedValue:N2}. Ensure you have enough for this change.",
                 MonthlyRepayments = monthlyRepayments,
                 PaymentItems = repayments
             };
