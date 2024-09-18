@@ -32,7 +32,17 @@ namespace Mortgage_Calculator
                                   (Math.Pow(1 + monthlyInterestRate, totalMonths) - 1);
             }
 
+<<<<<<< Updated upstream
             double remainingAmount = monthlyRepayment * totalMonths;//Total amount is remaining amount
+=======
+            //Total amount for Standard and Interest Only repayments 
+            double remainingAmount;
+            if (t == MortgageType.Standard)
+                remainingAmount = monthlyRepayment * totalMonths;// Total amount is remaining amount
+            else
+                remainingAmount = input.Amount - input.Deposit;// Total amount is capital amount 
+
+>>>>>>> Stashed changes
             repayments.Add(new PaymentItem
             {
                 Date = DateTime.Now,
@@ -54,7 +64,7 @@ namespace Mortgage_Calculator
             double roundedValue = Math.Round(potentialIncreaseRepayment, 2);
             Results results = new()//New results local variable
             {
-                WarningIndicator = $"Hello, be aware that if your monthly repayment where to increase by 3% at anytime, it will be £{roundedValue:N2}. Ensure you have enough for this change.",
+                WarningIndicator = $"Hello, be aware that if your monthly repayment where to increase by 3% at anytime, it will be £{roundedValue:N2}. Have the amount to cover this.",
                 MonthlyRepayments = monthlyRepayments,
                 PaymentItems = repayments
             };
