@@ -32,7 +32,13 @@ namespace Mortgage_Calculator
                                   (Math.Pow(1 + monthlyInterestRate, totalMonths) - 1);
             }
 
-            double remainingAmount = monthlyRepayment * totalMonths;//Total amount is remaining amount
+            double remainingAmount = 0;
+
+            if (t == MortgageType.Standard)
+                remainingAmount = monthlyRepayment * totalMonths;//Total amount is remaining amount
+            else
+                remainingAmount = input.Amount - input.Deposit;
+
             repayments.Add(new PaymentItem
             {
                 Date = DateTime.Now,
@@ -40,7 +46,10 @@ namespace Mortgage_Calculator
             });
             for (int month = 1; month <= totalMonths; month++)//Loop as many times as totalMonths (x totalMonths)
             {
-                remainingAmount -= monthlyRepayment;//Remaining (Total) amount after every monthly loop
+                if (t == MortgageType.Standard)
+                {
+                    remainingAmount -= monthlyRepayment;//Remaining (Total) amount after every monthly loop
+                }
 
                 monthlyRepayments.Add(monthlyRepayment);
                 repayments.Add(new PaymentItem
