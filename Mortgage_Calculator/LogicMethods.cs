@@ -32,8 +32,7 @@ namespace Mortgage_Calculator
                                   (Math.Pow(1 + monthlyInterestRate, totalMonths) - 1);
             }
 
-            double remainingAmount = 0;
-
+            double remainingAmount;
             if (t == MortgageType.Standard)
                 remainingAmount = monthlyRepayment * totalMonths;//Total amount is remaining amount
             else

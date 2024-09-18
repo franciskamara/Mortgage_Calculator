@@ -100,18 +100,16 @@
                 </font>
 
                 <!-- Capital repayment amount -->
-                @if (mTypeSelect == MortgageType.Standard)
-                {
-                    <font style="margin-top:-2; display: block;" size="0" title="Interest Repayment Value">
-                        Interest repayment is £@calcTotal().ToString("N2")
-                    </font> <!-- Interest repayment amount -->
-                }
-                else
-                {
-                    <font style="margin-top:-2; display: block;" size="0" title="Interest Repayment Value">
-                        Interest repayment is £@calcPrinciple().ToString("N2")
-                    </font> <!-- Interest repayment amount -->
-                }
+                <font style="margin-top:-2; display: block;" size="0" title="Interest Repayment Value">
+                    @if (mTypeSelect == MortgageType.Standard)
+                    {
+                        <span>Interest repayment is £@calcTotal().ToString("N2")</span>
+                    }
+                    else
+                    {
+                        <span>Interest repayment is £@calcPrinciple().ToString("N2")</span>
+                    }
+                </font>
 
                 <!-- 3) One month's repayment amount -->
                 <font size="3" title="Monthly Repayment Value">
@@ -120,18 +118,16 @@
 
                 <br />
                 <!-- 4) Total repayment months -->
-                if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
-                {
                 <font size="3" title="Total repayment months">
-                    Total Repayment Months: @resultSet.MonthlyRepayments.Count
+                    @if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
+                    {
+                        <span>Total Repayment Months: @resultSet.MonthlyRepayments.Count</span>
+                    }
+                    else
+                    {
+                        <span>0 months</span>
+                    }
                 </font>
-                }
-                else
-                {
-                <font size="3">
-                    0 months
-                </font>
-                }
 
                 <!-- 5) End of Year repayment balance -->
                 <details class="display-block">
@@ -271,18 +267,16 @@
             </font>
 
             <!-- Capital repayment amount -->
-            @if (mTypeSelect == MortgageType.Standard)
-            {
-                <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
-                    Interest repayment is £@calcTotal().ToString("N2")
-                </font> <!-- Interest repayment amount -->
-            }
-            else
-            {
-                <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
-                    Interest repayment is £@calcPrinciple().ToString("N2")
-                </font> <!-- Interest repayment amount -->
-            }
+            <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
+                @if (mTypeSelect == MortgageType.Standard)
+                {
+                    <span>Interest repayment is £@calcTotal().ToString("N2")</span>
+                }
+                else
+                {
+                    <span>Interest repayment is £@calcPrinciple().ToString("N2")</span>
+                }
+            </font> <!-- Interest repayment amount -->
 
             <!-- 3) Monthly repayment amount -->
             <font size="2" title="Monthly Repayment Value">
@@ -292,18 +286,16 @@
 
             <!-- 4) Total repayment months -->
             <div class="display-block">
-                if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
-                {
                 <font size="2" title="Total repayment months">
-                    Total Repayment Months: @resultSet.MonthlyRepayments.Count
+                    @if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
+                    {
+                        <span>Total Repayment Months: @resultSet.MonthlyRepayments.Count</span>
+                    }
+                    else
+                    {
+                        <span>0 months</span>
+                    }
                 </font>
-                }
-                else
-                {
-                <font size="2">
-                    0 months
-                </font>
-                }
             </div>
 
             <!-- 5) End of Year repayment balance -->
@@ -366,30 +358,30 @@
             <!-- 1) Line chart output -->
 
             <h6>Mortgage 2 Results</h6>
+
             <!-- 2) Total repayment, capital, and interest only values -->
+
+            <!-- Total repayment amount -->
             <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
                 Total Repayment Amount: £@resultSetCompare.TotalAmount.ToString("N2")
             </font>
 
-            <!-- Total repayment amount -->
-
+            <!-- Capital repayment amount -->
             <font style="margin-top:-3; display: block;" size="0" title="Capital Repayment Value">
                 Capital repayment is £@calcTotal().ToString("N2")
             </font>
 
-            <!-- Capital repayment amount -->
-            @if (mTypeSelectCompare == MortgageType.Standard)// Display Interest Rate value
-            {
-                <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
-                    Interest repayment is £@calcTotal().ToString("N2")
-                </font> <!-- Interest repayment amount -->
-            }
-            else
-            {
-                <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
-                    Interest repayment is £@calcPrinciple().ToString("N2")
-                </font> <!-- Interest repayment amount -->
-            }
+            <!-- Interest repayment amount -->
+            <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
+                @if (mTypeSelectCompare == MortgageType.Standard)
+                {
+                    <span>Interest repayment is £@calcTotalCompare().ToString("N2")</span>]
+                                                                    }
+                                        else
+                                        {
+                                            <span>Interest repayment is £@calcPrincipleCompare().ToString("N2")</span>
+                                        }
+            </font>
 
             <!-- 3) Monthly repayment amount -->
             <font size="3" title="Monthly Repayment Value">
@@ -398,18 +390,16 @@
 
             <br />
             <!-- 4) Total repayment months -->
-            if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
-            {
-                <font size="3" title="Total repayment months">
-                    Total Repayment Months: @resultSetCompare.MonthlyRepayments.Count
-                </font>
-            }
-            else
-            {
-                <font size="3">
-                    0 months
-                </font>
-            }
+            <font size="3" title="Total repayment months">
+                @if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
+                {
+                    <span>Total Repayment Months: @resultSetCompare.MonthlyRepayments.Count</span>
+                }
+                else
+                {
+                    <span>0 months</span>
+                }
+            </font>
 
             <!-- 5) End of Year repayment balance -->
             <details class="display-block">
@@ -485,9 +475,9 @@
     {
         errorMessage = "";
 
-        if (userInput.Deposit <= 0)
+        if (userInput.Deposit < 0)
         {
-            errorMessage = "Cant have negative Deposit";
+            errorMessage = "Cannot have negative Deposit amount";
         }
 
         if (userInput.Amount <= 0)
@@ -507,7 +497,7 @@
 
         if (userInputCompare.Amount <= 0)
         {
-
+            errorMessage = "Require amount to be more than 0.";
         }
 
         <!-- Output Calculation Results -->
@@ -544,11 +534,21 @@
         double principle = userInput.Amount - userInput.Deposit;
         return principle;
     }
-
     double calcTotal()
     {
         double interestRepaymentTotal = resultSet.TotalAmount - calcPrinciple();
         return interestRepaymentTotal;
+    }
+
+    double calcPrincipleCompare()
+    {
+        double principleCompare = userInputCompare.Amount - userInputCompare.Deposit;
+        return principleCompare;
+    }
+    double calcTotalCompare()
+    {
+        double intRepaymentTotalCompare = resultSetCompare.TotalAmount - calcPrincipleCompare();
+        return intRepaymentTotalCompare;
     }
 }
 
