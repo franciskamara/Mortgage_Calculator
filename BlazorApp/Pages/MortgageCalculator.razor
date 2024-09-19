@@ -75,7 +75,7 @@
     <!-- RESULTS OUTPUT -->
     <br />
     <div title="Results display">
-        @if (resultSet?.PaymentItems?.Count > 0)// Results output
+        @if (resultSet?.PaymentItems?.Count > 0 && errorMessage == string.Empty)// Results output
         {
             <div style="border: #34495e; border-width: 10px; border-style: solid; border-radius: 10px; padding: 15px;">
                 <br />
@@ -88,18 +88,17 @@
                 <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>
 
                 <!-- 2) Total repayment, Capital, and Interest Only values -->
-
+                <!-- Total repayment amount -->
                 <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
                     Total Repayment Amount: £@resultSet.TotalAmount.ToString("N2")
                 </font>
 
-                <!-- Total repayment amount -->
-
+                <!-- Capital repayment amount -->
                 <font style="margin-top:-2; display: block;" size="0" title="Capital Repayment Value">
                     Capital repayment is £@calcPrinciple().ToString("N2")
                 </font>
 
-                <!-- Capital repayment amount -->
+                <!-- Interest repayment amount -->
                 <font style="margin-top:-2; display: block;" size="0" title="Interest Repayment Value">
                     @if (mTypeSelect == MortgageType.Standard)
                     {
@@ -240,8 +239,10 @@
     </div>
 
     <!-- RESULT OUTPUT -->
+
+        <!-- FIRST RESULTS OUTPUT -->
     <div title="Results display">
-        @if (resultSet?.PaymentItems?.Count > 0)//First Results output
+        @if (resultSet?.PaymentItems?.Count > 0 && errorMessage == string.Empty)
         {
             <br />
             <div class="h4 pb-2 mb-4 text-danger border-bottom">
@@ -353,13 +354,13 @@
 
         <!-- SECOND RESULT OUTPUT -->
         <br />
-        @if (resultSetCompare?.PaymentItems?.Count > 0)
+        @if (resultSetCompare?.PaymentItems?.Count > 0 && errorMessage == string.Empty)
         {
             <!-- 1) Line chart output -->
 
             <h6>Mortgage 2 Results</h6>
 
-            <!-- 2) Total repayment, capital, and interest only values -->
+            <!-- 2) Total repayment, Capital and Interest only values -->
 
             <!-- Total repayment amount -->
             <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
@@ -368,27 +369,27 @@
 
             <!-- Capital repayment amount -->
             <font style="margin-top:-3; display: block;" size="0" title="Capital Repayment Value">
-                Capital repayment is £@calcTotal().ToString("N2")
+                Capital repayment is £@calcTotalCompare().ToString("N2")
             </font>
 
             <!-- Interest repayment amount -->
             <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
                 @if (mTypeSelectCompare == MortgageType.Standard)
                 {
-                    <span>Interest repayment is £@calcTotalCompare().ToString("N2")</span>]
-                                                                    }
-                                        else
-                                        {
-                                            <span>Interest repayment is £@calcPrincipleCompare().ToString("N2")</span>
-                                        }
+                    <span>Interest repayment is £@calcTotalCompare().ToString("N2")</span>
+                }
+                else
+                {
+                    <span>Interest repayment is £@calcPrincipleCompare().ToString("N2")</span>
+                }
             </font>
 
             <!-- 3) Monthly repayment amount -->
             <font size="3" title="Monthly Repayment Value">
                 Monthly Repayment Amount: £@resultSetCompare.MonthlyRepayments[0].ToString("N2")
             </font>
-
             <br />
+
             <!-- 4) Total repayment months -->
             <font size="3" title="Total repayment months">
                 @if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
@@ -475,29 +476,46 @@
     {
         errorMessage = "";
 
-        if (userInput.Deposit < 0)
-        {
-            errorMessage = "Cannot have negative Deposit amount";
-        }
-
+        <!-- Error messages: 1st loan -->
         if (userInput.Amount <= 0)
         {
-            errorMessage = "Require amount to be more than 0.";
+            errorMessage = "Amount needs to be more than 0.";
         }
 
         if (userInput.InterestRatePercentage <= 0)
         {
-            errorMessage = "Interet Rate is required.";
+            errorMessage = "Interest Rate needs to be more than 0.";
         }
 
         if (userInput.Term <= 0)
         {
-            errorMessage = "Term is required.";
+            errorMessage = "Term input is needed. Term input needs to be more than 0.";
         }
 
-        if (userInputCompare.Amount <= 0)
+        if (userInput.Deposit < 0 || userInput.Deposit == null)
         {
-            errorMessage = "Require amount to be more than 0.";
+            errorMessage = "Cannot have negative Deposit amount";
+        }
+
+        <!-- Error messages: 2nd loan -->
+        if (calcOption == 2 && userInputCompare.Amount <= 0)
+        {
+            errorMessage = "For the second loan, we need the amount to be more than 0.";
+        }
+
+        if (calcOption == 2 && userInputCompare.InterestRatePercentage <= 0)
+        {
+            errorMessage = "For the second loan, Interest Rate needs to be more than 0.";
+        }
+
+        if (calcOption == 2 && userInputCompare.Term <= 0)
+        {
+            errorMessage = "For the second loan, Term input is needed. Term input needs to be more than 0.";
+        }
+
+        if (calcOption == 2 && userInputCompare.Deposit < 0 || userInput.Deposit == null)
+        {
+            errorMessage = "For the second loan, Cannot have negative Deposit amount";
         }
 
         <!-- Output Calculation Results -->
