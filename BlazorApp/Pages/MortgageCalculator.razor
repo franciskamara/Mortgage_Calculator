@@ -107,14 +107,15 @@
                 </font>
 
                 <!-- Interest repayment amount -->
-                <font style="margin-top:-2; display: block;" size="0" title="Interest Repayment Value">
-                    @if (mTypeSelect == MortgageType.Standard)
+                <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
+                    Interest repayment is
+                    @if (mTypeSelect == MortgageType.Interest_Only)
                     {
-                        <span>Interest repayment is £@calcTotal().ToString("N2")</span>
+                        <span> £@calcIntTotal().ToString("N2")</span>
                     }
                     else
                     {
-                        <span>Interest repayment is £@calcPrinciple().ToString("N2")</span>
+                        <span> £@calcPrinciple().ToString("N2")</span>
                     }
                 </font>
 
@@ -286,14 +287,7 @@
 
             <!-- Interest repayment amount -->
             <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
-                @if (mTypeSelect == MortgageType.Standard)
-                {
-                    <span>Interest repayment is £@calcTotal().ToString("N2")</span>
-                }
-                else
-                {
-                    <span>Interest repayment is £@calcPrinciple().ToString("N2")</span>
-                }
+                <span>Interest repayment is £@calcIntTotal().ToString("N2")</span>
             </font>
 
             <!-- 3) Monthly repayment amount -->
@@ -392,19 +386,12 @@
 
             <!-- Capital repayment amount -->
             <font style="margin-top:-3; display: block;" size="0" title="Capital Repayment Value">
-                Capital repayment is £@calcTotalCompare().ToString("N2")
+                Capital repayment is £@calcPrincipleCompare().ToString("N2")
             </font>
 
             <!-- Interest repayment amount -->
             <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
-                @if (mTypeSelectCompare == MortgageType.Standard)
-                {
-                    <span>Interest repayment is £@calcTotalCompare().ToString("N2")</span>
-                }
-                else
-                {
-                    <span>Interest repayment is £@calcPrincipleCompare().ToString("N2")</span>
-                }
+                <span>Interest repayment is £@calcIntTotalCompare().ToString("N2")</span>
             </font>
 
             <!-- 3) Monthly repayment amount -->
@@ -576,7 +563,7 @@
         double principle = userInput.Amount - userInput.Deposit;
         return principle;
     }
-    double calcTotal()
+    double calcIntTotal()
     {
         double interestRepaymentTotal = resultSet.TotalAmount - calcPrinciple();
         return interestRepaymentTotal;
@@ -587,9 +574,9 @@
         double principleCompare = userInputCompare.Amount - userInputCompare.Deposit;
         return principleCompare;
     }
-    double calcTotalCompare()
+    double calcIntTotalCompare()
     {
-        double intRepaymentTotalCompare = resultSetCompare.TotalAmount - calcPrincipleCompare();
+        double intRepaymentTotalCompare = (resultSetCompare.TotalAmount - calcPrincipleCompare()) + calcPrincipleCompare();
         return intRepaymentTotalCompare;
     }
 
