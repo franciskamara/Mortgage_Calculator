@@ -88,7 +88,6 @@
                 <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>
 
                 <!-- 2) Total repayment, Capital and Interest only values -->
-
                 <!-- Total repayment amount -->
                 <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
                     Total Repayment Amount:
@@ -599,13 +598,13 @@
 
     double calcTotalRepayForInterestOnlyLoan()
     {
-        double intRateTotalRepayment = resultSet.TotalAmount + calcPrincipleCompare();
+        double intRateTotalRepayment = resultSet.TotalAmount + (userInput.Amount - userInput.Deposit);
         return intRateTotalRepayment;
     }
     double calcTotalRepayForInterestOnlyLoanCompare()
     {
-        double intRateTotalRepayment = resultSetCompare.TotalAmount + (userInputCompare.Amount - userInputCompare.Deposit);
-        return intRateTotalRepayment;
+        double intRateTotalRepaymentCompare = resultSetCompare.TotalAmount + (userInputCompare.Amount - userInputCompare.Deposit);
+        return intRateTotalRepaymentCompare;
     }
 }
 
