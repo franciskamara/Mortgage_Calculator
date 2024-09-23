@@ -90,14 +90,14 @@
                 <!-- 2) Total repayment, Capital and Interest only values -->
                 <!-- Total repayment amount -->
                 <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
-                    Total Repayment Amount:
+                    Total repayment amount is
                     @if (mTypeSelect == MortgageType.Standard)
                     {
                         <span> £@resultSet.TotalAmount.ToString("N2")</span>
                     }
                     else
                     {
-                        <span> £@calcTotalRepayForInterestOnlyLoan().ToString("N2")</span>
+                        <span> £@calcInterestOnlyLoanTotal().ToString("N2")</span>
                     }
                 </font>
 
@@ -115,7 +115,7 @@
                     }
                     else
                     {
-                        <span> £@calcPrinciple().ToString("N2")</span>
+                        <span> £@calcIntValueForIntOnlyLoan().ToString("N2")</span>
                     }
                 </font>
 
@@ -268,14 +268,14 @@
 
             <!-- Total repayment amount -->
             <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
-                Total Repayment Amount:
+                Total repayment amount is
                 @if (mTypeSelect == MortgageType.Standard)
                 {
                     <span> £@resultSet.TotalAmount.ToString("N2")</span>
                 }
                 else
                 {
-                    <span> £@calcTotalRepayForInterestOnlyLoan().ToString("N2")</span>
+                    <span> £@calcInterestOnlyLoanTotal().ToString("N2")</span>
                 }
             </font>
 
@@ -293,7 +293,7 @@
                 }
                 else
                 {
-                    <span> £@calcPrinciple().ToString("N2")</span>
+                    <span> £@calcIntValueForIntOnlyLoan().ToString("N2")</span>
                 }
             </font>
 
@@ -382,14 +382,14 @@
 
             <!-- Total repayment amount -->
             <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
-                Total Repayment Amount:
+                Total repayment amount is
                 @if (mTypeSelectCompare == MortgageType.Standard)
                 {
                     <span> £@resultSetCompare.TotalAmount.ToString("N2")</span>
                 }
                 else
                 {
-                    <span> £@calcTotalRepayForInterestOnlyLoanCompare().ToString("N2")</span>
+                    <span> £@calcInterestOnlyLoanTotalCompare().ToString("N2")</span>
                 }
             </font>
 
@@ -403,11 +403,11 @@
                 Interest repayment is
                 @if (mTypeSelectCompare == MortgageType.Standard)
                 {
-                    <span> £@calcTotalCompare().ToString("N2")</span>
+                    <span> £@calcIntTotalCompare().ToString("N2")</span>
                 }
                 else
                 {
-                    <span> £@calcPrincipleCompare().ToString("N2")</span>
+                    <span> £@calcIntValueForIntOnlyLoan().ToString("N2")</span>
                 }
             </font>
 
@@ -590,21 +590,31 @@
         double principleCompare = userInputCompare.Amount - userInputCompare.Deposit;
         return principleCompare;
     }
-    double calcTotalCompare()
+    double calcIntTotalCompare()
     {
         double intRepaymentTotalCompare = resultSetCompare.TotalAmount - calcPrincipleCompare();
         return intRepaymentTotalCompare;
     }
 
-    double calcTotalRepayForInterestOnlyLoan()
+    double calcInterestOnlyLoanTotal()
     {
-        double intRateTotalRepayment = resultSet.TotalAmount + (userInput.Amount - userInput.Deposit);
-        return intRateTotalRepayment;
+        double interestRepayment = resultSetCompare.TotalAmount + (userInputCompare.Amount - userInputCompare.Deposit);
+        return interestRepayment;
     }
-    double calcTotalRepayForInterestOnlyLoanCompare()
+    double calcInterestOnlyLoanTotalCompare()
     {
         double intRateTotalRepaymentCompare = resultSetCompare.TotalAmount + (userInputCompare.Amount - userInputCompare.Deposit);
         return intRateTotalRepaymentCompare;
+    }
+
+    double calcIntValueForIntOnlyLoan()
+    {
+        return calcInterestOnlyLoanTotal() - (userInput.Amount - userInput.Deposit);
+    }
+
+    double calcIntValueForIntOnlyLoanCompare()
+    {
+        return calcInterestOnlyLoanTotalCompare() - (userInputCompare.Amount - userInputCompare.Deposit);
     }
 }
 
