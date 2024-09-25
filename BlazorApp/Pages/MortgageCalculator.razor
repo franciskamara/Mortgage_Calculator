@@ -1,12 +1,13 @@
 ﻿@page "/mortgageCalculator"
 @using Mortgage_Calculator
+@inject IJSRuntime JS
 
 <PageTitle>Mortgage Calculator</PageTitle>
 
 @*<a style="font-size:x-small" href="/home">Click to go back </a>*@
 
 <h2>Mortgage Calculator</h2>
-
+<a name="top"></a>
 <!--Navbar setup and styling-->
 <nav style="width: 100%; background-color: #34495e; color: rgba(255, 255, 255, 0.5); padding: 10px; ">
     <div class="topnav" style="text-align: left;">
@@ -204,54 +205,21 @@
 
         <h6>First mortgage</h6>
         <br />
+        <MortageInputComponent Model="userInput"></MortageInputComponent>
 
-        <label>Loan amount: </label>
-        <InputNumber @bind-Value="userInput.Amount"></InputNumber>
-        <br /><br />
-
-        <label>How many years for the loan? </label>
-        <InputNumber @bind-Value="userInput.Term"></InputNumber>
-        <br /><br />
-
-        <MortgageTypeSelect @bind-selection="mTypeSelect"></MortgageTypeSelect>
-        <br />
-
-        <label>Interest rate: %</label>
-        <InputNumber @bind-Value="userInput.InterestRatePercentage"></InputNumber>
-        <br /><br />
-        <label>Deposit (optional):</label>
-        <InputNumber @bind-Value="userInput.Deposit"></InputNumber>
-        <br /><br /><br />
 
         <h6>Second mortgage</h6>
         <br />
 
-        <label>Loan amount: </label>
-        <InputNumber @bind-Value="userInputCompare.Amount"></InputNumber>
-        <br /><br />
-
-        <label>How many years for the loan? </label>
-        <InputNumber @bind-Value="userInputCompare.Term"></InputNumber>
-        <br /><br />
-
-        <MortgageTypeSelect @bind-selection="mTypeSelectCompare"></MortgageTypeSelect>
-        <br />
-
-        <label>Interest rate: %</label>
-        <InputNumber @bind-Value="userInputCompare.InterestRatePercentage"></InputNumber>
-        <br /><br />
-        <label>Deposit (optional):</label>
-        <InputNumber @bind-Value="userInputCompare.Deposit"></InputNumber>
-        <br /><br /><br />
+        <MortageInputComponent Model="userInputCompare"></MortageInputComponent>
 
         <button style="background-color:green" class="btn btn-primary" @onclick="DisplayResults">Results</button>
     </div>
 
     <!-- RESULT OUTPUT -->
-
     <!-- FIRST RESULTS OUTPUT -->
     <div title="Results display">
-        @if (resultSet?.PaymentItems?.Count > 0 && errorMessage == string.Empty)
+        @if (resultSet?.PaymentItems?.Count > 0 && resultSetCompare?.PaymentItems?.Count > 0 && errorMessage == string.Empty)
         {
             <br />
             <div class="h4 pb-2 mb-4 text-danger border-bottom">
@@ -265,7 +233,6 @@
             <h6>Mortgage 1 Results</h6>
 
             <!-- 2) Total repayment, Capital and Interest only values -->
-
             <!-- Total repayment amount -->
             <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
                 Total repayment amount is
@@ -372,117 +339,120 @@
 
         <!-- SECOND RESULT OUTPUT -->
         <br />
-        @if (resultSetCompare?.PaymentItems?.Count > 0 && errorMessage == string.Empty)
-        {
-            <!-- 1) Line chart output -->
+        <!-- 1) Line chart output -->
 
-            <h6>Mortgage 2 Results</h6>
+        <h6>Mortgage 2 Results</h6>
 
-            <!-- 2) Total repayment, Capital and Interest only values -->
+        <!-- 2) Total repayment, Capital and Interest only values -->
+        <!-- Total repayment amount -->
+        <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
+            Total repayment amount is
+            @if (mTypeSelectCompare == MortgageType.Standard)
+            {
+                <span> £@resultSetCompare.TotalAmount.ToString("N2")</span>
+            }
+            else
+            {
+                <span> £@calcInterestOnlyLoanTotalCompare().ToString("N2")</span>
+            }
+        </font>
 
-            <!-- Total repayment amount -->
-            <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
-                Total repayment amount is
-                @if (mTypeSelectCompare == MortgageType.Standard)
-                {
-                    <span> £@resultSetCompare.TotalAmount.ToString("N2")</span>
-                }
-                else
-                {
-                    <span> £@calcInterestOnlyLoanTotalCompare().ToString("N2")</span>
-                }
-            </font>
+        <!-- Capital repayment amount -->
+        <font style="margin-top:-3; display: block;" size="0" title="Capital Repayment Value">
+            Capital repayment is £@calcPrincipleCompare().ToString("N2")
+        </font>
 
-            <!-- Capital repayment amount -->
-            <font style="margin-top:-3; display: block;" size="0" title="Capital Repayment Value">
-                Capital repayment is £@calcPrincipleCompare().ToString("N2")
-            </font>
+        <!-- Interest repayment amount -->
+        <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
+            Interest repayment is
+            @if (mTypeSelectCompare == MortgageType.Standard)
+            {
+                <span> £@calcIntTotalCompare().ToString("N2")</span>
+            }
+            else
+            {
+                <span> £@calcIntValueForIntOnlyLoan().ToString("N2")</span>
+            }
+        </font>
 
-            <!-- Interest repayment amount -->
-            <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
-                Interest repayment is
-                @if (mTypeSelectCompare == MortgageType.Standard)
-                {
-                    <span> £@calcIntTotalCompare().ToString("N2")</span>
-                }
-                else
-                {
-                    <span> £@calcIntValueForIntOnlyLoan().ToString("N2")</span>
-                }
-            </font>
+        <!-- 3) Monthly repayment amount -->
+        <font size="3" title="Monthly Repayment Value">
+            Monthly Repayment Amount: £@resultSetCompare.MonthlyRepayments[0].ToString("N2")
+        </font>
+        <br />
 
-            <!-- 3) Monthly repayment amount -->
-            <font size="3" title="Monthly Repayment Value">
-                Monthly Repayment Amount: £@resultSetCompare.MonthlyRepayments[0].ToString("N2")
-            </font>
-            <br />
+        <!-- 4) Total repayment months -->
+        <font size="3" title="Total repayment months">
+            @if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
+            {
+                <span>Total Repayment Months: @resultSetCompare.MonthlyRepayments.Count</span>
+            }
+            else
+            {
+                <span>0 months</span>
+            }
+        </font>
 
-            <!-- 4) Total repayment months -->
-            <font size="3" title="Total repayment months">
-                @if (resultSetCompare.MonthlyRepayments != null && resultSetCompare.MonthlyRepayments.Count > 0)
-                {
-                    <span>Total Repayment Months: @resultSetCompare.MonthlyRepayments.Count</span>
-                }
-                else
-                {
-                    <span>0 months</span>
-                }
-            </font>
-
-            <!-- 5) End of Year repayment balance -->
-            <details class="display-block">
-                <summary title="List of annual remaining repayments">
-                    <font size="3" class="fs-7" style="color:blue">
-                        Remaining debt breakdown
-                    </font>
-                </summary>
-                <font size="2">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col">Year End &nbsp</th>
-                                <th scope="col">Remaining Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (PaymentItem item in resultSetCompare.PaymentItems)
-                            {
-                                if (item.Date.Month == 12) // Check if the month is December
-                                {
-                                    int firstYear = resultSetCompare.PaymentItems[0].Date.Year;
-                                    <tr>
-                                        <th scope="row">
-                                            Year @(item.Date.Year - firstYear + 1)
-                                        </th>
-                                        @*<th scope="row">@item.Date.ToString("MM/yyyy") &nbsp</th>*@
-                                        @if (mTypeSelectCompare == MortgageType.Standard)
-                                        {
-                                            <!-- For standard mortgage, display remaining balance -->
-                                            <td>£@item.RemainingAmount.ToString("N2")</td>
-                                        }
-                                        else
-                                        {
-                                            <!-- For interest-only mortgage, display only principal -->
-                                            <td>£@userInputCompare.Amount.ToString("N2")</td>
-                                        }
-                                    </tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
+        <!-- 5) End of Year repayment balance -->
+        <details class="display-block">
+            <summary title="List of annual remaining repayments">
+                <font size="3" class="fs-7" style="color:blue">
+                    Remaining debt breakdown
                 </font>
-            </details>
-            <br />
+            </summary>
+            <font size="2">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Year End &nbsp</th>
+                            <th scope="col">Remaining Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (PaymentItem item in resultSetCompare.PaymentItems)
+                        {
+                            if (item.Date.Month == 12) // Check if the month is December
+                            {
+                                int firstYear = resultSetCompare.PaymentItems[0].Date.Year;
+                                <tr>
+                                    <th scope="row">
+                                        Year @(item.Date.Year - firstYear + 1)
+                                    </th>
+                                    @*<th scope="row">@item.Date.ToString("MM/yyyy") &nbsp</th>*@
+                                    @if (mTypeSelectCompare == MortgageType.Standard)
+                                    {
+                                        <!-- For standard mortgage, display remaining balance -->
+                                        <td>£@item.RemainingAmount.ToString("N2")</td>
+                                    }
+                                    else
+                                    {
+                                        <!-- For interest-only mortgage, display only principal -->
+                                        <td>£@userInputCompare.Amount.ToString("N2")</td>
+                                    }
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </font>
+        </details>
+        <br />
 
-            <!-- 6) Warning indicator of repayment increase, 3% -->
-            <div class="alert alert-warning" role="alert" style="text-align:center">
-                <p class="fs-6">
-                    @resultSetCompare.WarningIndicator
-                </p>
-            </div>
-        }
+        <!-- 6) Warning indicator of repayment increase, 3% -->
+        <div class="alert alert-warning" role="alert" style="text-align:center">
+            <p class="fs-6">
+                @resultSetCompare.WarningIndicator
+            </p>
+        </div>
+
     </div>
 }
+<script type="text/javascript">
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+</script>
 
 
 @code
@@ -499,19 +469,19 @@
     private Graph graph = new();
     private string errorMessage = "";
 
-    private void DisplayResults()
+    private async void DisplayResults()
     {
         errorMessage = "";
 
         <!-- Error messages: 1st loan -->
         if (userInput.Amount <= 0)
         {
-            errorMessage = "Amount needs to be more than 0.";
+            errorMessage += "Amount needs to be more than 0. ";
         }
 
         if (userInput.InterestRatePercentage <= 0)
         {
-            errorMessage = "Interest Rate needs to be more than 0.";
+            errorMessage += "Interest Rate needs to be more than 0. ";
         }
 
         if (userInput.Term <= 0)
@@ -543,6 +513,11 @@
         if (calcOption == 2 && userInputCompare.Deposit < 0 || userInput.Deposit == null)
         {
             errorMessage = "For the second loan, Cannot have negative Deposit amount";
+        }
+
+        if (errorMessage != "")
+        {
+            await JS.InvokeVoidAsync("topFunction");
         }
 
         <!-- Output Calculation Results -->
