@@ -121,7 +121,7 @@
 
                 <!-- 3) One month's repayment amount -->
                 <font size="3" title="Monthly Repayment Value">
-                    Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2")
+                    Monthly Repayment Amount is £@resultSet.MonthlyRepayments[0].ToString("N2")
                 </font>
 
                 <br />
@@ -129,11 +129,11 @@
                 <font size="3" title="Total repayment months">
                     @if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
                     {
-                        <span>Total Repayment Months: @resultSet.MonthlyRepayments.Count</span>
+                        <span>Total Repayment Months is @resultSet.MonthlyRepayments.Count</span>
                     }
                     else
                     {
-                        <span>0 months</span>
+                        <span>Total Repayment Months is 0</span>
                     }
                 </font>
 
@@ -171,7 +171,7 @@
                                             else
                                             {
                                                 <!-- For interest-only mortgage, display only principal -->
-                                                <td>£@userInput.Amount.ToString("N2")</td>
+                                                <td>£@calcPrinciple().ToString("N2")</td>
                                             }
                                         </tr>
                                     }
@@ -299,7 +299,7 @@
 
             <!-- 3) Monthly repayment amount -->
             <font size="2" title="Monthly Repayment Value">
-                Monthly Repayment Amount: £@resultSet.MonthlyRepayments[0].ToString("N2")
+                Monthly Repayment Amount is £@resultSet.MonthlyRepayments[0].ToString("N2")
             </font>
             <br />
 
@@ -312,7 +312,7 @@
                     }
                     else
                     {
-                        <span>0 months</span>
+                        <span>Total Repayment Months is 0</span>
                     }
                 </font>
             </div>
@@ -351,7 +351,7 @@
                                         else
                                         {
                                             <!-- For interest-only mortgage, display only principal -->
-                                            <td>£@userInput.Amount.ToString("N2")</td>
+                                            <td>£@calcPrinciple().ToString("N2")</td>
                                         }
                                     </tr>
                                 }
@@ -413,7 +413,7 @@
 
             <!-- 3) Monthly repayment amount -->
             <font size="3" title="Monthly Repayment Value">
-                Monthly Repayment Amount: £@resultSetCompare.MonthlyRepayments[0].ToString("N2")
+                Monthly Repayment Amount is £@resultSetCompare.MonthlyRepayments[0].ToString("N2")
             </font>
             <br />
 
@@ -425,7 +425,7 @@
                 }
                 else
                 {
-                    <span>0 months</span>
+                    <span>Total Repayment Months is 0</span>
                 }
             </font>
 
@@ -463,7 +463,7 @@
                                         else
                                         {
                                             <!-- For interest-only mortgage, display only principal -->
-                                            <td>£@userInputCompare.Amount.ToString("N2")</td>
+                                            <td>£@calcPrincipleCompare().ToString("N2")</td>
                                         }
                                     </tr>
                                 }
@@ -560,20 +560,20 @@
         }
     }
 
-    <!-- Set Calculator option-->
+    <!-- Set Calculator option -->
     void setCalcOption(int option)
     {
         calcOption = option;
 
-        <!-- Default inputs when swtiching from Single mortgage to Compare mortgages-->
+        <!-- Default inputs when switching from Single to Compare mortgages -->
         userInputCompare.Amount = userInput.Amount;
         userInputCompare.Deposit = userInput.Deposit;
         userInputCompare.InterestRatePercentage = userInput.InterestRatePercentage;
         userInputCompare.Term = userInput.Term;
         userInputCompare.Type = userInput.Type;
-
     }
 
+    <!-- Calculations -->
     double calcPrinciple()
     {
         double principle = userInput.Amount - userInput.Deposit;
@@ -611,7 +611,6 @@
     {
         return calcInterestOnlyLoanTotal() - (userInput.Amount - userInput.Deposit);
     }
-
     double calcIntValueForIntOnlyLoanCompare()
     {
         return calcInterestOnlyLoanTotalCompare() - (userInputCompare.Amount - userInputCompare.Deposit);
