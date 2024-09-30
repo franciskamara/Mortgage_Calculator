@@ -1,0 +1,44 @@
+﻿@page "/navBar"
+@using System
+@using Mortgage_Calculator
+
+@code {
+    [Parameter]
+    public int selection { get; set; } // This will bind to calcOption
+
+    [Parameter]
+    public EventCallback<int> selectionChanged { get; set; } // To notify changes
+
+    void setCalcOption(int option)
+    {
+        selection = option;
+        selectionChanged.InvokeAsync(option); // Emit the change
+    }
+}
+
+<!--Navbar setup and styling-->
+<nav style="width: 100%; background-color: #34495e; color: rgba(255, 255, 255, 0.5); padding: 10px; ">
+    <div class="topnav" style="text-align: left;">
+        <a class="nav-link" style="color:white; cursor:pointer; text-decoration:none; hover" @onclick="() => setCalcOption(1)">Calculate a mortgage</a>
+        &nbsp
+        <a class="nav-link" style="color: white; cursor: pointer; text-decoration: none" @onclick="() => setCalcOption(2)">Compare mortgages</a>
+    </div>
+    <br />
+</nav>
+
+<style>
+    .nav-link {
+        display: inline-block;
+        border-radius: 50%; /* Make circular on hover */
+        transition: all 0.3s ease; /* Smooth transition */
+    }
+
+        .nav-link:hover {
+            background-color: #555;
+            color: white;
+            border-radius: 0;
+            padding: 10px 15px;
+            transform: scale(1.1); /* Slightly enlarge the link */
+        }
+</style>
+
