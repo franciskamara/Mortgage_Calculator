@@ -1,0 +1,35 @@
+﻿@page "/calculatorInput"
+@using System;
+@using Mortgage_Calculator
+
+
+@code
+{
+    [Parameter]
+    public UserInput userInput { get; set; }
+
+    [Parameter]
+    public MortgageType mTypeSelect { get; set; } = MortgageType.Standard;
+
+}
+
+<div style="color: #273157">
+    <label>Loan amount: </label>
+    <InputNumber @bind-Value="userInput.Amount"></InputNumber>
+    <br /> <br />
+
+    <label>How many years for the loan? </label>
+    <InputNumber @bind-Value="userInput.Term"></InputNumber>
+    <br /><br />
+
+    <MortgageTypeSelect @bind-selection="mTypeSelect"></MortgageTypeSelect>
+    <br />
+
+    <label>Interest rate: %</label>
+    <InputNumber @bind-Value="userInput.InterestRatePercentage"></InputNumber>
+    <br /><br />
+
+    <label>Deposit (optional):</label>
+    <InputNumber @bind-Value="userInput.Deposit"></InputNumber>
+    <br /><br /><br>
+</div>
