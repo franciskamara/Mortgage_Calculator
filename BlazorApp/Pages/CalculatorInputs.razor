@@ -8,8 +8,6 @@
     [Parameter]
     public UserInput userInput { get; set; }
 
-    [Parameter]
-    public MortgageType mTypeSelect { get; set; } = MortgageType.Standard;
 
 }
 
@@ -22,7 +20,7 @@
     <InputNumber @bind-Value="userInput.Term"></InputNumber>
     <br /><br />
 
-    <MortgageTypeSelect @bind-selection="mTypeSelect"></MortgageTypeSelect>
+    <MortgageTypeSelect @bind-selection="userInput.Type"></MortgageTypeSelect>
     <br />
 
     <label>Interest rate: %</label>

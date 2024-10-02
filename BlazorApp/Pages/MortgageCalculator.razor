@@ -10,7 +10,32 @@
 </div>
 
 <!--Navbar setup and styling-->
-<NavBar @bind-selection="calcOption"></NavBar>
+@*<NavBar @bind-selection="calcOption"></NavBar>*@
+<!--Navbar setup and styling-->
+<nav style="width: 100%; background-color: #34495e; color: rgba(255, 255, 255, 0.5); padding: 10px; ">
+    <div class="topnav" style="text-align: left;">
+        <a class="nav-link" style="color:white; cursor:pointer; text-decoration:none; hover" @onclick="() => setCalcOption(1)">Calculate a mortgage</a>
+        &nbsp
+        <a class="nav-link" style="color: white; cursor: pointer; text-decoration: none" @onclick="() => setCalcOption(2)">Compare mortgages</a>
+    </div>
+    <br />
+</nav>
+
+<style>
+    .nav-link {
+        display: inline-block;
+        border-radius: 50%; /* Make circular on hover */
+        transition: all 0.3s ease; /* Smooth transition */
+    }
+
+        .nav-link:hover {
+            background-color: #555;
+            color: white;
+            border-radius: 0;
+            padding: 10px 15px;
+            transform: scale(1.1); /* Slightly enlarge the link */
+        }
+        </style>
 
 @if (errorMessage != "")
 {
@@ -32,7 +57,7 @@
         </div>
 
         <!-- Calculator inputs -->
-        <CalculatorInputs userInput="userInput" mTypeSelect="mTypeSelect"></CalculatorInputs>
+        <CalculatorInputs userInput="userInput"></CalculatorInputs>
 
         <button style="background-color:green" class="btn btn-primary" @onclick="DisplayResults">Results</button>
         <br /><br />
@@ -53,7 +78,7 @@
                 <!-- Total repayment amount -->
                 <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
                     Total repayment amount is
-                    @if (mTypeSelect == MortgageType.Standard)
+                    @if (userInput.Type == MortgageType.Standard)
                     {
                         <span> £@resultSet.TotalAmount.ToString("N2")</span>
                     }
@@ -71,7 +96,7 @@
                 <!-- Interest repayment amount -->
                 <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
                     Interest repayment is
-                    @if (mTypeSelect == MortgageType.Standard)
+                    @if (userInput.Type == MortgageType.Standard)
                     {
                         <span> £@calcIntTotal().ToString("N2")</span>
                     }
@@ -125,7 +150,7 @@
                                                 Year @(item.Date.Year - firstYear + 1)
                                             </th>
                                             @*<th scope="row">@item.Date.ToString("MM/yyyy") &nbsp</th>*@
-                                            @if (mTypeSelect == MortgageType.Standard)
+                                            @if (userInput.Type == MortgageType.Standard)
                                             {
                                                 <!-- For standard mortgage, display remaining balance -->
                                                 <td>£@item.RemainingAmount.ToString("N2")</td>
@@ -167,7 +192,7 @@
         </div>
 
         <!-- Calculator inputs 1 -->
-        <CalculatorInputs userInput="userInput" mTypeSelect="mTypeSelect"></CalculatorInputs>
+        <CalculatorInputs userInput="userInput"></CalculatorInputs>
 
         <div class="h2 pb-0 mb-4 border-bottom" style="color: #273157">
             <h5>Second mortgage</h5>
@@ -175,14 +200,13 @@
         </div>
 
         <!-- Calculator inputs 2 -->
-        <CalculatorInputs userInput="userInputCompare" mTypeSelect="mTypeSelectCompare"></CalculatorInputs>
+        <CalculatorInputs userInput="userInputCompare"></CalculatorInputs>
 
         <button style="background-color:green" class="btn btn-primary" @onclick="DisplayResults">Results</button>
         <br /><br />
     </div>
 
     <!-- RESULT OUTPUT -->
-    <!-- FIRST RESULTS OUTPUT -->
     <div title="Results display">
         @if (resultSet?.PaymentItems?.Count > 0 && resultSetCompare?.PaymentItems?.Count > 0 && errorMessage == string.Empty)
         {
@@ -193,6 +217,7 @@
                 <!-- 1) Line chart output -->
                 <div><LineChartOutput resultSet="resultSet" resultSetCompare="resultSetCompare"></LineChartOutput></div>
 
+                <!-- First Result Output -->
                 <br />
                 <h6>Mortgage 1 Results</h6>
 
@@ -200,7 +225,7 @@
                 <!-- Total repayment amount -->
                 <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
                     Total repayment amount is
-                    @if (mTypeSelect == MortgageType.Standard)
+                    @if (userInput.Type == MortgageType.Standard)
                     {
                         <span> £@resultSet.TotalAmount.ToString("N2")</span>
                     }
@@ -218,7 +243,7 @@
                 <!-- Interest repayment amount -->
                 <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
                     Interest repayment is
-                    @if (mTypeSelect == MortgageType.Standard)
+                    @if (userInput.Type == MortgageType.Standard)
                     {
                         <span> £@calcIntTotal().ToString("N2")</span>
                     }
@@ -274,7 +299,7 @@
                                                 Year @(item.Date.Year - firstYear + 1)
                                             </th>
                                             @*<th scope="row">@item.Date.ToString("MM/yyyy") &nbsp</th>*@
-                                            @if (mTypeSelect == MortgageType.Standard)
+                                            @if (userInput.Type == MortgageType.Standard)
                                             {
                                                 <!-- For standard mortgage, display remaining balance -->
                                                 <td>£@item.RemainingAmount.ToString("N2")</td>
@@ -304,15 +329,13 @@
                 <!-- SECOND RESULT OUTPUT -->
                 <br />
 
-                <!-- 1) Line chart output -->
-
                 <h6>Mortgage 2 Results</h6>
 
                 <!-- 2) Total repayment, Capital and Interest only values -->
                 <!-- Total repayment amount -->
                 <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
                     Total repayment amount is
-                    @if (mTypeSelectCompare == MortgageType.Standard)
+                    @if (userInputCompare.Type == MortgageType.Standard)
                     {
                         <span> £@resultSetCompare.TotalAmount.ToString("N2")</span>
                     }
@@ -330,7 +353,7 @@
                 <!-- Interest repayment amount -->
                 <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
                     Interest repayment is
-                    @if (mTypeSelectCompare == MortgageType.Standard)
+                    @if (userInputCompare.Type == MortgageType.Standard)
                     {
                         <span> £@calcIntTotalCompare().ToString("N2")</span>
                     }
@@ -384,7 +407,7 @@
                                                 Year @(item.Date.Year - firstYear + 1)
                                             </th>
                                             @*<th scope="row">@item.Date.ToString("MM/yyyy") &nbsp</th>*@
-                                            @if (mTypeSelectCompare == MortgageType.Standard)
+                                            @if (userInputCompare.Type == MortgageType.Standard)
                                             {
                                                 <!-- For standard mortgage, display remaining balance -->
                                                 <td>£@item.RemainingAmount.ToString("N2")</td>
@@ -422,8 +445,6 @@
     private int calcOption = 0;
     private UserInput userInput = new();
     private UserInput userInputCompare = new();
-    private MortgageType mTypeSelect = MortgageType.Standard;
-    private MortgageType mTypeSelectCompare = MortgageType.Standard;
     private Results resultSet = new();
     private Results resultSetCompare = new();
     private Results resultSetInterestOnly = new();
@@ -450,7 +471,7 @@
             errorMessage = "Term input is needed. Term input needs to be more than 0.";
         }
 
-        if (userInput.Deposit < 0 || userInput.Deposit == null)
+        if (userInput.Deposit < 0 || userInput.Deposit < 0)
         {
             errorMessage = "Cannot have negative Deposit amount";
         }
@@ -471,7 +492,7 @@
             errorMessage = "For the second loan, Term input is needed. Term input needs to be more than 0.";
         }
 
-        if (calcOption == 2 && userInputCompare.Deposit < 0 || userInput.Deposit == null)
+        if (calcOption == 2 && userInputCompare.Deposit < 0 && userInput.Deposit < 0)
         {
             errorMessage = "For the second loan, Cannot have negative Deposit amount";
         }
@@ -480,14 +501,14 @@
         if (calcOption == 1)
         {
             //do calc single
-            resultSet = LogicMethod.CalculateRepayments(userInput, mTypeSelect);
+            resultSet = LogicMethod.CalculateRepayments(userInput, userInput.Type);
             // resultSetInterestOnly = LogicMethod.CalculateInterestOnlyResultSet(userInput)
         }
         else
         {
             //do calc compare
-            resultSet = LogicMethod.CalculateRepayments(userInput, mTypeSelect);
-            resultSetCompare = LogicMethod.CalculateRepayments(userInputCompare, mTypeSelectCompare);
+            resultSet = LogicMethod.CalculateRepayments(userInput, userInput.Type);
+            resultSetCompare = LogicMethod.CalculateRepayments(userInputCompare, userInputCompare.Type);
         }
     }
 
@@ -529,7 +550,7 @@
 
     double calcInterestOnlyLoanTotal()
     {
-        double interestRepayment = resultSetCompare.TotalAmount + (userInputCompare.Amount - userInputCompare.Deposit);
+        double interestRepayment = resultSet.TotalAmount + (userInput.Amount - userInput.Deposit);
         return interestRepayment;
     }
     double calcInterestOnlyLoanTotalCompare()
