@@ -1,0 +1,30 @@
+﻿@using System
+@using Mortgage_Calculator
+
+@code {
+    [Parameter]
+    public UserInput userInput { get; set; }
+
+    [Parameter]
+    public Results resultSet { get; set; }
+
+    double calcInterestOnlyLoanTotal()
+    {
+        return resultSet.TotalAmount + (userInput.Amount - userInput.Deposit);
+    }
+}
+
+<div>
+    <!-- Total repayment amount -->
+    <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
+        Total repayment amount is
+        @if (userInput.Type == MortgageType.Standard)
+        {
+            <span> £@resultSet.TotalAmount.ToString("N2")</span>
+        }
+        else
+        {
+            <span> £@calcInterestOnlyLoanTotal().ToString("N2")</span>
+        }
+    </font>
+</div>

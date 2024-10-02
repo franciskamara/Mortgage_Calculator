@@ -59,8 +59,7 @@
         <!-- Calculator inputs -->
         <CalculatorInputs userInput="userInput"></CalculatorInputs>
 
-        <button style="background-color:green" class="btn btn-primary" @onclick="DisplayResults">Results</button>
-        <br /><br />
+        <ButtonCalculate DisplayResults="DisplayResults"></ButtonCalculate>
     </div>
 
     <!-- RESULTS OUTPUT -->
@@ -75,27 +74,11 @@
                 <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>
 
                 <!-- 2) Total repayment, Capital and Interest only values -->
-                <!-- Total repayment amount -->
-                <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
-                    Total repayment amount is
-                    @if (userInput.Type == MortgageType.Standard)
-                    {
-                        <span> £@resultSet.TotalAmount.ToString("N2")</span>
-                    }
-                    else
-                    {
-                        <span> £@calcInterestOnlyLoanTotal().ToString("N2")</span>
-                    }
-                </font>
+                <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
 
-                <!-- Capital repayment amount -->
-                <font style="margin-top:-2; display: block;" size="0" title="Capital Repayment Value">
-                    Capital repayment is £@calcPrinciple().ToString("N2")
-                </font>
-
-                <!-- Interest repayment amount -->
-                <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
-                    Interest repayment is
+                <!-- Capital and Interest rate repayment amounts -->
+                <font style="margin-top:-2; display: block;" size="0">
+                    Capital repayment is £@calcPrinciple().ToString("N2") and the Interest repayment is
                     @if (userInput.Type == MortgageType.Standard)
                     {
                         <span> £@calcIntTotal().ToString("N2")</span>
@@ -105,6 +88,19 @@
                         <span> £@calcIntValueForIntOnlyLoan().ToString("N2")</span>
                     }
                 </font>
+
+                <!-- Interest repayment amount -->
+                <!--<font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
+                    Interest repayment is
+                    @if (userInput.Type == MortgageType.Standard)
+                    {
+                        <span> £@calcIntTotal().ToString("N2")</span>
+                    }
+                    else
+                    {
+                        <span> £@calcIntValueForIntOnlyLoan().ToString("N2")</span>
+                    }
+                </font>-->
 
                 <!-- 3) One month's repayment amount -->
                 <font size="3" title="Monthly Repayment Value">
@@ -202,8 +198,7 @@
         <!-- Calculator inputs 2 -->
         <CalculatorInputs userInput="userInputCompare"></CalculatorInputs>
 
-        <button style="background-color:green" class="btn btn-primary" @onclick="DisplayResults">Results</button>
-        <br /><br />
+        <ButtonCalculate DisplayResults="DisplayResults"></ButtonCalculate>
     </div>
 
     <!-- RESULT OUTPUT -->
@@ -217,23 +212,13 @@
                 <!-- 1) Line chart output -->
                 <div><LineChartOutput resultSet="resultSet" resultSetCompare="resultSetCompare"></LineChartOutput></div>
 
-                <!-- First Result Output -->
+                <!-- FIRST RESULT OUTPUT -->
                 <br />
                 <h6>Mortgage 1 Results</h6>
 
                 <!-- 2) Total repayment, Capital and Interest only values -->
                 <!-- Total repayment amount -->
-                <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
-                    Total repayment amount is
-                    @if (userInput.Type == MortgageType.Standard)
-                    {
-                        <span> £@resultSet.TotalAmount.ToString("N2")</span>
-                    }
-                    else
-                    {
-                        <span> £@calcInterestOnlyLoanTotal().ToString("N2")</span>
-                    }
-                </font>
+                <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
 
                 <!-- Capital repayment amount -->
                 <font style="margin-top:-3; display: block;" size="0" title="Capital Repayment Value">
@@ -333,17 +318,7 @@
 
                 <!-- 2) Total repayment, Capital and Interest only values -->
                 <!-- Total repayment amount -->
-                <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
-                    Total repayment amount is
-                    @if (userInputCompare.Type == MortgageType.Standard)
-                    {
-                        <span> £@resultSetCompare.TotalAmount.ToString("N2")</span>
-                    }
-                    else
-                    {
-                        <span> £@calcInterestOnlyLoanTotalCompare().ToString("N2")</span>
-                    }
-                </font>
+                <OutputTotalAmount userInput="userInputCompare" resultSet="resultSetCompare"></OutputTotalAmount>
 
                 <!-- Capital repayment amount -->
                 <font style="margin-top:-3; display: block;" size="0" title="Capital Repayment Value">

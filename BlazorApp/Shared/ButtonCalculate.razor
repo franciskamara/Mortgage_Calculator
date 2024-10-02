@@ -1,0 +1,12 @@
+﻿@using System
+@using Mortgage_Calculator
+
+@code {
+[Parameter]
+    public EventCallback DisplayResults { get; set; }
+}
+
+<div>
+    <button style="background-color:darkred" class="btn btn-primary" @onclick="DisplayResults">Calculate</button>
+    <br /><br />
+</div>
