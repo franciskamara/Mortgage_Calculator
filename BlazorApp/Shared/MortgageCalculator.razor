@@ -74,38 +74,14 @@
                 <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>
 
                 <!-- 2) Total repayment, Capital and Interest only values -->
+                <!-- Total amount output -->
                 <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
 
-                <!-- Capital and Interest rate repayment amounts -->
-                <font style="margin-top:-2; display: block;" size="0">
-                    Capital repayment is £@calcPrinciple().ToString("N2") and the Interest repayment is
-                    @if (userInput.Type == MortgageType.Standard)
-                    {
-                        <span> £@calcIntTotal().ToString("N2")</span>
-                    }
-                    else
-                    {
-                        <span> £@calcIntValueForIntOnlyLoan().ToString("N2")</span>
-                    }
-                </font>
+                <!-- Capital and Interest repayment amounts -->
+                <OutputCapital_InterestValues userInput="userInput" resultSet="resultSet"></OutputCapital_InterestValues>
 
-                <!-- Interest repayment amount -->
-                <!--<font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
-                    Interest repayment is
-                    @if (userInput.Type == MortgageType.Standard)
-                    {
-                        <span> £@calcIntTotal().ToString("N2")</span>
-                    }
-                    else
-                    {
-                        <span> £@calcIntValueForIntOnlyLoan().ToString("N2")</span>
-                    }
-                </font>-->
-
-                <!-- 3) One month's repayment amount -->
-                <font size="3" title="Monthly Repayment Value">
-                    Monthly Repayment Amount is £@resultSet.MonthlyRepayments[0].ToString("N2")
-                </font>
+                <!-- 3) Monthly repayment amount -->
+                <OutputMonthlyRepaymentAmount resultSet="resultSet"></OutputMonthlyRepaymentAmount>
 
                 <br />
                 <!-- 4) Total repayment months -->
@@ -220,29 +196,11 @@
                 <!-- Total repayment amount -->
                 <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
 
-                <!-- Capital repayment amount -->
-                <font style="margin-top:-3; display: block;" size="0" title="Capital Repayment Value">
-                    Capital repayment is £@calcPrinciple().ToString("N2")
-                </font>
-
-                <!-- Interest repayment amount -->
-                <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
-                    Interest repayment is
-                    @if (userInput.Type == MortgageType.Standard)
-                    {
-                        <span> £@calcIntTotal().ToString("N2")</span>
-                    }
-                    else
-                    {
-                        <span> £@calcIntValueForIntOnlyLoan().ToString("N2")</span>
-                    }
-                </font>
+                <!-- Capital and Interest repayment amounts -->
+                <OutputCapital_InterestValues userInput="userInput" resultSet="resultSet"></OutputCapital_InterestValues>
 
                 <!-- 3) Monthly repayment amount -->
-                <font size="2" title="Monthly Repayment Value">
-                    Monthly Repayment Amount is £@resultSet.MonthlyRepayments[0].ToString("N2")
-                </font>
-                <br />
+                <OutputMonthlyRepaymentAmount resultSet="resultSet"></OutputMonthlyRepaymentAmount>
 
                 <!-- 4) Total repayment months -->
                 <div class="display-block">
@@ -320,29 +278,11 @@
                 <!-- Total repayment amount -->
                 <OutputTotalAmount userInput="userInputCompare" resultSet="resultSetCompare"></OutputTotalAmount>
 
-                <!-- Capital repayment amount -->
-                <font style="margin-top:-3; display: block;" size="0" title="Capital Repayment Value">
-                    Capital repayment is £@calcPrincipleCompare().ToString("N2")
-                </font>
-
-                <!-- Interest repayment amount -->
-                <font style="margin-top:-3; display: block;" size="0" title="Interest Repayment Value">
-                    Interest repayment is
-                    @if (userInputCompare.Type == MortgageType.Standard)
-                    {
-                        <span> £@calcIntTotalCompare().ToString("N2")</span>
-                    }
-                    else
-                    {
-                        <span> £@calcIntValueForIntOnlyLoan().ToString("N2")</span>
-                    }
-                </font>
+                <!-- Capital and Interest repayment amounts -->
+                <OutputCapital_InterestValues userInput="userInputCompare" resultSet="resultSetCompare"></OutputCapital_InterestValues>
 
                 <!-- 3) Monthly repayment amount -->
-                <font size="3" title="Monthly Repayment Value">
-                    Monthly Repayment Amount is £@resultSetCompare.MonthlyRepayments[0].ToString("N2")
-                </font>
-                <br />
+                <OutputMonthlyRepaymentAmount resultSet="resultSetCompare"></OutputMonthlyRepaymentAmount>
 
                 <!-- 4) Total repayment months -->
                 <font size="3" title="Total repayment months">

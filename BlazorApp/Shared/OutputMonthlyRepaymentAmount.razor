@@ -1,0 +1,13 @@
+﻿@using System
+@using Mortgage_Calculator
+
+@code {
+    [Parameter]
+    public Results resultSet { get; set; }
+}
+
+<div>
+    <font size="3" title="Monthly Repayment Value">
+        The monthly repayment amount is £@resultSet.MonthlyRepayments.First().ToString("N2")
+    </font>
+</div>
