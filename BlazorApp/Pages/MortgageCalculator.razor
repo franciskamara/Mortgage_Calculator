@@ -35,7 +35,7 @@
             padding: 10px 15px;
             transform: scale(1.1); /* Slightly enlarge the link */
         }
-        </style>
+</style>
 
 @if (errorMessage != "")
 {
@@ -533,30 +533,25 @@
     }
     double calcIntTotal()
     {
-        double interestRepaymentTotal = resultSet.TotalAmount - calcPrinciple();
-        return interestRepaymentTotal;
+        return resultSet.TotalAmount - calcPrinciple();
     }
 
     double calcPrincipleCompare()
     {
-        double principleCompare = userInputCompare.Amount - userInputCompare.Deposit;
-        return principleCompare;
+        return userInputCompare.Amount - userInputCompare.Deposit;
     }
     double calcIntTotalCompare()
     {
-        double intRepaymentTotalCompare = resultSetCompare.TotalAmount - calcPrincipleCompare();
-        return intRepaymentTotalCompare;
+        return resultSetCompare.TotalAmount - calcPrincipleCompare();
     }
 
     double calcInterestOnlyLoanTotal()
     {
-        double interestRepayment = resultSet.TotalAmount + (userInput.Amount - userInput.Deposit);
-        return interestRepayment;
+        return resultSet.TotalAmount + (userInput.Amount - userInput.Deposit);
     }
     double calcInterestOnlyLoanTotalCompare()
     {
-        double intRateTotalRepaymentCompare = resultSetCompare.TotalAmount + (userInputCompare.Amount - userInputCompare.Deposit);
-        return intRateTotalRepaymentCompare;
+        return resultSetCompare.TotalAmount + (userInputCompare.Amount - userInputCompare.Deposit);
     }
 
     double calcIntValueForIntOnlyLoan()
