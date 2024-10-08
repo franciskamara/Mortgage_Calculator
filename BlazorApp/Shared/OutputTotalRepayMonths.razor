@@ -1,0 +1,20 @@
+﻿@using System
+@using Mortgage_Calculator
+
+@code {
+    [Parameter]
+    public Results resultSet { get; set; }
+}
+
+<div class="display-block">
+    <font size="3">
+        @if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
+        {
+            <span>Total Repayment Months is @resultSet.MonthlyRepayments.Count</span>
+        }
+        else
+        {
+            <span>Total Repayment Months is 0</span>
+        }
+    </font>
+</div>

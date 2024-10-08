@@ -6,8 +6,8 @@
     public Results resultSet { get; set; }
 }
 
-<div>
-    <font size="3" title="Monthly Repayment Value">
+<div class="display-block">
+    <font size="3">
         The monthly repayment amount is £@resultSet.MonthlyRepayments.First().ToString("N2")
     </font>
 </div>

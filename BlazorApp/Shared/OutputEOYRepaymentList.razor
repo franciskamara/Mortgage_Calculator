@@ -1,0 +1,63 @@
+﻿@using System
+@using Mortgage_Calculator
+
+@code {
+    [Parameter]
+    public Results resultSet { get; set; }
+
+    [Parameter]
+    public UserInput userInput { get; set; }
+
+    double calcPrinciple()
+    {
+        double principle = userInput.Amount - userInput.Deposit;
+        return principle;
+    }
+
+}
+
+<div class="display-block">
+    <details class="display-block">
+        <summary title="List of annual remaining repayments">
+            <font size="3" class="fs-7" style="color:blue">
+                Remaining debt breakdown
+            </font>
+        </summary>
+        <font size="2">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Year End &nbsp</th>
+                        <th scope="col">Remaining Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (PaymentItem item in resultSet.PaymentItems)
+                    {
+                        if (item.Date.Month == 12) // Check if the month is December
+                        {
+                            int firstYear = resultSet.PaymentItems[0].Date.Year;
+                            <tr>
+                                <th scope="row">
+                                    Year @(item.Date.Year - firstYear + 1)
+                                </th>
+                                @*<th scope="row">@item.Date.ToString("MM/yyyy") &nbsp</th>*@
+                                @if (userInput.Type == MortgageType.Standard)
+                                {
+                                    <!-- For standard mortgage, display remaining balance -->
+                                    <td>£@item.RemainingAmount.ToString("N2")</td>
+                                }
+                                else
+                                {
+                                    <!-- For interest-only mortgage, display only principal -->
+                                    <td>£@calcPrinciple().ToString("N2")</td>
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </font>
+    </details>
+    <br />
+</div>
