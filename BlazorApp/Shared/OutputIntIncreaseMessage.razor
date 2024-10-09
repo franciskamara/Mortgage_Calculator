@@ -1,0 +1,15 @@
+﻿@using System
+@using Mortgage_Calculator
+
+@code {
+    [Parameter]
+    public Results resultSet { get; set; }
+}
+
+<div class="display-block">
+    <div class="alert alert-warning" role="alert" style="text-align:center">
+        <p class="fs-6">
+            @resultSet.WarningIndicator
+        </p>
+    </div>
+</div>

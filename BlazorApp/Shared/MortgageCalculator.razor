@@ -88,15 +88,10 @@
                 <OutputTotalRepayMonths resultSet="resultSet"></OutputTotalRepayMonths>
 
                 <!-- 5) End of Year repayment balance -->
-                
                 <OutputEOYRepaymentList resultSet="resultSet" userInput="userInput"></OutputEOYRepaymentList>
 
                 <!-- 6) Warning indicator of repayment increase, 3% -->
-                <div class="alert alert-warning" role="alert" style="text-align:center">
-                    <p class="fs-6">
-                        @resultSet.WarningIndicator
-                    </p>
-                </div>
+                <OutputIntIncreaseMessage resultSet="resultSet"></OutputIntIncreaseMessage>
 
             </div>
         }
@@ -156,49 +151,7 @@
                 <OutputTotalRepayMonths resultSet="resultSet"></OutputTotalRepayMonths>
 
                 <!-- 5) End of Year repayment balance -->
-                <details class="display-block">
-                    <summary title="List of annual remaining repayments">
-                        <font size="3" class="fs-7" style="color:blue">
-                            Remaining debt breakdown
-                        </font>
-                    </summary>
-                    <font size="2">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Year End &nbsp</th>
-                                    <th scope="col">Remaining Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (PaymentItem item in resultSet.PaymentItems)
-                                {
-                                    if (item.Date.Month == 12) // Check if the month is December
-                                    {
-                                        int firstYear = resultSet.PaymentItems[0].Date.Year;
-                                        <tr>
-                                            <th scope="row">
-                                                Year @(item.Date.Year - firstYear + 1)
-                                            </th>
-                                            @*<th scope="row">@item.Date.ToString("MM/yyyy") &nbsp</th>*@
-                                            @if (userInput.Type == MortgageType.Standard)
-                                            {
-                                                <!-- For standard mortgage, display remaining balance -->
-                                                <td>£@item.RemainingAmount.ToString("N2")</td>
-                                            }
-                                            else
-                                            {
-                                                <!-- For interest-only mortgage, display only principal -->
-                                                <td>£@calcPrinciple().ToString("N2")</td>
-                                            }
-                                        </tr>
-                                    }
-                                }
-                            </tbody>
-                        </table>
-                    </font>
-                </details>
-                <br />
+                <OutputEOYRepaymentList resultSet="resultSet" userInput="userInput"></OutputEOYRepaymentList>
 
                 <!-- 6) Warning indicator of repayment increase, 3% -->
                 <div class="alert alert-warning" role="alert" style="text-align:center">
@@ -227,49 +180,7 @@
                 <OutputTotalRepayMonths resultSet="resultSetCompare"></OutputTotalRepayMonths>
 
                 <!-- 5) End of Year repayment balance -->
-                <details class="display-block">
-                    <summary title="List of annual remaining repayments">
-                        <font size="3" class="fs-7" style="color:blue">
-                            Remaining debt breakdown
-                        </font>
-                    </summary>
-                    <font size="2">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Year End &nbsp</th>
-                                    <th scope="col">Remaining Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (PaymentItem item in resultSetCompare.PaymentItems)
-                                {
-                                    if (item.Date.Month == 12) // Check if the month is December
-                                    {
-                                        int firstYear = resultSetCompare.PaymentItems[0].Date.Year;
-                                        <tr>
-                                            <th scope="row">
-                                                Year @(item.Date.Year - firstYear + 1)
-                                            </th>
-                                            @*<th scope="row">@item.Date.ToString("MM/yyyy") &nbsp</th>*@
-                                            @if (userInputCompare.Type == MortgageType.Standard)
-                                            {
-                                                <!-- For standard mortgage, display remaining balance -->
-                                                <td>£@item.RemainingAmount.ToString("N2")</td>
-                                            }
-                                            else
-                                            {
-                                                <!-- For interest-only mortgage, display only principal -->
-                                                <td>£@calcPrincipleCompare().ToString("N2")</td>
-                                            }
-                                        </tr>
-                                    }
-                                }
-                            </tbody>
-                        </table>
-                    </font>
-                </details>
-                <br />
+                <OutputEOYRepaymentList resultSet="resultSetCompare" userInput="userInputCompare"></OutputEOYRepaymentList>
 
                 <!-- 6) Warning indicator of repayment increase, 3% -->
                 <div class="alert alert-warning" role="alert" style="text-align:center">
