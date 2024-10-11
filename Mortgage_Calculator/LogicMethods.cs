@@ -11,7 +11,7 @@ namespace Mortgage_Calculator
             double deposit = input.Deposit;
             double totalAmount = input.Amount - deposit;
             double monthlyRepayment;
-
+            double monthlyRepaymentPlus3;
 
             List<PaymentItem> repayments = new();
             List<double> monthlyRepayments = new();
@@ -21,15 +21,22 @@ namespace Mortgage_Calculator
                 //Interest-only monthly repayment calculation
                 //Interest-Only = ((Amount x InterestRate) / 12months) x totalMonths
                 monthlyRepayment = ((totalAmount * interestRateDecimal) / CONSTANTS.MONTHS_OF_YEAR);
+
+                monthlyRepaymentPlus3 = ((totalAmount * (interestRateDecimal + CONSTANTS.INTEREST_RATE)) / CONSTANTS.MONTHS_OF_YEAR);
             }
             else
             {
-                //Standard repayment calculation
+                //Standard monthly repayment calculation
                 //Repayment = Amount x (monthlyInterestRate x (1 + (monthlyInterestRate * 12months))) /
                 // (1 + (monthlyInterestRate x totalMonths) - 1)
                 double monthlyInterestRate = interestRateDecimal / CONSTANTS.MONTHS_OF_YEAR;//Monthly interest rate calc
                 monthlyRepayment = totalAmount * (monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, totalMonths)) /
                                   (Math.Pow(1 + monthlyInterestRate, totalMonths) - 1);
+
+                double monthlyInterestRatePlus3 = (interestRateDecimal + CONSTANTS.INTEREST_RATE) / CONSTANTS.MONTHS_OF_YEAR;//Monthly interest rate calc
+                monthlyRepaymentPlus3 = totalAmount * (monthlyInterestRatePlus3 * Math.Pow(1 + monthlyInterestRatePlus3, totalMonths)) /
+                                  (Math.Pow(1 + monthlyInterestRatePlus3, totalMonths) - 1);
+
             }
 
             double remainingAmount;
@@ -58,8 +65,8 @@ namespace Mortgage_Calculator
                     RemainingAmount = remainingAmount,
                 }); //Add data to Payment Items class
             }
-            double potentialIncreaseRepayment = monthlyRepayment * CONSTANTS.INTEREST_RATE;//Monthly repayment if interest rises by 3%
-            double roundedValue = Math.Round(potentialIncreaseRepayment, 2);
+            //double potentialIncreaseRepayment = monthlyRepaymentPlus3 * CONSTANTS.INTEREST_RATE;//Monthly repayment if interest rises by 3%
+            double roundedValue = Math.Round(monthlyRepaymentPlus3, 2);
             Results results = new()//New results local variable
             {
                 WarningIndicator = $"Hello, be aware that if your monthly repayment where to increase by 3% at anytime, it will be £{roundedValue:N2}. Ensure you have enough for this change.",

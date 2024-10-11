@@ -92,7 +92,6 @@
 
                 <!-- 6) Warning indicator of repayment increase, 3% -->
                 <OutputIntIncreaseMessage resultSet="resultSet"></OutputIntIncreaseMessage>
-
             </div>
         }
     </div>
@@ -101,7 +100,6 @@
 @if (calcOption == 2)
 {
     <div title="Comparison mortgages form">
-
         <div class="h2 pb-0 mb-4 border-bottom" style="color: #273157">
             <br />
             <h5>First mortgage</h5>
@@ -154,11 +152,7 @@
                 <OutputEOYRepaymentList resultSet="resultSet" userInput="userInput"></OutputEOYRepaymentList>
 
                 <!-- 6) Warning indicator of repayment increase, 3% -->
-                <div class="alert alert-warning" role="alert" style="text-align:center">
-                    <p class="fs-6">
-                        @resultSet.WarningIndicator
-                    </p>
-                </div>
+                <OutputIntIncreaseMessage resultSet="resultSet"></OutputIntIncreaseMessage>
 
 
                 <!-- SECOND RESULT OUTPUT -->
@@ -183,17 +177,11 @@
                 <OutputEOYRepaymentList resultSet="resultSetCompare" userInput="userInputCompare"></OutputEOYRepaymentList>
 
                 <!-- 6) Warning indicator of repayment increase, 3% -->
-                <div class="alert alert-warning" role="alert" style="text-align:center">
-                    <p class="fs-6">
-                        @resultSetCompare.WarningIndicator
-                    </p>
-                </div>
+                <OutputIntIncreaseMessage resultSet="resultSetCompare"></OutputIntIncreaseMessage>
             </div>
         }
-
     </div>
 }
-
 
 @code
 {
