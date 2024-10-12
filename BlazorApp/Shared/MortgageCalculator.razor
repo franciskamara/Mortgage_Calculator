@@ -25,8 +25,10 @@
 @if (errorMessage != "")
 {
     <div class="alert alert-danger" role="alert" style="text-align:center">
-        <p class="fs-6">
-            @errorMessage
+        <p class="text-[6px]">
+            <span>
+                @errorMessage
+            </span>
         </p>
     </div>
 }
@@ -40,11 +42,12 @@
             <h5>Single mortgage</h5>
             <br />
         </div>
+        <div nonvalidate class="mc-tool-form">
+            <!-- Calculator inputs -->
+            <CalculatorInputs userInput="userInput"></CalculatorInputs>
 
-        <!-- Calculator inputs -->
-        <CalculatorInputs userInput="userInput"></CalculatorInputs>
-
-        <ButtonCalculate DisplayResults="DisplayResults"></ButtonCalculate>
+            <ButtonCalculate DisplayResults="DisplayResults"></ButtonCalculate>
+        </div>
     </div>
 
     <!-- RESULTS OUTPUT -->
@@ -174,7 +177,7 @@
 
     private void DisplayResults()
     {
-        errorMessage = ""; 
+        errorMessage = "";
 
         // Error messages: 1st loan
         if (userInput.Amount <= 0)
@@ -189,7 +192,7 @@
 
         if (userInput.Type != MortgageType.Standard && userInput.Type != MortgageType.Interest_Only)
         {
-            errorMessage += "Please select a valid mortgage type.\n";
+            errorMessage += "Select a valid mortgage type.\n";
         }
 
         if (userInput.InterestRatePercentage <= 0)
@@ -217,7 +220,7 @@
 
             if (userInputCompare.Type != MortgageType.Standard && userInputCompare.Type != MortgageType.Interest_Only)
             {
-                errorMessage += "For the second loan, please select a valid mortgage type.\n";
+                errorMessage += "For the second loan, select a valid mortgage type.\n";
             }
 
             if (userInputCompare.InterestRatePercentage <= 0)

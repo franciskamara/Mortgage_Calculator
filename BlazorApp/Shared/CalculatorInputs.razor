@@ -11,29 +11,31 @@
 
 }
 
-<div style="color: #273157">
-    <div class="space-y-3">
-        <label>Loan amount: </label>
-        <InputNumber @bind-Value="userInput.Amount"></InputNumber>
-        <br /> <br />
+<form method="post" >
+    <div style="color: #273157">
+        <div class="space-y-3">
+            <label>Loan amount: </label>
+            <InputNumber @bind-Value="userInput.Amount"></InputNumber>
+            <br /> <br />
+        </div>
+        <div class="space-y-3">
+            <label>How many years for the loan? </label>
+            <InputNumber @bind-Value="userInput.Term"></InputNumber>
+            <br /><br />
+        </div>
+        <div class="space-y-3">
+            <MortgageTypeSelect @bind-selection="userInput.Type"></MortgageTypeSelect>
+            <br />
+        </div>
+        <div class="space-y-3">
+            <label>Interest rate: %</label>
+            <InputNumber @bind-Value="userInput.InterestRatePercentage"></InputNumber>
+            <br /><br />
+        </div>
+        <div class="space-y-3">
+            <label>Deposit (optional):</label>
+            <InputNumber @bind-Value="userInput.Deposit"></InputNumber>
+            <br /><br /><br>
+        </div>
     </div>
-    <div class="space-y-3">
-        <label>How many years for the loan? </label>
-        <InputNumber @bind-Value="userInput.Term"></InputNumber>
-        <br /><br />
-    </div>
-    <div class="space-y-3">
-        <MortgageTypeSelect @bind-selection="userInput.Type"></MortgageTypeSelect>
-        <br />
-    </div>
-    <div class="space-y-3">
-        <label>Interest rate: %</label>
-        <InputNumber @bind-Value="userInput.InterestRatePercentage"></InputNumber>
-        <br /><br />
-    </div>
-    <div class="space-y-3">
-        <label>Deposit (optional):</label>
-        <InputNumber @bind-Value="userInput.Deposit"></InputNumber>
-        <br /><br /><br>
-    </div>
-</div>
+</form>
