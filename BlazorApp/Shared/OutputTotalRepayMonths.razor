@@ -6,15 +6,22 @@
     public Results resultSet { get; set; }
 }
 
-<div class="display-block">
-    <font size="3">
-        @if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
-        {
-            <span>Total Repayment Months is @resultSet.MonthlyRepayments.Count</span>
-        }
-        else
-        {
-            <span>Total Repayment Months is 0</span>
-        }
-    </font>
+<div class="row justify-content-between">
+    <div class="col-12 col-md">
+        <p class="text-xl mb-0">
+            Total months of repayment will be:
+        </p>
+    </div>
+    <div class="col-12 col-md-auto">
+        <p class="text-[38px] font-bold text-right col-12 col-md-auto">
+            @if (resultSet.MonthlyRepayments != null && resultSet.MonthlyRepayments.Count > 0)
+            {
+                <span>@resultSet.MonthlyRepayments.Count</span>
+            }
+            else
+            {
+                <span>0</span>
+            }
+        </p>
+    </div>
 </div>

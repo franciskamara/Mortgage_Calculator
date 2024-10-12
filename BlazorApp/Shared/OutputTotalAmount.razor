@@ -8,23 +8,57 @@
     [Parameter]
     public Results resultSet { get; set; }
 
+    double calcPrinciple()
+    {
+        double principle = userInput.Amount - userInput.Deposit;
+        return principle;
+    }
+    double calcIntTotal()
+    {
+        return resultSet.TotalAmount - calcPrinciple();
+    }
     double calcInterestOnlyLoanTotal()
     {
         return resultSet.TotalAmount + (userInput.Amount - userInput.Deposit);
     }
+    double calcIntValueForIntOnlyLoan()
+    {
+        return calcInterestOnlyLoanTotal() - (userInput.Amount - userInput.Deposit);
+    }
 }
 
-<div class="display-block">
-    <!-- Total repayment amount -->
-    <font style="margin-bottom:0; display: block;" size="3" title="Total Repayment Amount">
-        Total repayment amount is
-        @if (userInput.Type == MortgageType.Standard)
-        {
-            <span> £@resultSet.TotalAmount.ToString("N2")</span>
-        }
-        else
-        {
-            <span> £@calcInterestOnlyLoanTotal().ToString("N2")</span>
-        }
-    </font>
+<!-- Total repayment, Capital and Interest values -->
+<div class="row justify-content-between">
+    <div class="col-12 col-md">
+        <p class="text-xl mb-0">
+            <span>Total repayment amount is:</span>
+        </p>
+        <font style="margin-top:-3; display: block;" size="0">
+            Capital repayment is £@calcPrinciple().ToString("N2") and the Interest repayment is
+            @if (userInput.Type == MortgageType.Standard)
+            {
+                <span> £@calcIntTotal().ToString("N2")</span>
+            }
+            else
+            {
+                <span> £@calcIntValueForIntOnlyLoan().ToString("N2")</span>
+            }
+        </font>
+    </div>
+    <div class="col-12 col-md-auto">
+        <p class="text-[38px] font-bold text-right col-12 col-md-auto">
+            <span id="totalRepaymentAmount">
+                @if (userInput.Type == MortgageType.Standard)
+                {
+                    <span> £@resultSet.TotalAmount.ToString("N2")</span>
+                }
+                else
+                {
+                    <span> £@calcInterestOnlyLoanTotal().ToString("N2")</span>
+                }
+            </span>
+        </p>
+    </div>
 </div>
+
+

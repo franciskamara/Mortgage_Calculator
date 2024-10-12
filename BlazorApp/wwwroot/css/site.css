@@ -66,3 +66,93 @@ a, .btn-link {
         content: "An error has occurred."
     }
 
+
+.text-grey-800 {
+    --tw-text-opacity: 1;
+    color: rgb(0 11 59 / var(--tw-text-opacity));
+}
+
+.nav-link {
+    display: inline-block;
+    border-radius: 50%; /* Make circular on hover */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+    .nav-link:hover {
+        background-color: #555;
+        color: white;
+        border-radius: 0;
+        padding: 10px 15px;
+        transform: scale(1.1); /* Slightly enlarge the link */
+    }
+
+.font-bold {
+    font-weight: 700;
+}
+
+.text-\[38px\] {
+    font-size: 38px;
+    line-height: 32px;
+}
+
+.text-\[32px\] {
+    font-size: 32px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-xl {
+    font-size: 1.375rem;
+    line-height: 2rem;
+}
+
+.border-0 {
+    border-width: 0;
+}
+
+.h-px {
+    height: 1px;
+}
+
+.bg-grey-400 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(96 99 126 / var(--tw-bg-opacity));
+}
+
+.col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.col-md-auto {
+    flex: 0 0 auto;
+    max-width: 100%;
+    width: auto;
+}
+
+.col-md {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.justify-content-between {
+    justify-content: space-between !important;
+}
+
+mb-0 {
+    margin-bottom: 0;
+}

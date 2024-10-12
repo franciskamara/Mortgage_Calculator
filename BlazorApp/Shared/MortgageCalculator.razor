@@ -21,21 +21,6 @@
     <br />
 </nav>
 
-<style>
-    .nav-link {
-        display: inline-block;
-        border-radius: 50%; /* Make circular on hover */
-        transition: all 0.3s ease; /* Smooth transition */
-    }
-
-        .nav-link:hover {
-            background-color: #555;
-            color: white;
-            border-radius: 0;
-            padding: 10px 15px;
-            transform: scale(1.1); /* Slightly enlarge the link */
-        }
-</style>
 
 @if (errorMessage != "")
 {
@@ -67,31 +52,29 @@
         @if (resultSet?.PaymentItems?.Count > 0 && errorMessage == string.Empty)// Results output
         {
             <div style="border: #34495e; border-width: 10px; border-style: solid; border-radius: 10px; padding: 15px;">
-                <br />
                 <ResultsHeader></ResultsHeader>
+                <div class="text-grey-800">
 
-                <!-- 1) Line chart output -->
-                <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>
+                    <!-- 1) Monthly repayment amount -->
+                    <OutputMonthlyRepaymentAmount resultSet="resultSet"></OutputMonthlyRepaymentAmount>
+                    <hr class="border-0 h-px bg-grey-400">
 
-                <!-- 2) Total repayment, Capital and Interest only values -->
-                <!-- Total amount output -->
-                <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
+                    <!-- 2) Total repayment, Capital and Interest only values -->
+                    <!-- Outputs: Total repayment amount, Capital and Interest values -->
+                    <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
 
-                <!-- Capital and Interest repayment amounts -->
-                <OutputCapital_InterestValues userInput="userInput" resultSet="resultSet"></OutputCapital_InterestValues>
+                    <!-- Line chart output -->
+                    <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>
 
-                <!-- 3) Monthly repayment amount -->
-                <OutputMonthlyRepaymentAmount resultSet="resultSet"></OutputMonthlyRepaymentAmount>
+                    <!-- 3) Total repayment months -->
+                    <OutputTotalRepayMonths resultSet="resultSet"></OutputTotalRepayMonths>
 
-                <br />
-                <!-- 4) Total repayment months -->
-                <OutputTotalRepayMonths resultSet="resultSet"></OutputTotalRepayMonths>
+                    <!-- 4) List: End of Year repayment balance -->
+                    <OutputEOYRepaymentList resultSet="resultSet" userInput="userInput"></OutputEOYRepaymentList>
 
-                <!-- 5) End of Year repayment balance -->
-                <OutputEOYRepaymentList resultSet="resultSet" userInput="userInput"></OutputEOYRepaymentList>
-
-                <!-- 6) Warning indicator of repayment increase, 3% -->
-                <OutputIntIncreaseMessage resultSet="resultSet"></OutputIntIncreaseMessage>
+                    <!-- 5) Warning indicator of repayment increase, 3% -->
+                    <OutputIntIncreaseMessage resultSet="resultSet"></OutputIntIncreaseMessage>
+                </div>
             </div>
         }
     </div>
@@ -135,48 +118,42 @@
                 <br />
                 <h6>Mortgage 1 Results</h6>
 
-                <!-- 2) Total repayment, Capital and Interest only values -->
-                <!-- Total repayment amount -->
-                <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
-
-                <!-- Capital and Interest repayment amounts -->
-                <OutputCapital_InterestValues userInput="userInput" resultSet="resultSet"></OutputCapital_InterestValues>
-
-                <!-- 3) Monthly repayment amount -->
+                <!-- 1) Monthly repayment amount -->
                 <OutputMonthlyRepaymentAmount resultSet="resultSet"></OutputMonthlyRepaymentAmount>
 
-                <!-- 4) Total repayment months -->
+                <!-- 2) Total repayment, Capital and Interest only values -->
+                <!-- Outputs: Total repayment amount, Capital and Interest values -->
+                <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
+
+                <!-- 3) Total repayment months -->
                 <OutputTotalRepayMonths resultSet="resultSet"></OutputTotalRepayMonths>
 
-                <!-- 5) End of Year repayment balance -->
+                <!-- 4) List: End of Year repayment balance -->
                 <OutputEOYRepaymentList resultSet="resultSet" userInput="userInput"></OutputEOYRepaymentList>
 
-                <!-- 6) Warning indicator of repayment increase, 3% -->
+                <!-- 5) Warning indicator of repayment increase, 3% -->
                 <OutputIntIncreaseMessage resultSet="resultSet"></OutputIntIncreaseMessage>
 
 
                 <!-- SECOND RESULT OUTPUT -->
                 <br />
-
+                <hr class="border-0 h-px bg-grey-400">
                 <h6>Mortgage 2 Results</h6>
 
-                <!-- 2) Total repayment, Capital and Interest only values -->
-                <!-- Total repayment amount -->
-                <OutputTotalAmount userInput="userInputCompare" resultSet="resultSetCompare"></OutputTotalAmount>
-
-                <!-- Capital and Interest repayment amounts -->
-                <OutputCapital_InterestValues userInput="userInputCompare" resultSet="resultSetCompare"></OutputCapital_InterestValues>
-
-                <!-- 3) Monthly repayment amount -->
+                <!-- 1) Monthly repayment amount -->
                 <OutputMonthlyRepaymentAmount resultSet="resultSetCompare"></OutputMonthlyRepaymentAmount>
 
-                <!-- 4) Total repayment months -->
+                <!-- 2) Total repayment, Capital and Interest only values -->
+                <!-- Outputs: Total repayment amount, Capital and Interest values -->
+                <OutputTotalAmount userInput="userInputCompare" resultSet="resultSetCompare"></OutputTotalAmount>
+
+                <!-- 3) Total repayment months -->
                 <OutputTotalRepayMonths resultSet="resultSetCompare"></OutputTotalRepayMonths>
 
-                <!-- 5) End of Year repayment balance -->
+                <!-- 4) List: End of Year repayment balance -->
                 <OutputEOYRepaymentList resultSet="resultSetCompare" userInput="userInputCompare"></OutputEOYRepaymentList>
 
-                <!-- 6) Warning indicator of repayment increase, 3% -->
+                <!-- 5) Warning indicator of repayment increase, 3% -->
                 <OutputIntIncreaseMessage resultSet="resultSetCompare"></OutputIntIncreaseMessage>
             </div>
         }
@@ -197,49 +174,63 @@
 
     private void DisplayResults()
     {
-        errorMessage = "";
+        errorMessage = ""; 
 
-        <!-- Error messages: 1st loan -->
+        // Error messages: 1st loan
         if (userInput.Amount <= 0)
         {
-            errorMessage = "Amount needs to be more than 0.";
-        }
-
-        if (userInput.InterestRatePercentage <= 0)
-        {
-            errorMessage = "Interest Rate needs to be more than 0.";
+            errorMessage = "Amount needs to be more than 0.\n";
         }
 
         if (userInput.Term <= 0)
         {
-            errorMessage = "Term input is needed. Term input needs to be more than 0.";
+            errorMessage += "Term input is needed. Term input needs to be more than 0.\n";
         }
 
-        if (userInput.Deposit < 0 || userInput.Deposit < 0)
+        if (userInput.Type != MortgageType.Standard && userInput.Type != MortgageType.Interest_Only)
         {
-            errorMessage = "Cannot have negative Deposit amount";
+            errorMessage += "Please select a valid mortgage type.\n";
         }
 
-        <!-- Error messages: 2nd loan -->
-        if (calcOption == 2 && userInputCompare.Amount <= 0)
+        if (userInput.InterestRatePercentage <= 0)
         {
-            errorMessage = "For the second loan, we need the amount to be more than 0.";
+            errorMessage += "Interest rate needs to be more than 0.\n";
         }
 
-        if (calcOption == 2 && userInputCompare.InterestRatePercentage <= 0)
+        if (userInput.Deposit < 0)
         {
-            errorMessage = "For the second loan, Interest Rate needs to be more than 0.";
+            errorMessage += "Cannot have negative deposit amount.\n";
         }
 
-        if (calcOption == 2 && userInputCompare.Term <= 0)
+        // Error messages: 2nd loan (if calcOption is 2)
+        if (calcOption == 2)
         {
-            errorMessage = "For the second loan, Term input is needed. Term input needs to be more than 0.";
+            if (userInputCompare.Amount <= 0)
+            {
+                errorMessage += "For the second loan, the amount has to be more than 0.\n";
+            }
+
+            if (userInputCompare.Term <= 0)
+            {
+                errorMessage += "For the second loan, term years of the loan are needed. Term input needs to be more than 0.\n";
+            }
+
+            if (userInputCompare.Type != MortgageType.Standard && userInputCompare.Type != MortgageType.Interest_Only)
+            {
+                errorMessage += "For the second loan, please select a valid mortgage type.\n";
+            }
+
+            if (userInputCompare.InterestRatePercentage <= 0)
+            {
+                errorMessage += "For the second loan, Interest rate needs to be more than 0.\n";
+            }
+
+            if (userInputCompare.Deposit < 0)
+            {
+                errorMessage += "For the second loan, cannot have negative deposit amount.\n";
+            }
         }
 
-        if (calcOption == 2 && userInputCompare.Deposit < 0 && userInput.Deposit < 0)
-        {
-            errorMessage = "For the second loan, Cannot have negative Deposit amount";
-        }
 
         <!-- Output Calculation Results -->
         if (calcOption == 1)
