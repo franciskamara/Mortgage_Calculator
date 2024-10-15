@@ -25,7 +25,7 @@
 @if (errorMessage != "")
 {
     <div class="alert alert-danger" role="alert" style="text-align:center">
-        <p class="text-[6px]">
+        <p style="white-space: pre-line" class="text-[6px]">
             <span>
                 @errorMessage
             </span>
@@ -33,134 +33,172 @@
     </div>
 }
 
-@if (calcOption == 1)// Option for single mortgage calculation
+
+@if (calcOption == 1) // Option for single mortgage calculation
 {
-    <br />
-    <div title="Single mortgage form">
+    <section class="mc-tool">
+        <br />
+        <div title="Single mortgage form">
+            <div class="h2 pb-2 mb-4 border-bottom" style="color: #273157">
+                <h5>Single mortgage</h5>
+                <br />
+            </div>
+            <div class="container text-left">
+                <div class="row">
+                    <!-- Input form section -->
+                    <div class="col-sm-6">
+                        <!-- Adjust the width with Bootstrap grid (6 of 12 columns) -->
+                        <div nonvalidate class="mc-tool-form">
+                            <!-- Calculator inputs -->
+                            <CalculatorInputs userInput="userInput"></CalculatorInputs>
 
-        <div class="h2 pb-0 mb-4 border-bottom" style="color: #273157">
-            <h5>Single mortgage</h5>
-            <br />
-        </div>
-        <div nonvalidate class="mc-tool-form">
-            <!-- Calculator inputs -->
-            <CalculatorInputs userInput="userInput"></CalculatorInputs>
+                            <ButtonCalculate DisplayResults="DisplayResults"></ButtonCalculate>
+                        </div>
+                    </div>
 
-            <ButtonCalculate DisplayResults="DisplayResults"></ButtonCalculate>
-        </div>
-    </div>
+                    <!-- Results output section -->
+                    <div class="col-sm-6">
+                        <!-- Adjust the width with Bootstrap grid (6 of 12 columns) -->
+                        <!-- RESULTS OUTPUT -->
+                        <div title="Results display">
+                            @if (resultSet?.PaymentItems?.Count > 0 && errorMessage == string.Empty) // Results output
+                            {
+                                <div class="container text-left">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div style="border: #34495e; border-width: 10px; border-style: solid; border-radius: 10px; padding: 15px;">
 
-    <!-- RESULTS OUTPUT -->
-    <div title="Results display">
-        @if (resultSet?.PaymentItems?.Count > 0 && errorMessage == string.Empty)// Results output
-        {
-            <div style="border: #34495e; border-width: 10px; border-style: solid; border-radius: 10px; padding: 15px;">
-                <ResultsHeader></ResultsHeader>
-                <div class="text-grey-800">
+                                                <ResultsHeader></ResultsHeader>
 
-                    <!-- 1) Monthly repayment amount -->
-                    <OutputMonthlyRepaymentAmount resultSet="resultSet"></OutputMonthlyRepaymentAmount>
-                    <hr class="border-0 h-px bg-grey-400">
+                                                <div class="text-grey-800">
+                                                    <!-- 1) Monthly repayment amount -->
+                                                    <OutputMonthlyRepaymentAmount resultSet="resultSet"></OutputMonthlyRepaymentAmount>
+                                                    <hr class="border-0 h-px bg-grey-400">
 
-                    <!-- 2) Total repayment, Capital and Interest only values -->
-                    <!-- Outputs: Total repayment amount, Capital and Interest values -->
-                    <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
+                                                    <!-- 2) Total repayment, Capital and Interest only values -->
+                                                    <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
 
-                    <!-- Line chart output -->
-                    <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>
+                                                    <!-- Line chart output -->
+                                                    <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>
 
-                    <!-- 3) Total repayment months -->
-                    <OutputTotalRepayMonths resultSet="resultSet"></OutputTotalRepayMonths>
+                                                    <!-- 3) Total repayment months -->
+                                                    <OutputTotalRepayMonths resultSet="resultSet"></OutputTotalRepayMonths>
 
-                    <!-- 4) List: End of Year repayment balance -->
-                    <OutputEOYRepaymentList resultSet="resultSet" userInput="userInput"></OutputEOYRepaymentList>
+                                                    <!-- 4) List: End of Year repayment balance -->
+                                                    <OutputEOYRepaymentList resultSet="resultSet" userInput="userInput"></OutputEOYRepaymentList>
 
-                    <!-- 5) Warning indicator of repayment increase, 3% -->
-                    <OutputIntIncreaseMessage resultSet="resultSet"></OutputIntIncreaseMessage>
+                                                    <!-- 5) Warning indicator of repayment increase, 3% -->
+                                                    <OutputIntIncreaseMessage resultSet="resultSet"></OutputIntIncreaseMessage>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
-        }
-    </div>
+        </div>
+    </section>
 }
+
 
 @if (calcOption == 2)
 {
-    <div title="Comparison mortgages form">
-        <div class="h2 pb-0 mb-4 border-bottom" style="color: #273157">
-            <br />
-            <h5>First mortgage</h5>
-            <br />
-        </div>
+    <section class="mc-tool">
+        <br />
+        <div class="container text-left">
+            <div title="Comparison mortgages form">
+                <div class="row">
+                    <!-- Input form section -->
+                    <div class="col-sm-6">
+                        <div class="h2 pb-0 mb-4 border-bottom" style="color: #273157">
+                            <h5>First mortgage</h5>
+                            <br />
+                        </div>
 
-        <!-- Calculator inputs 1 -->
-        <CalculatorInputs userInput="userInput"></CalculatorInputs>
+                        <div nonvalidate class="mc-tool-form">
+                            <!-- Adjust the width with Bootstrap grid (6 of 12 columns) -->
+                            <!-- Calculator inputs 1 -->
+                            <CalculatorInputs userInput="userInput"></CalculatorInputs>
 
-        <div class="h2 pb-0 mb-4 border-bottom" style="color: #273157">
-            <h5>Second mortgage</h5>
-            <br />
-        </div>
+                            <div class="h2 pb-0 mb-4 border-bottom" style="color: #273157">
+                                <h5>Second mortgage</h5>
+                                <br />
+                            </div>
 
-        <!-- Calculator inputs 2 -->
-        <CalculatorInputs userInput="userInputCompare"></CalculatorInputs>
+                            <!-- Calculator inputs 2 -->
+                            <CalculatorInputs userInput="userInputCompare"></CalculatorInputs>
 
-        <ButtonCalculate DisplayResults="DisplayResults"></ButtonCalculate>
-    </div>
+                            <ButtonCalculate DisplayResults="DisplayResults"></ButtonCalculate>
+                        </div>
+                    </div>
 
-    <!-- RESULT OUTPUT -->
-    <div title="Results display">
-        @if (resultSet?.PaymentItems?.Count > 0 && resultSetCompare?.PaymentItems?.Count > 0 && errorMessage == string.Empty)
-        {
-            <div style="border: #34495e; border-width: 10px; border-style: solid; border-radius: 10px; padding: 15px;">
-                <br />
-                <ResultsHeader></ResultsHeader>
+                    <!-- Results output section -->
+                    <div class="col-sm-6">
+                        <!-- Adjust the width with Bootstrap grid (6 of 12 columns) -->
+                        <!-- RESULT OUTPUT -->
+                        <div title="Results display">
+                            @if (resultSet?.PaymentItems?.Count > 0 && resultSetCompare?.PaymentItems?.Count > 0 && errorMessage == string.Empty)
+                            {
+                                <div style="border: #34495e; border-width: 10px; border-style: solid; border-radius: 10px; padding: 15px;">
+                                    <ResultsHeader></ResultsHeader>
 
-                <!-- 1) Line chart output -->
-                <div><LineChartOutput resultSet="resultSet" resultSetCompare="resultSetCompare"></LineChartOutput></div>
+                                    <!-- Line chart output -->
+                                    <div><LineChartOutput resultSet="resultSet" resultSetCompare="resultSetCompare"></LineChartOutput></div>
 
-                <!-- FIRST RESULT OUTPUT -->
-                <br />
-                <h6>Mortgage 1 Results</h6>
+                                    <!-- FIRST RESULT OUTPUT -->
+                                    <br />
+                                    <h5>Mortgage 1 Results</h5>
 
-                <!-- 1) Monthly repayment amount -->
-                <OutputMonthlyRepaymentAmount resultSet="resultSet"></OutputMonthlyRepaymentAmount>
+                                    <div class="text-grey-800">
+                                        <!-- 1) Monthly repayment amount -->
+                                        <OutputMonthlyRepaymentAmount resultSet="resultSet"></OutputMonthlyRepaymentAmount>
 
-                <!-- 2) Total repayment, Capital and Interest only values -->
-                <!-- Outputs: Total repayment amount, Capital and Interest values -->
-                <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
+                                        <!-- 2) Total repayment, Capital and Interest only values -->
+                                        <!-- Outputs: Total repayment amount, Capital and Interest values -->
+                                        <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
 
-                <!-- 3) Total repayment months -->
-                <OutputTotalRepayMonths resultSet="resultSet"></OutputTotalRepayMonths>
+                                        <!-- 3) Total repayment months -->
+                                        <OutputTotalRepayMonths resultSet="resultSet"></OutputTotalRepayMonths>
 
-                <!-- 4) List: End of Year repayment balance -->
-                <OutputEOYRepaymentList resultSet="resultSet" userInput="userInput"></OutputEOYRepaymentList>
+                                        <!-- 4) List: End of Year repayment balance -->
+                                        <OutputEOYRepaymentList resultSet="resultSet" userInput="userInput"></OutputEOYRepaymentList>
 
-                <!-- 5) Warning indicator of repayment increase, 3% -->
-                <OutputIntIncreaseMessage resultSet="resultSet"></OutputIntIncreaseMessage>
+                                        <!-- 5) Warning indicator of repayment increase, 3% -->
+                                        <OutputIntIncreaseMessage resultSet="resultSet"></OutputIntIncreaseMessage>
 
 
-                <!-- SECOND RESULT OUTPUT -->
-                <br />
-                <hr class="border-0 h-px bg-grey-400">
-                <h6>Mortgage 2 Results</h6>
+                                        <!-- SECOND RESULT OUTPUT -->
+                                        <br />
+                                        <hr class="border-0 h-px bg-grey-400">
+                                        <h5>Mortgage 2 Results</h5>
 
-                <!-- 1) Monthly repayment amount -->
-                <OutputMonthlyRepaymentAmount resultSet="resultSetCompare"></OutputMonthlyRepaymentAmount>
+                                        <!-- 1) Monthly repayment amount -->
+                                        <OutputMonthlyRepaymentAmount resultSet="resultSetCompare"></OutputMonthlyRepaymentAmount>
 
-                <!-- 2) Total repayment, Capital and Interest only values -->
-                <!-- Outputs: Total repayment amount, Capital and Interest values -->
-                <OutputTotalAmount userInput="userInputCompare" resultSet="resultSetCompare"></OutputTotalAmount>
+                                        <!-- 2) Total repayment, Capital and Interest only values -->
+                                        <!-- Outputs: Total repayment amount, Capital and Interest values -->
+                                        <OutputTotalAmount userInput="userInputCompare" resultSet="resultSetCompare"></OutputTotalAmount>
 
-                <!-- 3) Total repayment months -->
-                <OutputTotalRepayMonths resultSet="resultSetCompare"></OutputTotalRepayMonths>
+                                        <!-- 3) Total repayment months -->
+                                        <OutputTotalRepayMonths resultSet="resultSetCompare"></OutputTotalRepayMonths>
 
-                <!-- 4) List: End of Year repayment balance -->
-                <OutputEOYRepaymentList resultSet="resultSetCompare" userInput="userInputCompare"></OutputEOYRepaymentList>
+                                        <!-- 4) List: End of Year repayment balance -->
+                                        <OutputEOYRepaymentList resultSet="resultSetCompare" userInput="userInputCompare"></OutputEOYRepaymentList>
 
-                <!-- 5) Warning indicator of repayment increase, 3% -->
-                <OutputIntIncreaseMessage resultSet="resultSetCompare"></OutputIntIncreaseMessage>
+                                        <!-- 5) Warning indicator of repayment increase, 3% -->
+                                        <OutputIntIncreaseMessage resultSet="resultSetCompare"></OutputIntIncreaseMessage>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
-        }
-    </div>
+        </div>
+    </section>
 }
 
 @code
