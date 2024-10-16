@@ -28,44 +28,44 @@
             numDS = 2;
 
         chartData = new ChartData
-        {
-            Labels = GetDataLabels(),
-            Datasets = GetDataSets(numDS)
-        };
-        lineChartOptions = new()
-        {
-            Responsive = true,
-            Interaction = new Interaction { Mode = InteractionMode.Index },
-
-            // Axis titles
-            Scales = new Scales
             {
-                X = new ChartAxes
+                Labels = GetDataLabels(),
+                Datasets = GetDataSets(numDS)
+            };
+        lineChartOptions = new()
+            {
+                Responsive = true,
+                Interaction = new Interaction { Mode = InteractionMode.Index },
+
+                // Axis titles
+                Scales = new Scales
                 {
-                    Title = new ChartAxesTitle
+                    X = new ChartAxes
                     {
-                        Display = true,
-                        Text = "Term Years (End of)"  // X-axis title
+                        Title = new ChartAxesTitle
+                        {
+                            Display = true,
+                            Text = "Term Years (End of)"  // X-axis title
+                        }
+                    },
+                    Y = new ChartAxes
+                    {
+                        Title = new ChartAxesTitle
+                        {
+                            Display = true,
+                            Text = "Amount (£)"  // Y-axis title
+                        }
                     }
                 },
-                Y = new ChartAxes
+                Plugins = new LineChartPlugins
                 {
-                    Title = new ChartAxesTitle
+                    Title = new ChartPluginsTitle
                     {
                         Display = true,
-                        Text = "Amount (£)"  // Y-axis title
+                        Text = "Mortgage End of Year Remainder" // Chart title
                     }
                 }
-            },
-            Plugins = new LineChartPlugins
-            {
-                Title = new ChartPluginsTitle
-                {
-                    Display = true,
-                    Text = "Mortgage End of Year Remainder" // Chart title
-                }
-            }
-        };
+            };
 
     }
 
@@ -155,26 +155,29 @@
         datasetsCount += 1;
 
         List<double> displaydata = new();
+
+        DateTime startingDate = resultSet.PaymentItems.First().Date;
+
         foreach (PaymentItem pi in resultSet.PaymentItems)
         {
-            if (pi.Date.Month == 12)
+            if (pi.Date.Month == startingDate.Month)
             {
                 displaydata.Add(pi.RemainingAmount);
             }
         }
 
         return new LineChartDataset()
-        {
-            Label = $"Mortgage {datasetsCount}",
-            Data = displaydata,
-            BackgroundColor = new List<string> { c.ToRgbString() },
-            BorderColor = new List<string> { c.ToRgbString() },
-            BorderWidth = new List<double> { 2 },
-            HoverBorderWidth = new List<double> { 4 },
-            PointBackgroundColor = new List<string> { c.ToRgbString() },
-            PointRadius = new List<int> { 0 }, // hide points
-            PointHoverRadius = new List<int> { 4 },
-        };
+            {
+                Label = $"Mortgage {datasetsCount}",
+                Data = displaydata,
+                BackgroundColor = new List<string> { c.ToRgbString() },
+                BorderColor = new List<string> { c.ToRgbString() },
+                BorderWidth = new List<double> { 2 },
+                HoverBorderWidth = new List<double> { 4 },
+                PointBackgroundColor = new List<string> { c.ToRgbString() },
+                PointRadius = new List<int> { 0 }, // hide points
+                PointHoverRadius = new List<int> { 4 },
+            };
     }
 
     private List<string> GetDataLabels()
@@ -183,7 +186,7 @@
 
         int loanTermYears = resultSet.PaymentItems.Count / CONSTANTS.MONTHS_OF_YEAR;// Payment items in months multiplied by 12 month
 
-        for (int i = 0; i < loanTermYears; i++)
+        for (int i = 0; i < loanTermYears+1; i++)
         {
             if (i == 0 || (i + 1) % 5 == 0)// Print every 5th year label
             {
