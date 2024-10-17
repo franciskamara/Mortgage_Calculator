@@ -79,7 +79,11 @@
                                                     <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
 
                                                     <!-- Line chart output -->
-                                                    <div><LineChartOutput resultSet="resultSet"></LineChartOutput></div>
+                                                    @*<div class="chart-container" style="position: relative; height:40vh; width:80vw">
+                                                        <canvas id="chart"></canvas>
+                                                    </div>*@
+
+                                                    <div class="container"><LineChartOutput resultSet="resultSet"></LineChartOutput></div>
 
                                                     <!-- 3) Total repayment months -->
                                                     <OutputTotalRepayMonths resultSet="resultSet"></OutputTotalRepayMonths>
@@ -149,10 +153,10 @@
                                     <div><LineChartOutput resultSet="resultSet" resultSetCompare="resultSetCompare"></LineChartOutput></div>
 
                                     <!-- FIRST RESULT OUTPUT -->
-                                    <br />
-                                    <h5>Mortgage 1 Results</h5>
-
                                     <div class="text-grey-800">
+                                        <br />
+                                        <h5>Mortgage 1 Results</h5>
+
                                         <!-- 1) Monthly repayment amount -->
                                         <OutputMonthlyRepaymentAmount resultSet="resultSet"></OutputMonthlyRepaymentAmount>
 

@@ -2,7 +2,7 @@
 @using Mortgage_Calculator
 @using Color = System.Drawing.Color
 
-<LineChart @ref="lineChart" Width="700" Class="col-sm-6" />
+<LineChart @ref="lineChart" Width="700" Class="col-sm-6"/>
 
 
 @code {
@@ -163,6 +163,8 @@
             }
         }
 
+        displaydata.Add(0);// Add 0 to represent balance is 0
+
         return new LineChartDataset()
         {
             Label = $"Mortgage {datasetsCount}",
@@ -181,7 +183,7 @@
     {
         List<string> labels = new();// List of labels to be used
 
-        int loanTermYears = resultSet.PaymentItems.Count / CONSTANTS.MONTHS_OF_YEAR;// Payment items in months multiplied by 12 month
+        int loanTermYears = (resultSet.PaymentItems.Count / CONSTANTS.MONTHS_OF_YEAR) + 1;// Payment items in months multiplied by 12 month, +1
 
         for (int i = 0; i < loanTermYears; i++)
         {
