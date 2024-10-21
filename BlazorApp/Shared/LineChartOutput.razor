@@ -2,7 +2,7 @@
 @using Mortgage_Calculator
 @using Color = System.Drawing.Color
 
-<LineChart @ref="lineChart" Width="700" Class="col-sm-6"/>
+<LineChart @ref="lineChart" />
 
 
 @code {
@@ -65,8 +65,8 @@
                     Text = "Mortgage End of Year Remainder" // Chart title
                 }
             }
-        };
 
+        };
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -81,9 +81,7 @@
     private async Task RandomizeAsync()
     {
         if (chartData is null || chartData.Datasets is null || !chartData.Datasets.Any()) return;
-
         var newDatasets = new List<IChartDataset>();
-
         foreach (var dataset in chartData.Datasets)
         {
             if (dataset is LineChartDataset lineChartDataset
@@ -91,7 +89,6 @@
                 && lineChartDataset.Data is not null)
             {
                 var count = lineChartDataset.Data.Count;
-
                 var newData = new List<double>();
                 for (var i = 0; i < count; i++)
                 {
@@ -102,7 +99,6 @@
                 newDatasets.Add(lineChartDataset);
             }
         }
-
         chartData.Datasets = newDatasets;
 
         await lineChart.UpdateAsync(chartData, lineChartOptions);
@@ -162,8 +158,7 @@
                 displaydata.Add(pi.RemainingAmount);
             }
         }
-
-        displaydata.Add(0);// Add 0 to represent balance is 0
+        //displaydata.Add(0);// Add 0 to represent balance is 0
 
         return new LineChartDataset()
         {
@@ -201,7 +196,6 @@
         return labels;
     }
 
-
     private string GetNextDataLabel()
     {
         while (labelsCount < resultSet.PaymentItems.Count)
@@ -214,13 +208,10 @@
                 labelsCount++;
                 return $"Dec/{paymentItem.Date.Year}";
             }
-
             labelsCount++;
         }
-
         return string.Empty;
     }
-
 
     #endregion Data Preparation
 }

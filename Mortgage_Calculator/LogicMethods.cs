@@ -8,8 +8,7 @@ namespace Mortgage_Calculator
             double interestRateDecimal = input.InterestRatePercentage / 100;
             int termYears = input.Term;
             int totalMonths = termYears * CONSTANTS.MONTHS_OF_YEAR;//Total months of Loan term calc
-            double deposit = input.Deposit;
-            double totalAmount = input.Amount - deposit;
+            double totalAmount = input.Amount - input.Deposit;
             double monthlyRepayment;
             double monthlyRepaymentPlus3;
 
@@ -74,8 +73,32 @@ namespace Mortgage_Calculator
                 PaymentItems = repayments
             };
 
-            return results;//Return results
+            //if calculation is standard, add made up paymentitem to paymentitems list with value 0 and month 12
+            if (t == MortgageType.Standard)
+            {
+                // Get the year from the last payment item
+                PaymentItem finalPaymentItem = results.PaymentItems.LastOrDefault();
+                if (finalPaymentItem != null)
+                {
+                    repayments.Add(new PaymentItem
+                    {
+                        Amount = 0,
+                        Date = new DateTime(finalPaymentItem.Date.Year, 12, 31), // December 31 of the same year
+                        RemainingAmount = 0
+                    });
+                }
+                else
+                {
+                        repayments.Add(new PaymentItem
+                        {
+                            Amount = 0,
+                            Date = new DateTime(finalPaymentItem.Date.Year, 12, 31),
+                            RemainingAmount = input.Amount - input.Deposit
+                        });
+                }
+            }
 
+            return results;//Return results
         }
     }
 }

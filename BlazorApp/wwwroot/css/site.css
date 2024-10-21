@@ -167,3 +167,11 @@ mb-0 {
     padding-left: 16px;
     padding-right: 16px;
 }
+
+.chart-container {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}

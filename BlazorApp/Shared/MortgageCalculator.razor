@@ -48,7 +48,7 @@
                     <!-- Input form section -->
                     <div class="col-sm-6">
                         <!-- Adjust the width with Bootstrap grid (6 of 12 columns) -->
-                        <div nonvalidate class="mc-tool-form">
+                        <div nonvalidate class="mc-tool-form; chart-container">
                             <!-- Calculator inputs -->
                             <CalculatorInputs userInput="userInput"></CalculatorInputs>
 
@@ -79,11 +79,7 @@
                                                     <OutputTotalAmount userInput="userInput" resultSet="resultSet"></OutputTotalAmount>
 
                                                     <!-- Line chart output -->
-                                                    @*<div class="chart-container" style="position: relative; height:40vh; width:80vw">
-                                                        <canvas id="chart"></canvas>
-                                                    </div>*@
-
-                                                    <div class="container"><LineChartOutput resultSet="resultSet"></LineChartOutput></div>
+                                                    <div class="chart-container"><LineChartOutput resultSet="resultSet"></LineChartOutput></div>
 
                                                     <!-- 3) Total repayment months -->
                                                     <OutputTotalRepayMonths resultSet="resultSet"></OutputTotalRepayMonths>
@@ -124,16 +120,20 @@
 
                         <div nonvalidate class="mc-tool-form">
                             <!-- Adjust the width with Bootstrap grid (6 of 12 columns) -->
-                            <!-- Calculator inputs 1 -->
-                            <CalculatorInputs userInput="userInput"></CalculatorInputs>
+                            <div class="chart-container">
+                                <!-- Calculator inputs 1 -->
+                                <CalculatorInputs userInput="userInput"></CalculatorInputs>
+                            </div>
 
                             <div class="h2 pb-0 mb-4 border-bottom" style="color: #273157">
                                 <h5>Second mortgage</h5>
                                 <br />
                             </div>
 
-                            <!-- Calculator inputs 2 -->
-                            <CalculatorInputs userInput="userInputCompare"></CalculatorInputs>
+                            <div class="chart-container">
+                                <!-- Calculator inputs 2 -->
+                                <CalculatorInputs userInput="userInputCompare"></CalculatorInputs>
+                            </div>
 
                             <ButtonCalculate DisplayResults="DisplayResults"></ButtonCalculate>
                         </div>
@@ -150,7 +150,7 @@
                                     <ResultsHeader></ResultsHeader>
 
                                     <!-- Line chart output -->
-                                    <div><LineChartOutput resultSet="resultSet" resultSetCompare="resultSetCompare"></LineChartOutput></div>
+                                    <div class="chart-container"><LineChartOutput resultSet="resultSet" resultSetCompare="resultSetCompare"></LineChartOutput></div>
 
                                     <!-- FIRST RESULT OUTPUT -->
                                     <div class="text-grey-800">
@@ -244,7 +244,11 @@
 
         if (userInput.Deposit < 0)
         {
-            errorMessage += "Cannot have negative deposit amount.\n";
+            errorMessage += "Cannot have negative Deposit amount.\n";
+        }
+        if (userInput.Deposit >= userInput.Amount)
+        {
+            errorMessage += "Deposit amount cannot be more or equal to the Loan amount. \n";
         }
 
         // Error messages: 2nd loan (if calcOption is 2)
