@@ -229,22 +229,26 @@
 
         if (userInput.Term <= 0)
         {
-            errorMessage += "Term input is needed. Term input needs to be more than 0.\n";
+            errorMessage += "Term input is needed.\n";
+        }
+        if (userInput.Term > 45)
+        {
+            errorMessage += "Term input cannot be more than 45 years. \n";
         }
 
         if (userInput.Type != MortgageType.Standard && userInput.Type != MortgageType.Interest_Only)
         {
-            errorMessage += "Select a valid mortgage type.\n";
+            errorMessage += "Select a valid mortgage Type.\n";
         }
 
         if (userInput.InterestRatePercentage <= 0)
         {
-            errorMessage += "Interest rate needs to be more than 0.\n";
+            errorMessage += "Interest rate input is needed.\n";
         }
 
         if (userInput.Deposit < 0)
         {
-            errorMessage += "Cannot have negative Deposit amount.\n";
+            errorMessage += "Cannot have a negative Deposit amount.\n";
         }
         if (userInput.Deposit >= userInput.Amount)
         {
@@ -256,30 +260,33 @@
         {
             if (userInputCompare.Amount <= 0)
             {
-                errorMessage += "For the second loan, the amount has to be more than 0.\n";
+                errorMessage += "For the second loan, the Amount has to be more than 0.\n";
             }
 
             if (userInputCompare.Term <= 0)
             {
-                errorMessage += "For the second loan, term years of the loan are needed. Term input needs to be more than 0.\n";
+                errorMessage += "For the second loan, Term input is needed.\n";
+            }
+            if (userInputCompare.Term > 45)
+            {
+                errorMessage += "For the second loan, Term input cannot be more than 45 years. \n";
             }
 
             if (userInputCompare.Type != MortgageType.Standard && userInputCompare.Type != MortgageType.Interest_Only)
             {
-                errorMessage += "For the second loan, select a valid mortgage type.\n";
+                errorMessage += "For the second loan, select a valid mortgage Type.\n";
             }
 
             if (userInputCompare.InterestRatePercentage <= 0)
             {
-                errorMessage += "For the second loan, Interest rate needs to be more than 0.\n";
+                errorMessage += "For the second loan, Interest rate input is needed.\n";
             }
 
             if (userInputCompare.Deposit < 0)
             {
-                errorMessage += "For the second loan, cannot have negative deposit amount.\n";
+                errorMessage += "For the second loan, cannot have a negative Deposit amount.\n";
             }
         }
-
 
         <!-- Output Calculation Results -->
         if (calcOption == 1)
