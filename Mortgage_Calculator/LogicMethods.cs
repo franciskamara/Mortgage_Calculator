@@ -74,10 +74,10 @@ namespace Mortgage_Calculator
             };
 
             //if calculation is standard, add made up paymentitem to paymentitems list with value 0 and month 12
+            PaymentItem finalPaymentItem = results.PaymentItems.LastOrDefault();
             if (t == MortgageType.Standard)
             {
                 // Get the year from the last payment item
-                PaymentItem finalPaymentItem = results.PaymentItems.LastOrDefault();
                 if (finalPaymentItem != null)
                 {
                     repayments.Add(new PaymentItem
@@ -87,15 +87,15 @@ namespace Mortgage_Calculator
                         RemainingAmount = 0
                     });
                 }
-                else
+            }
+            else
+            {
+                repayments.Add(new PaymentItem
                 {
-                        repayments.Add(new PaymentItem
-                        {
-                            Amount = 0,
-                            Date = new DateTime(finalPaymentItem.Date.Year, 12, 31),
-                            RemainingAmount = input.Amount - input.Deposit
-                        });
-                }
+                    Amount = 0,
+                    Date = new DateTime(finalPaymentItem.Date.Year, 12, 31),
+                    RemainingAmount = input.Amount - input.Deposit
+                });
             }
 
             return results;//Return results

@@ -4,14 +4,11 @@
 <div class="bb-page">
 
     <Sidebar @ref="sidebar"
-             IconName="IconName.BootstrapFill"
-             Title="Blazor Bootstrap"
+             IconName="IconName.House"
+             Title="Mortgage Calculator"
              DataProvider="SidebarDataProvider" />
 
     <main>
-        <div class="bb-top-row px-4 d-flex justify-content-end">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
 
         <article class="content px-4">
             <div class="py-2">
@@ -44,7 +41,6 @@
     {
             new NavItem { Id = "1", Href = "/", IconName = IconName.HouseDoorFill, Text = "Home", Match=NavLinkMatch.All},
             new NavItem { Id = "2", Href = "/mortgageCalculator", IconName = IconName.PlusSquareFill, Text = "Mortgage Calculator"},
-            //new NavItem { Id = "3", Href = "/fetchdata", IconName = IconName.Table, Text = "Fetch Data"},
         };
 
         return navItems;

@@ -2,7 +2,7 @@
 @using Mortgage_Calculator
 @using Color = System.Drawing.Color
 
-<LineChart @ref="lineChart" />
+<LineChart @ref="lineChart" Height="500"/>
 
 
 @code {
@@ -36,6 +36,7 @@
         {
             Responsive = true,
             Interaction = new Interaction { Mode = InteractionMode.Index },
+            MaintainAspectRatio = false,
 
             // Axis titles
             Scales = new Scales

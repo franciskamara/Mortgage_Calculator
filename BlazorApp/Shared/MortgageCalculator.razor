@@ -10,8 +10,6 @@
 </div>
 
 <!--Navbar setup and styling-->
-@*<NavBar @bind-selection="calcOption"></NavBar>*@
-<!--Navbar setup and styling-->
 <nav style="width: 100%; background-color: #34495e; color: rgba(255, 255, 255, 0.5); padding: 10px; ">
     <div class="topnav" style="text-align: left;">
         <a class="nav-link" style="color:white; cursor:pointer; text-decoration:none; hover" @onclick="() => setCalcOption(1)">Calculate a mortgage</a>
@@ -33,7 +31,7 @@
     </div>
 }
 
-
+<!-- Single mortgage calculator -->
 @if (calcOption == 1) // Option for single mortgage calculation
 {
     <section class="mc-tool">
@@ -103,7 +101,7 @@
     </section>
 }
 
-
+<!-- Compare mortgages calculator -->
 @if (calcOption == 2)
 {
     <section class="mc-tool">
