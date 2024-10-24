@@ -5,15 +5,15 @@
 
 @*<a style="font-size:x-small" href="/home">Click to go back </a>*@
 
-<div class="h2 pb-0 mb-0 border-bottom" style="color: white; background-color: #273157">
+<div class="h2 pb-0 mb-0 border-bottom page-header">
     <p>Mortgage Calculator</p>
 </div>
 
 <!--Navbar setup and styling-->
-<nav style="width: 100%; background-color: #34495e; color: rgba(255, 255, 255, 0.5); padding: 10px; ">
-    <div class="topnav" style="text-align: left;">
+<nav class="calc-nav-options">
+    <div class="topnav text-left" >
         <a class="nav-link" style="color:white; cursor:pointer; text-decoration:none; hover" @onclick="() => setCalcOption(1)">Calculate a mortgage</a>
-        &nbsp
+        &nbsp; &nbsp;
         <a class="nav-link" style="color: white; cursor: pointer; text-decoration: none" @onclick="() => setCalcOption(2)">Compare mortgages</a>
     </div>
     <br />
@@ -64,7 +64,7 @@
                                 <div class="container text-left">
                                     <div class="row">
                                         <div class="col">
-                                            <div style="border: #34495e; border-width: 10px; border-style: solid; border-radius: 10px; padding: 15px;">
+                                            <div class="results-container">
 
                                                 <ResultsHeader></ResultsHeader>
 
@@ -144,7 +144,8 @@
                         <div title="Results display">
                             @if (resultSet?.PaymentItems?.Count > 0 && resultSetCompare?.PaymentItems?.Count > 0 && errorMessage == string.Empty)
                             {
-                                <div style="border: #34495e; border-width: 10px; border-style: solid; border-radius: 10px; padding: 15px;">
+                                <div class="results-container">
+
                                     <ResultsHeader></ResultsHeader>
 
                                     <!-- Line chart output -->

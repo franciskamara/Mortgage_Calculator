@@ -69,7 +69,7 @@ a, .btn-link {
 
 .text-grey-800 {
     --tw-text-opacity: 1;
-    color: rgb(0 11 59 / var(--tw-text-opacity));
+    color: #261c0d;
 }
 
 .nav-link {
@@ -79,7 +79,7 @@ a, .btn-link {
 }
 
     .nav-link:hover {
-        background-color: #555;
+        background-color: #e2d0af;
         color: white;
         border-radius: 0;
         padding: 10px 15px;
@@ -109,6 +109,10 @@ a, .btn-link {
 
 .text-left {
     text-align: left;
+}
+
+.text-centre {
+    text-align: center;
 }
 
 .text-xl {
@@ -172,6 +176,37 @@ mb-0 {
     margin: 20px 0;
     padding: 20px;
     border: 1px solid #ddd;
-    background-color: #f9f9f9;
+    background-color: #e2d0af;
     border-radius: 8px;
+}
+
+.results-container {
+    border: #d5595c;
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.interestWarning-indicator {
+    text-align: center;
+    background-color: #e4ce26;
+}
+
+.font-colour {
+    color: #261c0d;
+}
+
+.page-header {
+    color: white;
+    background-color: #1f637b;
+    text-align:center;
+}
+
+.calc-nav-options {
+    width: 100%;
+    background-color: #261c0d;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+
 }
