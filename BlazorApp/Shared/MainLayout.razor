@@ -23,6 +23,21 @@
 <Preload />
 <Toasts class="p-3" AutoHide="true" Delay="4000" Placement="ToastsPlacement.TopRight" />
 
+<style>
+    :root {
+        --bb-sidebar-width: 270px;
+        --bb-sidebar-collapsed-width: 50px;
+        --bb-sidebar-background-color: rgba(234, 234, 234, 1);
+        --bb-sidebar-top-row-background-color: rgba(31, 99, 123, 1);
+        --bb-sidebar-top-row-border-color: rgb(38,28,13);
+        --bb-sidebar-brand-icon-color: #261c0d;
+        --bb-sidebar-nav-item-text-active-color-rgb: 228,206,38;
+        --bb-sidebar-nav-item-text-hover-color: rgba(var(--bb-sidebar-nav-item-text-active-color-rgb),0.9);
+        --bb-sidebar-nav-item-background-hover-color: rgba(var(--bb-sidebar-nav-item-text-active-color-rgb),0.08);
+        --bb-sidebar-nav-item-group-background-color: rgba(var(--bb-sidebar-nav-item-text-active-color-rgb),0.08);
+    }
+</style>
+
 @code {
     private Sidebar sidebar = default!;
     private IEnumerable<NavItem> navItems = default!;
