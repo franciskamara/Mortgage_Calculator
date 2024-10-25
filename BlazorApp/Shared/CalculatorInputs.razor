@@ -15,7 +15,7 @@
     <div class="font-colour">
         <div class="space-y-3 border-bottom">
             <div class="text-[28px] lg:text-[38px] font-bold">
-                <label>Loan amount: </label>
+                <label>Loan amount </label>
             </div>
             <div class="space-y-2 border-b border-gray-400 pb-4">
                 <p>If the loan is not for a new mortgage, enter the amount left on your current mortgage</p>
@@ -28,9 +28,10 @@
 
         <div class="space-y-3 border-bottom">
             <div class="text-[28px] lg:text-[38px] font-bold">
-                <label>Loan term: </label>
+                <label>Mortgage term </label>
             </div>
             <div class="space-y-2 border-b border-gray-400 pb-4">
+                <p>The average period for repayment of a mortgage is 25 years.</p>
                 <div class="flex">
                     <InputNumber @bind-Value="userInput.Term" class="border-gray-400 border-b border-l-0 w-full border pl-2 ml-0 h-auto"></InputNumber>
                     <span aria-hidden="true" class="py-2 px-3 rounded-l border-gray-400 border border-solid">years</span>
@@ -44,7 +45,7 @@
 
         <div class="space-y-3 border-bottom">
             <div class="text-[28px] lg:text-[38px] font-bold">
-                <label>Interest rate: </label>
+                <label>Interest rate </label>
             </div>
             <div class="space-y-2 border-b border-gray-400 pb-4">
                 <div class="flex">
@@ -53,8 +54,14 @@
                 </div>
             </div>
         </div>
-        <div class="space-y-3">
-            <label>Deposit (optional):</label>
+
+        <div class="space-y-3 border-bottom">
+            <div class="text-[28px] lg:text-[38px] font-bold">
+                <label>
+                    Deposit
+                    <span class="font-normal text-xl">(Optional):</span>
+                </label>
+            </div>
             <InputNumber @bind-Value="userInput.Deposit"></InputNumber>
             <br /><br /><br>
         </div>
