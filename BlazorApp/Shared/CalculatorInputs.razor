@@ -38,14 +38,20 @@
             </div>
         </div>
 
-        <div class="space-y-3">
+        <div>
             <MortgageTypeSelect @bind-selection="userInput.Type"></MortgageTypeSelect>
-            <br />
         </div>
-        <div class="space-y-3">
-            <label>Interest rate: %</label>
-            <InputNumber @bind-Value="userInput.InterestRatePercentage"></InputNumber>
-            <br /><br />
+
+        <div class="space-y-3 border-bottom">
+            <div class="text-[28px] lg:text-[38px] font-bold">
+                <label>Interest rate: </label>
+            </div>
+            <div class="space-y-2 border-b border-gray-400 pb-4">
+                <div class="flex">
+                    <span aria-hidden="true" class="py-2 px-3 rounded-l border-gray-400 border border-solid">%</span>
+                    <InputNumber @bind-Value="userInput.InterestRatePercentage" class="border-gray-400 border-b border-l-0 w-full border pl-2 ml-0 h-auto"></InputNumber>
+                </div>
+            </div>
         </div>
         <div class="space-y-3">
             <label>Deposit (optional):</label>
