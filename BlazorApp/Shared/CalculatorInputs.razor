@@ -13,7 +13,7 @@
 
 <form method="post">
     <div class="font-colour">
-        <div class="space-y-3">
+        <div class="space-y-3 border-bottom">
             <div class="text-[28px] lg:text-[38px] font-bold">
                 <label>Loan amount: </label>
             </div>
@@ -21,17 +21,23 @@
                 <p>If the loan is not for a new mortgage, enter the amount left on your current mortgage</p>
                 <div class="flex">
                     <span aria-hidden="true" class="py-2 px-3 rounded-l border-gray-400 border border-solid">£</span>
-                    <InputNumber @bind-Value="userInput.Amount" class="border-gray-400 border-b border-l-0 tool-field w-full border pl-2 ml-0 h-auto focus:outline-purple-700 focus:shadow-focus-outline"></InputNumber>
+                    <InputNumber @bind-Value="userInput.Amount" class="border-gray-400 border-b border-l-0 w-full border pl-2 ml-0 h-auto"></InputNumber>
                 </div>
             </div>
-            <br /> <br />
         </div>
 
-        <div class="space-y-3">
-            <label>How many years for the loan? </label>
-            <InputNumber @bind-Value="userInput.Term"></InputNumber>
-            <br /><br />
+        <div class="space-y-3 border-bottom">
+            <div class="text-[28px] lg:text-[38px] font-bold">
+                <label>Loan term: </label>
+            </div>
+            <div class="space-y-2 border-b border-gray-400 pb-4">
+                <div class="flex">
+                    <InputNumber @bind-Value="userInput.Term" class="border-gray-400 border-b border-l-0 w-full border pl-2 ml-0 h-auto"></InputNumber>
+                    <span aria-hidden="true" class="py-2 px-3 rounded-l border-gray-400 border border-solid">years</span>
+                </div>
+            </div>
         </div>
+
         <div class="space-y-3">
             <MortgageTypeSelect @bind-selection="userInput.Type"></MortgageTypeSelect>
             <br />
