@@ -13,6 +13,7 @@
 
 <form method="post">
     <div class="font-colour">
+
         <div class="space-y-3 border-bottom">
             <div class="text-[28px] lg:text-[38px] font-bold">
                 <label>Loan amount </label>
@@ -34,7 +35,7 @@
                 <p>The average period for repayment of a mortgage is 25 years.</p>
                 <div class="flex">
                     <InputNumber @bind-Value="userInput.Term" class="border-gray-400 border-b border-l-0 w-full border pl-2 ml-0 h-auto"></InputNumber>
-                    <span aria-hidden="true" class="py-2 px-3 rounded-l border-gray-400 border border-solid">years</span>
+                    <span aria-hidden="true" class="py-2 px-3 rounded-r border-gray-400 border border-solid">years</span>
                 </div>
             </div>
         </div>
@@ -49,21 +50,23 @@
             </div>
             <div class="space-y-2 border-b border-gray-400 pb-4">
                 <div class="flex">
-                    <span aria-hidden="true" class="py-2 px-3 rounded-l border-gray-400 border border-solid">%</span>
                     <InputNumber @bind-Value="userInput.InterestRatePercentage" class="border-gray-400 border-b border-l-0 w-full border pl-2 ml-0 h-auto"></InputNumber>
+                    <span aria-hidden="true" class="py-2 px-3 rounded-r border-gray-400 border border-solid">%</span>
                 </div>
             </div>
         </div>
 
-        <div class="space-y-3 border-bottom">
+        <div class="space-y-3">
             <div class="text-[28px] lg:text-[38px] font-bold">
                 <label>
                     Deposit
                     <span class="font-normal text-xl">(Optional):</span>
                 </label>
             </div>
-            <InputNumber @bind-Value="userInput.Deposit"></InputNumber>
-            <br /><br /><br>
+            <p>This not not apply for a remortgage.</p>
+            <div class="flex">
+                <InputNumber @bind-Value="userInput.Deposit" class="border-gray-400 border-b border-l-0 w-full border pl-2 ml-0 h-auto"></InputNumber>
+            </div>
         </div>
     </div>
 </form>
