@@ -1,6 +1,6 @@
 ﻿@page "/graph2"
 @using Mortgage_Calculator
-@using Color = System.Drawing.Color
+
 
 <LineChart @ref="lineChart" Height="500"/>
 
@@ -159,7 +159,6 @@
                 displaydata.Add(pi.RemainingAmount);
             }
         }
-        //displaydata.Add(0);// Add 0 to represent balance is 0
 
         return new LineChartDataset()
         {

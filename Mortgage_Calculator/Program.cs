@@ -86,10 +86,6 @@
                 {
                     Console.WriteLine($"{firstResultSet.PaymentItems[i].Date}: £{firstResultSet.PaymentItems[i].Amount:N2} ");
                 }
-                //for (int i = 0; i <= firstResultSet.PaymentItems.Count; i++)//Print monthly repayments from list
-                //{
-                //    Console.WriteLine($"{firstResultSet.PaymentItems[i].Year}: £{firstResultSet.PaymentItems[i].Amount} ");
-                //}
 
                 Console.WriteLine($"Total months: {firstResultSet.MonthlyRepayments.Count}");//Print total number of payments
                 Console.WriteLine($"{firstResultSet.WarningIndicator}");
@@ -97,17 +93,13 @@
                 //------------
                 Console.WriteLine("\nSecond mortgage\n");
                 Results secondResultSet = LogicMethod.CalculateRepayments(secondInputs, type);
-                //UIMethods.ClearConsole();
+
                 Console.WriteLine($"Total amount: £{secondResultSet.TotalAmount:N2}\n");
                 Console.WriteLine("Monthly repayments \n-------------");
                 for (int i = 0; i < 1; i++)
                 {
                     Console.WriteLine($"{secondResultSet.PaymentItems[i].Date}: £{secondResultSet.PaymentItems[i].Amount:N2} ");
                 }
-                //for (int i = 0; i <= secondResultSet.PaymentItems.Count; i++)//Print monthly repayments from list
-                //{
-                //    Console.WriteLine($"{secondResultSet.PaymentItems[i].Year}: £{secondResultSet.PaymentItems[i].Amount} ");
-                //}
 
                 Console.WriteLine($"Total months: {secondResultSet.MonthlyRepayments.Count}");//Print total number of payments
                 Console.WriteLine($"{secondResultSet.WarningIndicator}");
