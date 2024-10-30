@@ -164,16 +164,10 @@ a, .btn-link {
     height: 1px;
 }
 
-.border-gray-400 {
-    --tw-border-opacity: 1;
-    border-color: #0f151b !important;
-}
-
 .bg-grey-400 {
     --tw-bg-opacity: 1;
     background-color: rgb(96 99 126 / var(--tw-bg-opacity));
 }
-
 
 .col-12 {
     flex: 0 0 100%;
@@ -263,15 +257,6 @@ mb-0 {
 .rounded-l {
     border-top-left-radius: .25rem;
     border-bottom-left-radius: .25rem;
-}
-
-.rounded-r {
-    border-top-right-radius: .25rem;
-    border-bottom-right-radius: .25rem;
-}
-
-.border-bottom {
-    border-bottom: var(--bs-border-width) var(--bs-border-style) #0f151b !important;
 }
 
 .border-solid {
