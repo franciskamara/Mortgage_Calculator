@@ -1,16 +1,17 @@
 ﻿@page "/mortgageCalculator"
+@using System
 @using Mortgage_Calculator
 
 <PageTitle>Mortgage Calculator</PageTitle>
 
 @*<a style="font-size:x-small" href="/home">Click to go back </a>*@
 
-<div class="h2 pb-0 mb-0 border-bottom page-header">
+<div class="h2 pb-0 mb-0 border-bottom page-header br-top-8">
     <p>Mortgage Calculator</p>
 </div>
 
 <!--Navbar setup and styling-->
-<nav class="calc-nav-options">
+<nav class="calc-nav-options br-bottom-8">
     <div class="topnav text-left">
         <a class="nav-link" style="color:white; cursor:pointer; text-decoration:none; hover" @onclick="() => setCalcOption(1)">Calculate a mortgage</a>
         &nbsp; &nbsp;
@@ -19,7 +20,7 @@
     <br />
 </nav>
 
-
+<!-- Error message output -->
 @if (errorMessage != "")
 {
     <div class="alert alert-danger" role="alert" style="text-align:center">
@@ -41,7 +42,7 @@
                 <!-- Input form section (6 of 12 columns) -->
                 <div class="col-sm-6">
                     <div title="Single mortgage form">
-                        <div class="h2 pb-2 mb-4 border-bottom" style="color: #273157">
+                        <div class="h2 pb-2 mb-4 border-bottom form-header-colour">
                             <h5>Single mortgage</h5>
                         </div>
 
@@ -105,7 +106,7 @@
                 <div class="col-sm-6">
 
                     <div title="Comparison mortgages form">
-                        <div class="h2 pb-2 mb-4 border-bottom" style="color: #273157">
+                        <div class="h2 pb-2 mb-4 border-bottom form-header-colour">
                             <h5>First mortgage</h5>
                         </div>
                         <!-- Adjust the width with Bootstrap grid (6 of 12 columns) -->
@@ -115,7 +116,7 @@
                             <CalculatorInputs userInput="userInput"></CalculatorInputs>
                         </div>
 
-                        <div class="h2 pb-2 mb-4 border-bottom" style="color: #273157">
+                        <div class="h2 pb-2 mb-4 border-bottom form-header-colour">
                             <h5>Second mortgage</h5>
                         </div>
 
@@ -204,7 +205,6 @@
     private Results resultSet = new();
     private Results resultSetCompare = new();
     private Results resultSetInterestOnly = new();
-    private Graph graph = new();
     private string errorMessage = "";
 
     private void DisplayResults()
