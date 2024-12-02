@@ -58,5 +58,78 @@ public sealed class MortgageCalculatorStepDefinitions
     //     _scenarioContext.Pending();
     // }
 
+    // Loan input validation 
+    [Given("the user is on the Loan amount field")]
+    public void TheUserIsOnTheLoanAmountField()
+    {
+        _scenarioContext.Pending();
+    }
+    
+    [When(@"the user enters a loan amount of (.*)")]
+    public void WhenTheUserEntersALoanAmountOf(int p0)
+    {
+        _scenarioContext.Pending();
+    }
+        
+    [When(@"the deposit amount is (.*)")]
+    public void WhenTheDepositAmountIs(int p0)
+    {
+        _scenarioContext.Pending();
+    }
+        
+    [When(@"all other inputs are valid")]
+    public void WhenAllOtherInputsAreValid()
+    {
+        _scenarioContext.Pending();
+    }
+    
+    [Then(@"the system displays Result display")]
+    public void ThenTheSystemDisplaysResultDisplay()
+    {
+        _scenarioContext.Pending();
+    }
+        
+    [Then(@"the system displays errorMessage: amount input")]
+    public void ThenTheSystemDisplaysErrorMessageAmountInput()
+    {
+        _scenarioContext.Pending();
+    }
+    
+    [Then(@"the system displays errorMessage: Deposit has be less than Loan amount")]
+    public void ThenTheSystemDisplaysErrorMessageDepositHasBeLessThanLoanAmount()
+    {
+        _scenarioContext.Pending();
+    }
+    
+    [Then(@"additionally errorMessage: Deposit has be less than Loan amount")]
+    public void ThenAdditionallyErrorMessageDepositHasBeLessThenLoanAmount()
+    {
+        _scenarioContext.Pending();
+    }
+    
+    [Then(@"additionally none")]
+    public void ThenAdditionallyNone()
+    {
+        _scenarioContext.Pending();
+    }
+    
+    //Mortgage Term validation 
+    [Given(@"the user is on the term field")]
+    public void GivenTheUserIsOnTheTermField()
+    {
+        _scenarioContext.Pending();
+    }
+        
+    [When(@"the user enters a term input of (.*)")]
+    public void WhenTheUserEntersATermInputOf(int p0)
+    {
+        _scenarioContext.Pending();
+    }
+        
+    [Then(@"the system displays errorMessage: Term input is needed")]
+    public void ThenTheSystemDisplaysErrorMessageTermInputIsNeeded()
+    {
+        _scenarioContext.Pending();
+    }
     
 }

@@ -16,15 +16,15 @@ Scenario Outline: Loan amount input validation
 	And additionally <secAction>
 	Examples:  
 		| loanAmount | depAmount | firstAction                                        | secAction                                          |
-		| 0          | 0         | errorMessage: amount input                         | errorMessage: Deposit has be less then Loan amount |
-		| -1         | 1         | errorMessage: amount input                         | errorMessage: Deposit has be less then Loan amount |
+		| 0          | 0         | errorMessage: amount input                         | errorMessage: Deposit has be less than Loan amount |
+		| -1         | 1         | errorMessage: amount input                         | errorMessage: Deposit has be less than Loan amount |
+		|            | 0         | errorMessage: amount input                         | errorMessage: Deposit has be less than Loan amount |
 		| 1          | 0         | Result display                                     | none                                               |
+		| 1          | 1         | errorMessage: Deposit has be less than Loan amount | none                                               |
 		| 2          | 1         | Result display                                     | none                                               |
-		| 1          | 1         | errorMessage: Deposit has be less then Loan amount | none                                               |
-		|            | 0         | errorMessage: amount input                         | errorMessage: Deposit has be less then Loan amount |
   
 Scenario Outline: Term input validation 
-	Given the user is on the Mortage term field 
+	Given the user is on the term field 
 	When the user enters a term input of <input>
 	And all other inputs are valid
 	Then the system displays <action>

@@ -84,12 +84,12 @@ namespace MortgageCalculator.Specs.Features
         [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
         [Xunit.TraitAttribute("Description", "Loan amount input validation")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        [Xunit.InlineDataAttribute("0", "0", "errorMessage: amount input", "errorMessage: Deposit has be less then Loan amount", new string[0])]
-        [Xunit.InlineDataAttribute("-1", "1", "errorMessage: amount input", "errorMessage: Deposit has be less then Loan amount", new string[0])]
+        [Xunit.InlineDataAttribute("0", "0", "errorMessage: amount input", "errorMessage: Deposit has be less than Loan amount", new string[0])]
+        [Xunit.InlineDataAttribute("-1", "1", "errorMessage: amount input", "errorMessage: Deposit has be less than Loan amount", new string[0])]
+        [Xunit.InlineDataAttribute("", "0", "errorMessage: amount input", "errorMessage: Deposit has be less than Loan amount", new string[0])]
         [Xunit.InlineDataAttribute("1", "0", "Result display", "none", new string[0])]
+        [Xunit.InlineDataAttribute("1", "1", "errorMessage: Deposit has be less than Loan amount", "none", new string[0])]
         [Xunit.InlineDataAttribute("2", "1", "Result display", "none", new string[0])]
-        [Xunit.InlineDataAttribute("1", "1", "errorMessage: Deposit has be less then Loan amount", "none", new string[0])]
-        [Xunit.InlineDataAttribute("", "0", "errorMessage: amount input", "errorMessage: Deposit has be less then Loan amount", new string[0])]
         public virtual void LoanAmountInputValidation(string loanAmount, string depAmount, string firstAction, string secAction, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -182,7 +182,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 27
- testRunner.Given("the user is on the Mortage term field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("the user is on the term field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 28
  testRunner.When(string.Format("the user enters a term input of {0}", input), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
