@@ -11,6 +11,7 @@ public sealed class MortgageCalculatorStepDefinitions
     private readonly ScenarioContext _scenarioContext;
 
     private readonly BlazorApp.Shared.MortgageCalculator _mortgageCalculator;
+    private readonly Mortgage_Calculator.UserInput _calculatorUserInput;
 
     public MortgageCalculatorStepDefinitions(ScenarioContext scenarioContext)
     {
@@ -57,23 +58,5 @@ public sealed class MortgageCalculatorStepDefinitions
     //     _scenarioContext.Pending();
     // }
 
-    //Mortgage Calculator homepage
-    [Given("the user is on the homepage")]
-    public void TheUserIsOnTheHomepage()
-    {
-        _scenarioContext.Pending();
-        //homepage
-    }
-
-    [When("the user clicks the button 'Click here to use the Calculator'")]
-    public void TheUserClicksTheButtonClickHereToUseTheCalculator()
-    {
-        _scenarioContext.Pending();
-    }
-
-    [Then("the Mortgage Calculator navigation is displayed")]
-    public void TheMortgageCalculatorNavigationIsDisplayed()
-    {
-        _scenarioContext.Pending();
-    }
+    
 }
