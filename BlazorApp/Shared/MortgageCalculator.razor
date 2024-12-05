@@ -205,9 +205,81 @@
     private Results resultSet = new();
     private Results resultSetCompare = new();
     private Results resultSetInterestOnly = new();
-    private string errorMessage = "";
+    public string errorMessage = "";
 
-    private void DisplayResults()
+    public string GenErrorMessage(UserInput userInput)
+    {
+              var  errorMessage = "";
+
+        // Error messages: 1st loan
+        if (userInput.Amount <= 0)
+        {
+            errorMessage = "Amount needs to be more than 0.\n";
+        }
+
+        if (userInput.Term <= 0)
+        {
+            errorMessage += "Term input needs to be more than 0 years.\n";
+        }
+        if (userInput.Term > 40)
+        {
+            errorMessage += "Term input cannot be more than 40 years. \n";
+        }
+
+        if (userInput.Type != MortgageType.Standard && userInput.Type != MortgageType.Interest_Only)
+        {
+            errorMessage += "Select a valid mortgage Type.\n";
+        }
+
+        if (userInput.InterestRatePercentage <= 0)
+        {
+            errorMessage += "Interest rate needs to be more than 0.\n";
+        }
+
+        if (userInput.Deposit < 0)
+        {
+            errorMessage += "Cannot have a negative Deposit amount.\n";
+        }
+        if (userInput.Deposit >= userInput.Amount)
+        {
+            errorMessage += "Deposit amount cannot be more or equal to the Loan amount. \n";
+        }
+
+        // Error messages: 2nd loan (if calcOption is 2)
+        if (calcOption == 2)
+        {
+            if (userInputCompare.Amount <= 0)
+            {
+                errorMessage += "For the second loan, the Amount has to be more than 0.\n";
+            }
+
+            if (userInputCompare.Term <= 0)
+            {
+                errorMessage += "For the second loan, Term input needs to be more than 0 years.\n";
+            }
+            if (userInputCompare.Term > 40)
+            {
+                errorMessage += "For the second loan, Term input cannot be more than 40 years. \n";
+            }
+
+            if (userInputCompare.Type != MortgageType.Standard && userInputCompare.Type != MortgageType.Interest_Only)
+            {
+                errorMessage += "For the second loan, select a valid mortgage Type.\n";
+            }
+
+            if (userInputCompare.InterestRatePercentage <= 0)
+            {
+                errorMessage += "For the second loan, Interest rate input is needed.\n";
+            }
+
+            if (userInputCompare.Deposit < 0)
+            {
+                errorMessage += "For the second loan, cannot have a negative Deposit amount.\n";
+            }
+        }
+        return errorMessage;
+    }
+    public void DisplayResults()
     {
         errorMessage = "";
 
@@ -257,9 +329,9 @@
             {
                 errorMessage += "For the second loan, Term input is needed.\n";
             }
-            if (userInputCompare.Term > 45)
+            if (userInputCompare.Term > 40)
             {
-                errorMessage += "For the second loan, Term input cannot be more than 45 years. \n";
+                errorMessage += "For the second loan, Term input cannot be more than 40 years. \n";
             }
 
             if (userInputCompare.Type != MortgageType.Standard && userInputCompare.Type != MortgageType.Interest_Only)

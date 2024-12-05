@@ -1,5 +1,7 @@
 ﻿using BlazorApp.Shared;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Mortgage_Calculator;
+using Xunit;
 
 namespace MortgageCalculator.Specs.Steps;
 
@@ -10,8 +12,8 @@ public sealed class MortgageCalculatorStepDefinitions
 
     private readonly ScenarioContext _scenarioContext;
 
-    private readonly BlazorApp.Shared.MortgageCalculator _mortgageCalculator;
-    private readonly Mortgage_Calculator.UserInput _calculatorUserInput;
+    private BlazorApp.Shared.MortgageCalculator _mortgageCalculator;
+    private Mortgage_Calculator.UserInput _calculatorUserInput;
 
     public MortgageCalculatorStepDefinitions(ScenarioContext scenarioContext)
     {
@@ -59,77 +61,110 @@ public sealed class MortgageCalculatorStepDefinitions
     // }
 
     // Loan input validation 
-    [Given("the user is on the Loan amount field")]
-    public void TheUserIsOnTheLoanAmountField()
+    [Given("page object is initialized")]
+    public void GivenPageObjectIsInitialized()
     {
-        _scenarioContext.Pending();
+        _mortgageCalculator = (BlazorApp.Shared.MortgageCalculator)Activator.CreateInstance(typeof(BlazorApp.Shared.MortgageCalculator));
+        
+        // Verify the object is initialized successfully
+        if (_mortgageCalculator == null)
+        {
+            throw new InvalidOperationException("Failed to initialize MortgageCalculator object.");
+        }
+
+        Console.WriteLine("MortgageCalculator object initialized successfully.");
     }
     
-    [When(@"the user enters a loan amount of (.*)")]
-    public void WhenTheUserEntersALoanAmountOf(int p0)
+    [When(@"the loan amount input is (.*)")]
+    public void WhenTheLoanAmountInputIs <loanAmount>(int amount)
     {
-        _scenarioContext.Pending();
+       
+        _calculatorUserInput.Amount = amount;
+
     }
         
     [When(@"the deposit amount is (.*)")]
-    public void WhenTheDepositAmountIs(int p0)
+    public void WhenTheDepositAmountIs(int depAmount)
     {
-        _scenarioContext.Pending();
+        _calculatorUserInput.Deposit = depAmount;
+        // _scenarioContext.Pending();
     }
         
-    [When(@"all other inputs are valid")]
-    public void WhenAllOtherInputsAreValid()
+    [Then(@"the error message contains (.*)")]
+    public void ThenTheErrorMessageContains(string expectedErrorMessage)
     {
-        _scenarioContext.Pending();
-    }
-    
-    [Then(@"the system displays Result display")]
-    public void ThenTheSystemDisplaysResultDisplay()
-    {
-        _scenarioContext.Pending();
-    }
+        _mortgageCalculator.DisplayResults();
+        Assert.Contains(expectedErrorMessage, _mortgageCalculator.errorMessage);
         
-    [Then(@"the system displays errorMessage: amount input")]
-    public void ThenTheSystemDisplaysErrorMessageAmountInput()
-    {
-        _scenarioContext.Pending();
     }
     
-    [Then(@"the system displays errorMessage: Deposit has be less than Loan amount")]
-    public void ThenTheSystemDisplaysErrorMessageDepositHasBeLessThanLoanAmount()
+    [When(@"the term input is (.*)")]//Term input 
+    public void WhenTheTermInputIs (int termInput)
     {
-        _scenarioContext.Pending();
+        _calculatorUserInput.Term = termInput;
+
+        Console.WriteLine($"Term input is {termInput}");
     }
     
-    [Then(@"additionally errorMessage: Deposit has be less than Loan amount")]
-    public void ThenAdditionallyErrorMessageDepositHasBeLessThenLoanAmount()
+    [When(@"the type is (.*)")]//Mortgage Type selection 
+    public void WhenTheTypeIs(string type)
     {
-        _scenarioContext.Pending();
+        if (string.IsNullOrWhiteSpace(type))
+        {
+            throw new ArgumentException("The type parameter cannot be null or empty.");
+        }
+
+        switch (type.ToLower())
+        {
+            case "standard":
+                _calculatorUserInput.Type = MortgageType.Standard;
+                break;
+
+            case "interest":
+                _calculatorUserInput.Type = MortgageType.Interest_Only;
+                break;
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), $"Invalid mortgage type: {type}");
+        }
+    
+        Console.WriteLine($"Mortgage type set to: {_calculatorUserInput.Type}");
     }
     
-    [Then(@"additionally none")]
-    public void ThenAdditionallyNone()
+    [Then(@"the system displays for Mortgage Type (.+)")]//Result: Mortgage Type selection
+    public void ThenTheSystemDisplaysForMortgageType(string expectedAction)
     {
-        _scenarioContext.Pending();
-    }
-    
-    //Mortgage Term validation 
-    [Given(@"the user is on the term field")]
-    public void GivenTheUserIsOnTheTermField()
-    {
-        _scenarioContext.Pending();
-    }
+        string actualAction = string.Empty;
+
+        switch (_calculatorUserInput.Type)
+        {
+            case MortgageType.None:
+                actualAction = "Select a valid mortgage Type."; //Invalid selection, error message
+                break;
+
+            case MortgageType.Standard:
+            case MortgageType.Interest_Only:
+                actualAction = string.Empty; //Valid selection
+                break;
+        }
         
-    [When(@"the user enters a term input of (.*)")]
-    public void WhenTheUserEntersATermInputOf(int p0)
-    {
-        _scenarioContext.Pending();
+        Assert.Equal(expectedAction, actualAction);
     }
-        
-    [Then(@"the system displays errorMessage: Term input is needed")]
-    public void ThenTheSystemDisplaysErrorMessageTermInputIsNeeded()
+
+    [When("the interest rate is (.*)")]//Interest Rate input 
+    public void WhenTheInterestRateIs(int intRate)
     {
-        _scenarioContext.Pending();
+        _calculatorUserInput.InterestRatePercentage = intRate;
+
+        Console.WriteLine($"The interest rate is: {intRate}");
+    }
+    
+    [Then("the system displays for Interest rate (.*)")]
+    public void ThenTheSystemDisplaysForInterestRate(string expectedAction)
+    {
+        string actualAction = _mortgageCalculator.errorMessage;
+        
+        Assert.Equal(expectedAction, actualAction);
     }
     
 }
