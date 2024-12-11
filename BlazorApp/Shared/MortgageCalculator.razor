@@ -233,7 +233,7 @@
             errorMessage += "Select a valid mortgage Type.\n";
         }
 
-        if (userInput.InterestRatePercentage < CONSTANTS.MAX_INT_RATE)
+        if (userInput.InterestRatePercentage < CONSTANTS.MIN_INT_RATE)
         {
             errorMessage += "Interest rate input needs to be more than 0.\n";
         }
