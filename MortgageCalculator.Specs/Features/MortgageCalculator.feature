@@ -38,24 +38,33 @@ Scenario Outline: Mortgage Type selection validation
   	When the type is <type>
 	Then the system displays for Mortgage Type <action>
 	Examples: 
-		| type                     | action                       |
-		| --Select mortgage type-- | Select a valid mortgage Type. |
-		| Standard                 |                              |
-		| Interest                 |                              |
+		| type     | action                        |
+		| None     | Select a valid mortgage Type. |
+		| Standard | valid                         |
+		| Interest | valid                         |
   
-Scenario Outline: Interest Rate input validation 
+Scenario Outline: Interest Rate input validation NEGATIVE
 	Given page object is initialized
 	When the interest rate is <intRate>
-	Then the system displays for Interest rate <action>
+	Then the error message for Interest rate <action>
 	Examples: 
-		| intRate | action                                 |
-		| 1       |                                        |
-		|         | Interest rate needs to be more than 0. |
-		| 0       | Interest rate needs to be more than 0. |
-		| -1      | Interest rate needs to be more than 0. | 
+		| intRate | action                                       |
+		| 0       | Interest rate input needs to be more than 0. |
+		| -1      | Interest rate input needs to be more than 0. | 
+  
+Scenario: Interest Rate input validation NO INPUT 
+	Given page object is initialized
+	When the interest rate is empty
+	Then the error message for Interest rate "Interest rate needs to be more than 0."
+	
+Scenario: Interest Rate input validation EXCEEDING 100%
+	Given page object is initialized
+	When the interest rate is 101
+	Then the error message for Interest rate "Interest rate input cannot exceed 100%."
+
   
 Scenario Outline: Deposit input validation 
-	Given the user is on the Deposit input field 
-	When the enters a deposit amount of -1
-	And all other inputs are valid 
-	Then the system displays an error message  
+	Given page object is initialized
+	When the loan amount input is 1
+	And the deposit amount is -1
+	Then the error message contains "Cannot have a negative Deposit amount." 

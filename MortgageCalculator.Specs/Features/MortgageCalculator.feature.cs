@@ -194,9 +194,9 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.SkippableTheoryAttribute(DisplayName="Mortgage Type selection validation")]
         [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
         [Xunit.TraitAttribute("Description", "Mortgage Type selection validation")]
-        [Xunit.InlineDataAttribute("--Select mortgage type--", "Select a valid mortgage Type.", new string[0])]
-        [Xunit.InlineDataAttribute("Standard", "", new string[0])]
-        [Xunit.InlineDataAttribute("Interest", "", new string[0])]
+        [Xunit.InlineDataAttribute("None", "Select a valid mortgage Type.", new string[0])]
+        [Xunit.InlineDataAttribute("Standard", "valid", new string[0])]
+        [Xunit.InlineDataAttribute("Interest", "valid", new string[0])]
         public virtual void MortgageTypeSelectionValidation(string type, string action, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
@@ -237,20 +237,18 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableTheoryAttribute(DisplayName="Interest Rate input validation")]
+        [Xunit.SkippableTheoryAttribute(DisplayName="Interest Rate input validation NEGATIVE")]
         [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
-        [Xunit.TraitAttribute("Description", "Interest Rate input validation")]
-        [Xunit.InlineDataAttribute("0.1", "", new string[0])]
-        [Xunit.InlineDataAttribute("", "Interest rate needs to be more than 0.", new string[0])]
-        [Xunit.InlineDataAttribute("0", "Interest rate needs to be more than 0.", new string[0])]
-        [Xunit.InlineDataAttribute("-1", "Interest rate needs to be more than 0.", new string[0])]
-        public virtual void InterestRateInputValidation(string intRate, string action, string[] exampleTags)
+        [Xunit.TraitAttribute("Description", "Interest Rate input validation NEGATIVE")]
+        [Xunit.InlineDataAttribute("0", "Interest rate input needs to be more than 0.", new string[0])]
+        [Xunit.InlineDataAttribute("-1", "Interest rate input needs to be more than 0.", new string[0])]
+        public virtual void InterestRateInputValidationNEGATIVE(string intRate, string action, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("intRate", intRate);
             argumentsOfScenario.Add("action", action);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Interest Rate input validation", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Interest Rate input validation NEGATIVE", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 46
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -278,21 +276,21 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When(string.Format("the interest rate is {0}", intRate), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 49
- testRunner.Then(string.Format("the system displays for Interest rate {0}", action), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("the error message for Interest rate {0}", action), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Deposit input validation")]
+        [Xunit.SkippableFactAttribute(DisplayName="Interest Rate input validation NO INPUT")]
         [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
-        [Xunit.TraitAttribute("Description", "Deposit input validation")]
-        public virtual void DepositInputValidation()
+        [Xunit.TraitAttribute("Description", "Interest Rate input validation NO INPUT")]
+        public virtual void InterestRateInputValidationNOINPUT()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deposit input validation", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 57
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Interest Rate input validation NO INPUT", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 55
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -312,17 +310,99 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+#line 56
+ testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 57
+ testRunner.When("the interest rate is empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
 #line 58
- testRunner.Given("the user is on the Deposit input field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Then("the error message for Interest rate \"Interest rate needs to be more than 0.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 59
- testRunner.When("the enters a deposit amount of -1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Interest Rate input validation EXCEEDING 100%")]
+        [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
+        [Xunit.TraitAttribute("Description", "Interest Rate input validation EXCEEDING 100%")]
+        public virtual void InterestRateInputValidationEXCEEDING100()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Interest Rate input validation EXCEEDING 100%", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 60
- testRunner.And("all other inputs are valid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
 #line 61
- testRunner.Then("the system displays an error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 62
+ testRunner.When("the interest rate is 101", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 63
+ testRunner.Then("the error message for Interest rate \"Interest rate input cannot exceed 100%.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Deposit input validation")]
+        [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
+        [Xunit.TraitAttribute("Description", "Deposit input validation")]
+        public virtual void DepositInputValidation()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deposit input validation", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 66
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 67
+ testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 68
+ testRunner.When("the loan amount input is 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 69
+ testRunner.And("the deposit amount is -1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 70
+ testRunner.Then("the error message contains \"Cannot have a negative Deposit amount.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

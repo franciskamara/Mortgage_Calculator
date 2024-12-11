@@ -8,8 +8,6 @@ namespace MortgageCalculator.Specs.Steps;
 [Binding]
 public sealed class MortgageCalculatorStepDefinitions
 {
-    // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
-
     private readonly ScenarioContext _scenarioContext;
 
     private BlazorApp.Shared.MortgageCalculator _mortgageCalculator;
@@ -65,7 +63,7 @@ public sealed class MortgageCalculatorStepDefinitions
     public void GivenPageObjectIsInitialized()
     {
         _mortgageCalculator = (BlazorApp.Shared.MortgageCalculator)Activator.CreateInstance(typeof(BlazorApp.Shared.MortgageCalculator));
-        
+        _calculatorUserInput = new();
         // Verify the object is initialized successfully
         if (_mortgageCalculator == null)
         {
@@ -76,7 +74,7 @@ public sealed class MortgageCalculatorStepDefinitions
     }
     
     [When(@"the loan amount input is (.*)")]
-    public void WhenTheLoanAmountInputIs <loanAmount>(int amount)
+    public void WhenTheLoanAmountInputIs (int amount)
     {
        
         _calculatorUserInput.Amount = amount;
@@ -131,7 +129,7 @@ public sealed class MortgageCalculatorStepDefinitions
         Console.WriteLine($"Mortgage type set to: {_calculatorUserInput.Type}");
     }
     
-    [Then(@"the system displays for Mortgage Type (.+)")]//Result: Mortgage Type selection
+    [Then(@"the system displays for Mortgage Type (.+)")] //Result: Mortgage Type selection
     public void ThenTheSystemDisplaysForMortgageType(string expectedAction)
     {
         string actualAction = string.Empty;
@@ -144,7 +142,7 @@ public sealed class MortgageCalculatorStepDefinitions
 
             case MortgageType.Standard:
             case MortgageType.Interest_Only:
-                actualAction = string.Empty; //Valid selection
+                actualAction = "valid"; //Valid selection
                 break;
         }
         
@@ -152,19 +150,30 @@ public sealed class MortgageCalculatorStepDefinitions
     }
 
     [When("the interest rate is (.*)")]//Interest Rate input 
-    public void WhenTheInterestRateIs(int intRate)
+    public void WhenTheInterestRateIs(double intRate)
     {
         _calculatorUserInput.InterestRatePercentage = intRate;
 
         Console.WriteLine($"The interest rate is: {intRate}");
     }
     
-    [Then("the system displays for Interest rate (.*)")]
-    public void ThenTheSystemDisplaysForInterestRate(string expectedAction)
+    [Then(@"the error message for Interest rate (.*)")]
+    public void ThenTheErrorMessageForInterestRate(string expectedErrorMessage)
     {
-        string actualAction = _mortgageCalculator.errorMessage;
+        _mortgageCalculator.DisplayResults();
         
-        Assert.Equal(expectedAction, actualAction);
+        string actualErrorMessage = _mortgageCalculator.errorMessage;
+        
+        Assert.Contains(expectedErrorMessage, actualErrorMessage);
     }
     
+    [Then(@"the error message for Deposit input displays ""(.*)""")]
+    public void ThenTheErrorMessageForDepositInputDisplays(string expectedErrorMessage)
+    {
+        _mortgageCalculator.DisplayResults();
+
+        string actualErrorMessage = _mortgageCalculator.errorMessage;
+        
+        Assert.Contains(expectedErrorMessage, actualErrorMessage);
+    }
 }

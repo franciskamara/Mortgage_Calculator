@@ -12,4 +12,10 @@ public class CONSTANTS
 
     public static int MONTHS_OF_YEAR = 12;
     public static double INTEREST_RATE = 0.03;
+
+    public static int MIN_TERM_YEARS = 1;
+    public static int MAX_TERM_YEARS = 40;
+
+    public static double MIN_INT_RATE = 0.1;
+    public static double MAX_INT_RATE = 100;
 }
