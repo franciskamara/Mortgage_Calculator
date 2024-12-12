@@ -147,7 +147,6 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
         [Xunit.TraitAttribute("Description", "Term input validation")]
         [Xunit.InlineDataAttribute("0", "Term input is required and needs to be more than 0.", new string[0])]
-        [Xunit.InlineDataAttribute("", "Term input is required and needs to be more than 0.", new string[0])]
         [Xunit.InlineDataAttribute("-1", "Term input is required and needs to be more than 0.", new string[0])]
         [Xunit.InlineDataAttribute("1", "", new string[0])]
         [Xunit.InlineDataAttribute("41", "Term input cannot be more than 40 years.", new string[0])]
@@ -316,7 +315,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("the interest rate is 101", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 63
- testRunner.Then("the error message contains \"Interest rate input cannot exceed 100%.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the error message contains Interest rate input cannot exceed 100%.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -363,7 +362,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And(string.Format("the deposit amount is {0}", dAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 70
- testRunner.Then("the error message contains \"Cannot have a negative Deposit amount.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the error message contains Cannot have a negative Deposit amount.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -60,14 +60,14 @@ Scenario Outline: Interest Rate input validation NEGATIVE
 Scenario: Interest Rate input validation EXCEEDING 100%
 	Given page object is initialized
 	When the interest rate is 101
-	Then the error message contains "Interest rate input cannot exceed 100%."
+	Then the error message contains Interest rate input cannot exceed 100%.
 
   
 Scenario Outline: Deposit input validation 
 	Given page object is initialized
 	When the loan amount input is <lAmount>
 	And the deposit amount is <dAmount>
-	Then the error message contains "Cannot have a negative Deposit amount." 
+	Then the error message contains Cannot have a negative Deposit amount.
 	Examples: 
 			| lAmount | dAmount |
 			| 1       | -1      | 

@@ -63,7 +63,7 @@ public sealed class MortgageCalculatorStepDefinitions
     public void GivenPageObjectIsInitialized()
     {
         _mortgageCalculator = (BlazorApp.Shared.MortgageCalculator)Activator.CreateInstance(typeof(BlazorApp.Shared.MortgageCalculator));
-        _calculatorUserInput = new();
+        _calculatorUserInput = _mortgageCalculator.userInput;
         // Verify the object is initialized successfully
         if (_mortgageCalculator == null)
         {
