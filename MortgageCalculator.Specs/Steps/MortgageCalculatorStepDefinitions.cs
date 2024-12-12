@@ -59,7 +59,7 @@ public sealed class MortgageCalculatorStepDefinitions
     // }
 
     // Loan input validation 
-    [Given("page object is initialized")]
+    [Given("page object is initialized")]//Initialise program
     public void GivenPageObjectIsInitialized()
     {
         _mortgageCalculator = (BlazorApp.Shared.MortgageCalculator)Activator.CreateInstance(typeof(BlazorApp.Shared.MortgageCalculator));
@@ -73,29 +73,16 @@ public sealed class MortgageCalculatorStepDefinitions
         Console.WriteLine("MortgageCalculator object initialized successfully.");
     }
     
-    [When(@"the loan amount input is (.*)")]
+    [When(@"the loan amount input is (.*)")]//Loan amount input 
     public void WhenTheLoanAmountInputIs (int amount)
     {
        
         _calculatorUserInput.Amount = amount;
 
+        Console.WriteLine($"The Loam amount is: {amount}");
+
     }
         
-    [When(@"the deposit amount is (.*)")]
-    public void WhenTheDepositAmountIs(int depAmount)
-    {
-        _calculatorUserInput.Deposit = depAmount;
-        // _scenarioContext.Pending();
-    }
-        
-    [Then(@"the error message contains (.*)")]
-    public void ThenTheErrorMessageContains(string expectedErrorMessage)
-    {
-        _mortgageCalculator.DisplayResults();
-        Assert.Contains(expectedErrorMessage, _mortgageCalculator.errorMessage);
-        
-    }
-    
     [When(@"the term input is (.*)")]//Term input 
     public void WhenTheTermInputIs (int termInput)
     {
@@ -129,26 +116,6 @@ public sealed class MortgageCalculatorStepDefinitions
         Console.WriteLine($"Mortgage type set to: {_calculatorUserInput.Type}");
     }
     
-    [Then(@"the system displays for Mortgage Type (.+)")] //Result: Mortgage Type selection
-    public void ThenTheSystemDisplaysForMortgageType(string expectedAction)
-    {
-        string actualAction = string.Empty;
-
-        switch (_calculatorUserInput.Type)
-        {
-            case MortgageType.None:
-                actualAction = "Select a valid mortgage Type."; //Invalid selection, error message
-                break;
-
-            case MortgageType.Standard:
-            case MortgageType.Interest_Only:
-                actualAction = "valid"; //Valid selection
-                break;
-        }
-        
-        Assert.Equal(expectedAction, actualAction);
-    }
-
     [When("the interest rate is (.*)")]//Interest Rate input 
     public void WhenTheInterestRateIs(double intRate)
     {
@@ -157,23 +124,41 @@ public sealed class MortgageCalculatorStepDefinitions
         Console.WriteLine($"The interest rate is: {intRate}");
     }
     
-    [Then(@"the error message for Interest rate (.*)")]
-    public void ThenTheErrorMessageForInterestRate(string expectedErrorMessage)
+    [When(@"the deposit amount is (.*)")]//Deposit input 
+    public void WhenTheDepositAmountIs(int depAmount)
     {
-        _mortgageCalculator.DisplayResults();
-        
-        string actualErrorMessage = _mortgageCalculator.errorMessage;
-        
-        Assert.Contains(expectedErrorMessage, actualErrorMessage);
+        _calculatorUserInput.Deposit = depAmount;
+
+        Console.WriteLine($"Deposit amount is {depAmount}");
     }
     
-    [Then(@"the error message for Deposit input displays ""(.*)""")]
-    public void ThenTheErrorMessageForDepositInputDisplays(string expectedErrorMessage)
+    
+    [Then(@"the error message contains (.*)")]//Result: Error message display
+    public void ThenTheErrorMessageContains(string expectedErrorMessage)
     {
         _mortgageCalculator.DisplayResults();
-
-        string actualErrorMessage = _mortgageCalculator.errorMessage;
         
-        Assert.Contains(expectedErrorMessage, actualErrorMessage);
+        Assert.Contains(expectedErrorMessage, _mortgageCalculator.errorMessage);
+        
+    }
+    
+    [Then(@"the system displays for Mortgage Type (.+)")] //Result: Mortgage Type selection
+    public void ThenTheSystemDisplaysForMortgageType(string expectedAction)
+    {
+        string actualAction = string.Empty;
+
+        switch (_calculatorUserInput.Type)
+        {
+            // case MortgageType.None:
+            //     actualAction = "Select a valid mortgage Type."; //Invalid selection, error message
+            //     break;
+
+            case MortgageType.Standard:
+            case MortgageType.Interest_Only:
+                actualAction = "valid"; //Valid selection
+                break;
+        }
+        
+        Assert.Equal(expectedAction, actualAction);
     }
 }

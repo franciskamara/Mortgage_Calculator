@@ -225,7 +225,7 @@
         }
         if (userInput.Term > CONSTANTS.MAX_TERM_YEARS)
         {
-            errorMessage += "Term input cannot be more than 40 years. \n";
+            errorMessage += "Term input cannot be more than 40 years.\n";
         }
 
         if (userInput.Type != MortgageType.Standard && userInput.Type != MortgageType.Interest_Only)
@@ -248,7 +248,7 @@
         }
         if (userInput.Deposit >= userInput.Amount)
         {
-            errorMessage += "Deposit amount cannot be more or equal to the Loan amount. \n";
+            errorMessage += "Deposit amount cannot be more or equal to the Loan amount.\n";
         }
 
         // Error messages: 2nd loan (if calcOption is 2)
