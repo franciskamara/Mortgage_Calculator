@@ -230,7 +230,7 @@
 
         if (userInput.Type != MortgageType.Standard && userInput.Type != MortgageType.Interest_Only)
         {
-            errorMessage += "Select a valid mortgage Type.\n";
+            errorMessage += "Select a valid mortgage type.\n";
         }
 
         if (userInput.InterestRatePercentage < CONSTANTS.MIN_INT_RATE)
@@ -270,7 +270,7 @@
 
             if (userInputCompare.Type != MortgageType.Standard && userInputCompare.Type != MortgageType.Interest_Only)
             {
-                errorMessage += "For the second loan, select a valid mortgage Type.\n";
+                errorMessage += "For the second loan, select a valid mortgage type.\n";
             }
 
             if (userInputCompare.InterestRatePercentage <= 0)
