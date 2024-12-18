@@ -1,7 +1,7 @@
 ﻿Feature: MortgageCalculator
 
 @mytag
-Scenario Outline: Loan amount input and Deposit validation 
+Scenario Outline: Loan and Deposit amounts validation 
 	Given page object is initialized
 	When the loan amount input is <loanAmount>
 	And the deposit amount is <depAmount>
@@ -49,24 +49,17 @@ Scenario Outline: Mortgage Type selection validation
 		| Standard                 | valid                         |
 		| Interest                 | valid                         |
   
-Scenario Outline: Interest Rate input validation NEGATIVE
+Scenario Outline: Interest Rate input validation 
 	Given page object is initialized
 	When the interest rate is <intRate>
 	Then the error message contains <action>
 	Examples: 
 		| intRate | action                                       |
 		| 0       | Interest rate input needs to be more than 0. |
-		| -1      | Interest rate input needs to be more than 0. | 
-  
-#Scenario: Interest Rate input validation NO INPUT 
-#	Given page object is initialized
-#	When the interest rate is empty
-#	Then the error message contains "Interest rate needs to be more than 0."
-	
-Scenario: Interest Rate input validation EXCEEDING 100%
-	Given page object is initialized
-	When the interest rate is 101
-	Then the error message contains Interest rate input cannot exceed 100%.
+		| -1      | Interest rate input needs to be more than 0. |
+		| 0.1     |                                              |
+		| 100     |                                              |
+		| 101     | Interest rate input cannot exceed 100%.      |
 
 Scenario Outline: Deposit input validation 
 	Given page object is initialized
@@ -76,3 +69,17 @@ Scenario Outline: Deposit input validation
 	Examples: 
 			| lAmount | dAmount |
 			| 1       | -1      | 
+   
+Scenario Outline: Results Item count
+	Given page object is initialized
+	When the loan amount input is <loanAmount>
+	And the term input is <term>
+	And the type is <mType>
+	And the interest rate is <intRate>
+	And the deposit amount is <depAmount>
+	Then the results display 6 items
+	Examples: 
+		| loanAmount | term | mType    | intRate | depAmount |
+		| 250000     | 20   | standard | 6.6     | 0         |
+		| 250000     | 20   | interest | 6.6     | 10000     |
+	
