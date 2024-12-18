@@ -101,6 +101,10 @@ public sealed class MortgageCalculatorStepDefinitions
 
         switch (type.ToLower())
         {
+            case "none":
+                _calculatorUserInput.Type = MortgageType.None;
+                break;
+            
             case "standard":
                 _calculatorUserInput.Type = MortgageType.Standard;
                 break;
@@ -149,9 +153,10 @@ public sealed class MortgageCalculatorStepDefinitions
 
         switch (_calculatorUserInput.Type)
         {
-            // case MortgageType.None:
-            //     actualAction = "Select a valid mortgage Type."; //Invalid selection, error message
-            //     break;
+            case MortgageType.None:
+                // case "---Select mortgage type--":
+                actualAction = "Select a valid mortgage Type."; //Invalid selection, error message
+                break;
 
             case MortgageType.Standard:
             case MortgageType.Interest_Only:

@@ -18,4 +18,6 @@ public class CONSTANTS
 
     public static double MIN_INT_RATE = 0.1;
     public static double MAX_INT_RATE = 100;
+
+    public static int ZERO = 0;
 }

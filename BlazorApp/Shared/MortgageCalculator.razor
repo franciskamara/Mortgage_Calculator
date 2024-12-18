@@ -214,7 +214,7 @@
         errorMessage = "";
 
         // Error messages: 1st loan
-        if (userInput.Amount <= 0)
+        if (userInput.Amount <= CONSTANTS.ZERO)
         {
             errorMessage = "Amount needs to be more than 0.\n";
         }
@@ -242,7 +242,7 @@
             errorMessage += "Interest rate input cannot exceed 100%.\n";
         }
 
-        if (userInput.Deposit < 0)
+        if (userInput.Deposit < CONSTANTS.ZERO)
         {
             errorMessage += "Cannot have a negative Deposit amount.\n";
         }
@@ -254,33 +254,34 @@
         // Error messages: 2nd loan (if calcOption is 2)
         if (calcOption == 2)
         {
+            string secLoanStarter = "For the second loan,";
             if (userInputCompare.Amount <= 0)
             {
-                errorMessage += "For the second loan, the Amount has to be more than 0.\n";
+                errorMessage += $"{secLoanStarter} the amount has to be more than 0.\n";
             }
 
-            if (userInputCompare.Term <= 0)
+            if (userInputCompare.Term < CONSTANTS.MIN_TERM_YEARS)
             {
-                errorMessage += "For the second loan, Term input is needed.\n";
+                errorMessage += $"{secLoanStarter} input is required and needs to be more than 0.\n";
             }
-            if (userInputCompare.Term > 40)
+            if (userInputCompare.Term > CONSTANTS.MAX_TERM_YEARS)
             {
-                errorMessage += "For the second loan, Term input cannot be more than 40 years.\n";
+                errorMessage += $"{secLoanStarter} term input cannot be more than 40 years.\n";
             }
 
             if (userInputCompare.Type != MortgageType.Standard && userInputCompare.Type != MortgageType.Interest_Only)
             {
-                errorMessage += "For the second loan, select a valid mortgage type.\n";
+                errorMessage += $"{secLoanStarter} select a valid mortgage type.\n";
             }
 
-            if (userInputCompare.InterestRatePercentage <= 0)
+            if (userInputCompare.InterestRatePercentage <= CONSTANTS.ZERO)
             {
-                errorMessage += "For the second loan, Interest rate input is needed.\n";
+                errorMessage += $"{secLoanStarter} interest rate input is needed.\n";
             }
 
-            if (userInputCompare.Deposit < 0)
+            if (userInputCompare.Deposit < CONSTANTS.ZERO)
             {
-                errorMessage += "For the second loan, cannot have a negative Deposit amount.\n";
+                errorMessage += $"{secLoanStarter} cannot have a negative Deposit amount.\n";
             }
         }
 

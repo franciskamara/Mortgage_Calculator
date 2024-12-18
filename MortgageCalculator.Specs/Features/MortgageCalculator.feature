@@ -43,10 +43,11 @@ Scenario Outline: Mortgage Type selection validation
   	When the type is <type>
 	Then the system displays for Mortgage Type <action>
 	Examples: 
-		| type     | action |
-		| None     |        |
-		| Standard | valid  |
-		| Interest | valid  |
+		| type                     | action                        |
+		| --Select mortgage type-- | Select a valid mortgage type. |
+		| None                     | Select a valid mortgage type. |
+		| Standard                 | valid                         |
+		| Interest                 | valid                         |
   
 Scenario Outline: Interest Rate input validation NEGATIVE
 	Given page object is initialized
