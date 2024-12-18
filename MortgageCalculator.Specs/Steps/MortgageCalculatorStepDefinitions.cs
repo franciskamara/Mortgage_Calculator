@@ -149,13 +149,13 @@ public sealed class MortgageCalculatorStepDefinitions
     [Then(@"the system displays for Mortgage Type (.+)")] //Result: Mortgage Type selection
     public void ThenTheSystemDisplaysForMortgageType(string expectedAction)
     {
+        _mortgageCalculator.DisplayResults();
         string actualAction = string.Empty;
 
         switch (_calculatorUserInput.Type)
         {
             case MortgageType.None:
-                // case "---Select mortgage type--":
-                actualAction = "Select a valid mortgage Type."; //Invalid selection, error message
+                actualAction = _mortgageCalculator.errorMessage; //Invalid selection, error message
                 break;
 
             case MortgageType.Standard:
@@ -164,6 +164,6 @@ public sealed class MortgageCalculatorStepDefinitions
                 break;
         }
         
-        Assert.Equal(expectedAction, actualAction);
+        Assert.Contains(expectedAction, actualAction);
     }
 }

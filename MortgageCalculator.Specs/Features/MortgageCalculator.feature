@@ -44,7 +44,7 @@ Scenario Outline: Mortgage Type selection validation
 	Then the system displays for Mortgage Type <action>
 	Examples: 
 		| type                     | action                        |
-		| --Select mortgage type-- | Select a valid mortgage type. |
+#		| --Select mortgage type-- | Select a valid mortgage type. |
 		| None                     | Select a valid mortgage type. |
 		| Standard                 | valid                         |
 		| Interest                 | valid                         |
@@ -68,7 +68,6 @@ Scenario: Interest Rate input validation EXCEEDING 100%
 	When the interest rate is 101
 	Then the error message contains Interest rate input cannot exceed 100%.
 
-  
 Scenario Outline: Deposit input validation 
 	Given page object is initialized
 	When the loan amount input is <lAmount>

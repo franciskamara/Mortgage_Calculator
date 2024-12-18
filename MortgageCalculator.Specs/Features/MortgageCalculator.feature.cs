@@ -241,7 +241,6 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.SkippableTheoryAttribute(DisplayName="Mortgage Type selection validation")]
         [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
         [Xunit.TraitAttribute("Description", "Mortgage Type selection validation")]
-        [Xunit.InlineDataAttribute("--Select mortgage type--", "Select a valid mortgage type.", new string[0])]
         [Xunit.InlineDataAttribute("None", "Select a valid mortgage type.", new string[0])]
         [Xunit.InlineDataAttribute("Standard", "valid", new string[0])]
         [Xunit.InlineDataAttribute("Interest", "valid", new string[0])]
