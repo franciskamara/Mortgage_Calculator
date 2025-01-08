@@ -379,12 +379,12 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableTheoryAttribute(DisplayName="Results Item count")]
+        [Xunit.SkippableTheoryAttribute(DisplayName="Payment Items count")]
         [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
-        [Xunit.TraitAttribute("Description", "Results Item count")]
-        [Xunit.InlineDataAttribute("250000", "20", "standard", "6.6", "0", new string[0])]
-        [Xunit.InlineDataAttribute("250000", "20", "interest", "6.6", "10000", new string[0])]
-        public virtual void ResultsItemCount(string loanAmount, string term, string mType, string intRate, string depAmount, string[] exampleTags)
+        [Xunit.TraitAttribute("Description", "Payment Items count")]
+        [Xunit.InlineDataAttribute("250000", "1", "standard", "6.6", "0", "14", new string[0])]
+        [Xunit.InlineDataAttribute("250000", "10", "interest", "6.6", "10000", "122", new string[0])]
+        public virtual void PaymentItemsCount(string loanAmount, string term, string mType, string intRate, string depAmount, string paymentItem, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
@@ -393,7 +393,8 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("mType", mType);
             argumentsOfScenario.Add("intRate", intRate);
             argumentsOfScenario.Add("depAmount", depAmount);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Results Item count", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            argumentsOfScenario.Add("paymentItem", paymentItem);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Payment Items count", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 73
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -433,7 +434,186 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And(string.Format("the deposit amount is {0}", depAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 80
- testRunner.Then("the results display 6 items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("the results object contains {0} paymentItems", paymentItem), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableTheoryAttribute(DisplayName="Payment Item, Final payment is 0")]
+        [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
+        [Xunit.TraitAttribute("Description", "Payment Item, Final payment is 0")]
+        [Xunit.InlineDataAttribute("standard", "0", new string[0])]
+        [Xunit.InlineDataAttribute("interest", "100000", new string[0])]
+        public virtual void PaymentItemFinalPaymentIs0(string mType, string finalPayment, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("mType", mType);
+            argumentsOfScenario.Add("finalPayment", finalPayment);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Payment Item, Final payment is 0", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 86
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 87
+ testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 88
+ testRunner.When("the loan amount input is 100000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 89
+ testRunner.And("the term input is 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 90
+ testRunner.And(string.Format("the type is {0}", mType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 91
+ testRunner.And("the interest rate is 6.6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 92
+ testRunner.And("the deposit amount is 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 93
+ testRunner.Then(string.Format("the results object contains {0} for the final paymentItem", finalPayment), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableTheoryAttribute(DisplayName="Total Amount output")]
+        [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
+        [Xunit.TraitAttribute("Description", "Total Amount output")]
+        [Xunit.InlineDataAttribute("100000", "10", "standard", "127278.61828689057", new string[0])]
+        [Xunit.InlineDataAttribute("100000", "10", "interest", "49999.999999999935", new string[0])]
+        [Xunit.InlineDataAttribute("250000", "25", "standard", "438442.5311309876", new string[0])]
+        [Xunit.InlineDataAttribute("250000", "25", "interest", "312499.99999999994", new string[0])]
+        public virtual void TotalAmountOutput(string loanAmount, string term, string mType, string totalAmount, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("loanAmount", loanAmount);
+            argumentsOfScenario.Add("term", term);
+            argumentsOfScenario.Add("mType", mType);
+            argumentsOfScenario.Add("totalAmount", totalAmount);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Total Amount output", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 99
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 100
+ testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 101
+ testRunner.When(string.Format("the loan amount input is {0}", loanAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 102
+ testRunner.And(string.Format("the term input is {0}", term), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 103
+ testRunner.And(string.Format("the type is {0}", mType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 104
+ testRunner.And("the interest rate is 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 105
+ testRunner.And("the deposit amount is 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 106
+ testRunner.Then(string.Format("the results object contains total amount {0}", totalAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableTheoryAttribute(DisplayName="Monthly Repayment count")]
+        [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
+        [Xunit.TraitAttribute("Description", "Monthly Repayment count")]
+        [Xunit.InlineDataAttribute("10000", "1", "standard", "12", new string[0])]
+        [Xunit.InlineDataAttribute("10000", "1", "interest", "12", new string[0])]
+        [Xunit.InlineDataAttribute("10000", "10", "standard", "120", new string[0])]
+        [Xunit.InlineDataAttribute("10000", "10", "interest", "120", new string[0])]
+        public virtual void MonthlyRepaymentCount(string loanAmount, string term, string mType, string monthlyRepayCount, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("loanAmount", loanAmount);
+            argumentsOfScenario.Add("term", term);
+            argumentsOfScenario.Add("mType", mType);
+            argumentsOfScenario.Add("monthlyRepayCount", monthlyRepayCount);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Monthly Repayment count", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 114
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 115
+ testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 116
+ testRunner.When(string.Format("the loan amount input is {0}", loanAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 117
+ testRunner.And(string.Format("the term input is {0}", term), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 118
+ testRunner.And(string.Format("the type is {0}", mType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 119
+ testRunner.And("the interest rate is 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 120
+ testRunner.And("the deposit amount is 25000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 121
+ testRunner.Then(string.Format("the results object contains {0} repayment months", monthlyRepayCount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -70,16 +70,58 @@ Scenario Outline: Deposit input validation
 			| lAmount | dAmount |
 			| 1       | -1      | 
    
-Scenario Outline: Results Item count
+Scenario Outline: Payment Items count 
 	Given page object is initialized
 	When the loan amount input is <loanAmount>
 	And the term input is <term>
 	And the type is <mType>
 	And the interest rate is <intRate>
 	And the deposit amount is <depAmount>
-	Then the results display 6 items
+	Then the results object contains <paymentItem> paymentItems
 	Examples: 
-		| loanAmount | term | mType    | intRate | depAmount |
-		| 250000     | 20   | standard | 6.6     | 0         |
-		| 250000     | 20   | interest | 6.6     | 10000     |
+		| loanAmount | term | mType    | intRate | depAmount | paymentItem |
+		| 250000     | 1    | standard | 6.6     | 0         | 14          |
+		| 250000     | 10   | interest | 6.6     | 10000     | 122         |
+  
+Scenario Outline: Payment Item, Final payment is 0 
+	Given page object is initialized
+	When the loan amount input is 100000
+	And the term input is 10
+	And the type is <mType>
+	And the interest rate is 6.6
+	And the deposit amount is 0
+	Then the results object contains <finalPayment> for the final paymentItem
+	Examples: 
+	| mType    | finalPayment |
+	| standard | 0            |
+	| interest | 100000       |
+  
+Scenario Outline: Total Amount output 
+	Given page object is initialized
+	When the loan amount input is <loanAmount>
+	And the term input is <term>
+	And the type is <mType>
+	And the interest rate is 5
+	And the deposit amount is 0
+	Then the results object contains total amount <totalAmount> 
+	Examples: 
+	  | loanAmount | term | mType    | totalAmount        |
+	  | 100000     | 10   | standard | 127278.61828689057 |
+	  | 100000     | 10   | interest | 49999.999999999935 |
+	  | 250000     | 25   | standard | 438442.5311309876  |
+	  | 250000     | 25   | interest | 312499.99999999994 |
 	
+Scenario Outline: Monthly Repayment count
+	Given page object is initialized
+	When the loan amount input is <loanAmount>
+	And the term input is <term>
+	And the type is <mType>
+	And the interest rate is 5
+	And the deposit amount is 25000
+	Then the results object contains <monthlyRepayCount> repayment months
+	Examples: 
+	  | loanAmount | term | mType    | monthlyRepayCount |
+	  | 10000      | 1    | standard | 12                |
+	  | 10000      | 1    | interest | 12                |
+	  | 10000      | 10   | standard | 120               |
+	  | 10000      | 10   | interest | 120               |

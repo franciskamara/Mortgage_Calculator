@@ -39,16 +39,21 @@ namespace Mortgage_Calculator
             }
 
             double remainingAmount;
+            double inputAmount = input.Amount;
+            double inputDeposit = input.Deposit;
             if (t == MortgageType.Standard)
                 remainingAmount = monthlyRepayment * totalMonths;//Total amount is remaining amount
             else
-                remainingAmount = input.Amount - input.Deposit;
+                remainingAmount = inputAmount - inputDeposit;
 
+            //Total Repayment balance 
             repayments.Add(new PaymentItem
             {
                 Date = DateTime.Now,
                 RemainingAmount = remainingAmount,
             });
+            
+            //Loop months after first month
             for (int month = 1; month <= totalMonths; month++)//Loop as many times as totalMonths (x totalMonths)
             {
                 if (t == MortgageType.Standard)
@@ -95,7 +100,7 @@ namespace Mortgage_Calculator
                 {
                     Amount = 0,
                     Date = new DateTime(finalPaymentItem.Date.Year, 12, 31),
-                    RemainingAmount = input.Amount - input.Deposit
+                    RemainingAmount = inputAmount - inputDeposit
                 });
             }
 
