@@ -103,6 +103,14 @@ public sealed class MortgageCalculatorStepDefinitions
         Assert.Contains(expErrorMessage, actualErrorMessage);
     }
 
+    [Then(@"the error message does not contain (.*)")]//Result: Negative error message
+    public void ThenTheErrorMessageDoesNotContain(string expErrorMessage)
+    {
+        _mortgageCalculator.DisplayResults();
+        string actualErrorMessage = _mortgageCalculator.errorMessage;
+        Assert.DoesNotContain(expErrorMessage, actualErrorMessage);
+    }
+    
     [Then(@"the system displays for Mortgage Type (.+)")] //Result: Mortgage Type selection
     public void ThenTheSystemDisplaysForMortgageType(string expectedAction)
     {
@@ -131,6 +139,7 @@ public sealed class MortgageCalculatorStepDefinitions
         int actualPaymentItemsCount = result.PaymentItems.Count;
         Assert.Equal(expNoOfItems, actualPaymentItemsCount);
     }
+    
 
     [Then(@"the results object contains (.*) for the final paymentItem")]
     public void ThenTheResultsObjectContainsForTheFinalPaymentItem(double expFinalAmount)
@@ -155,4 +164,5 @@ public sealed class MortgageCalculatorStepDefinitions
         int actualRepayMonthsCount = result.MonthlyRepayments.Count;
         Assert.Equal(expRepayMonthsCount, actualRepayMonthsCount);
     }
+
 }
