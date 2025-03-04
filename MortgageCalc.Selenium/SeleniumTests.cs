@@ -24,6 +24,9 @@ public class Tests
         var clickForCalc = driver.FindElement(By.XPath("//button[contains(text(), 'Click here to use the Calculator')]"));
         clickForCalc.Click();
         
+        // Wait for navigation 
+        System.Threading.Thread.Sleep(2000);
+        
         // Validate the page title
         Assert.That(driver.Title, Is.EqualTo("Mortgage Calculator"), "The page title does not match.");
     }
