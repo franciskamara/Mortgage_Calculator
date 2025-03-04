@@ -12,7 +12,7 @@ public class Tests
         driver = new ChromeDriver();//Open Chrome browser 
         driver.Navigate().GoToUrl("http://localhost:5292/");//Navigate to page
         
-        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(300);//Wait time 
+        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);//Wait time 
         
         var title = driver.Title;//Get page title 
         Console.WriteLine($"Page title: {title}");
@@ -21,10 +21,16 @@ public class Tests
     [Test]
     public void ClickCalculatorButtonOnHomepage()
     {
-        var clickForCalc = driver.FindElement(By.XPath("Click here to use the Calculator"));
+        var clickForCalc = driver.FindElement(By.XPath("//button[contains(text(), 'Click here to use the Calculator')]"));
         clickForCalc.Click();
-
-        var calcMortgagePageTitleElement = driver.FindElement(By.Id("Mortgage Calculator"));
-        Assert.Equals(calcMortgagePageTitleElement,"Mortgage Calculator");
+        
+        // Validate the page title
+        Assert.That(driver.Title, Is.EqualTo("Mortgage Calculator"), "The page title does not match.");
+    }
+    
+    [TearDown]
+    public void Cleanup()
+    {
+        driver.Quit(); // Close browser after tests
     }
 }
