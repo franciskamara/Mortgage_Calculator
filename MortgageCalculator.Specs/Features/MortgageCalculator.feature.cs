@@ -148,7 +148,6 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.TraitAttribute("Description", "Loan amount input validation")]
         [Xunit.InlineDataAttribute("-1", "Amount needs to be more than 0.", new string[0])]
         [Xunit.InlineDataAttribute("0", "Amount needs to be more than 0.", new string[0])]
-        [Xunit.InlineDataAttribute("1", "", new string[0])]
         public virtual void LoanAmountInputValidation(string loanAmount, string action, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
@@ -201,7 +200,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("loanAmount", loanAmount);
             argumentsOfScenario.Add("action", action);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Loan amount input validation NEGATIVE", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 28
+#line 27
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -221,13 +220,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 29
+#line 28
  testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 30
+#line 29
  testRunner.When(string.Format("the loan amount input is {0}", loanAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 31
+#line 30
  testRunner.Then(string.Format("the error message does not contain {0}", action), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -239,7 +238,6 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.TraitAttribute("Description", "Term input validation")]
         [Xunit.InlineDataAttribute("0", "Term input is required and needs to be more than 0.", new string[0])]
         [Xunit.InlineDataAttribute("-1", "Term input is required and needs to be more than 0.", new string[0])]
-        [Xunit.InlineDataAttribute("1", "", new string[0])]
         [Xunit.InlineDataAttribute("41", "Term input cannot be more than 40 years.", new string[0])]
         public virtual void TermInputValidation(string input, string action, string[] exampleTags)
         {
@@ -248,7 +246,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("input", input);
             argumentsOfScenario.Add("action", action);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Term input validation", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 37
+#line 36
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -268,13 +266,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 38
+#line 37
  testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 39
+#line 38
  testRunner.When(string.Format("the term input is {0}", input), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 40
+#line 39
  testRunner.Then(string.Format("the error message contains {0}", action), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -284,6 +282,7 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.SkippableTheoryAttribute(DisplayName="Term input validation NEGATIVE")]
         [Xunit.TraitAttribute("FeatureTitle", "MortgageCalculator")]
         [Xunit.TraitAttribute("Description", "Term input validation NEGATIVE")]
+        [Xunit.InlineDataAttribute("1", "Term input cannot be more than 40 years.", new string[0])]
         [Xunit.InlineDataAttribute("10", "Term input cannot be more than 40 years.", new string[0])]
         [Xunit.InlineDataAttribute("25", "Term input cannot be more than 40 years.", new string[0])]
         [Xunit.InlineDataAttribute("40", "Term input cannot be more than 40 years.", new string[0])]
@@ -294,7 +293,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("term", term);
             argumentsOfScenario.Add("action", action);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Term input validation NEGATIVE", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 48
+#line 46
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -314,13 +313,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 49
+#line 47
  testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 50
+#line 48
  testRunner.When(string.Format("the term input is {0}", term), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 51
+#line 49
  testRunner.Then(string.Format("the error message does not contain {0}", action), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -340,7 +339,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("type", type);
             argumentsOfScenario.Add("action", action);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Mortgage Type selection validation", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 58
+#line 57
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -360,13 +359,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 59
+#line 58
    testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 60
+#line 59
    testRunner.When(string.Format("the type is {0}", type), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 61
+#line 60
  testRunner.Then(string.Format("the system displays for Mortgage Type {0}", action), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -388,7 +387,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("intRate", intRate);
             argumentsOfScenario.Add("action", action);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Interest Rate input validation", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 69
+#line 67
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -408,13 +407,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 70
+#line 68
  testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 71
+#line 69
  testRunner.When(string.Format("the interest rate is {0}", intRate), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 72
+#line 70
  testRunner.Then(string.Format("the error message contains {0}", action), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -432,7 +431,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("lAmount", lAmount);
             argumentsOfScenario.Add("dAmount", dAmount);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deposit input validation", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 81
+#line 79
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -452,16 +451,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 82
+#line 80
  testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 83
+#line 81
  testRunner.When(string.Format("the loan amount input is {0}", lAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 84
+#line 82
  testRunner.And(string.Format("the deposit amount is {0}", dAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 85
+#line 83
  testRunner.Then("the error message contains Cannot have a negative Deposit amount.", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -484,7 +483,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("depAmount", depAmount);
             argumentsOfScenario.Add("paymentItem", paymentItem);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Payment Items count", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 90
+#line 88
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -504,25 +503,25 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 91
+#line 89
  testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 92
+#line 90
  testRunner.When(string.Format("the loan amount input is {0}", loanAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 93
+#line 91
  testRunner.And(string.Format("the term input is {0}", term), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 94
+#line 92
  testRunner.And(string.Format("the type is {0}", mType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 95
+#line 93
  testRunner.And(string.Format("the interest rate is {0}", intRate), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 96
+#line 94
  testRunner.And(string.Format("the deposit amount is {0}", depAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 97
+#line 95
  testRunner.Then(string.Format("the results object contains {0} paymentItems", paymentItem), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -541,7 +540,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("mType", mType);
             argumentsOfScenario.Add("finalPayment", finalPayment);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Payment Item, Final payment is 0", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 103
+#line 101
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -561,25 +560,25 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 104
+#line 102
  testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 105
+#line 103
  testRunner.When("the loan amount input is 100000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 106
+#line 104
  testRunner.And("the term input is 10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 107
+#line 105
  testRunner.And(string.Format("the type is {0}", mType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 108
+#line 106
  testRunner.And("the interest rate is 6.6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 109
+#line 107
  testRunner.And("the deposit amount is 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 110
+#line 108
  testRunner.Then(string.Format("the results object contains {0} for the final paymentItem", finalPayment), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -602,7 +601,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("mType", mType);
             argumentsOfScenario.Add("totalAmount", totalAmount);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Total Amount output", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 116
+#line 114
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -622,25 +621,25 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 117
+#line 115
  testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 118
+#line 116
  testRunner.When(string.Format("the loan amount input is {0}", loanAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 119
+#line 117
  testRunner.And(string.Format("the term input is {0}", term), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 120
+#line 118
  testRunner.And(string.Format("the type is {0}", mType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 121
+#line 119
  testRunner.And("the interest rate is 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 122
+#line 120
  testRunner.And("the deposit amount is 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 123
+#line 121
  testRunner.Then(string.Format("the results object contains total amount {0}", totalAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -663,7 +662,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("mType", mType);
             argumentsOfScenario.Add("monthlyRepayCount", monthlyRepayCount);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Monthly Repayment count", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 131
+#line 129
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -683,25 +682,25 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 132
+#line 130
  testRunner.Given("page object is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 133
+#line 131
  testRunner.When(string.Format("the loan amount input is {0}", loanAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 134
+#line 132
  testRunner.And(string.Format("the term input is {0}", term), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 135
+#line 133
  testRunner.And(string.Format("the type is {0}", mType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 136
+#line 134
  testRunner.And("the interest rate is 5", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 137
+#line 135
  testRunner.And("the deposit amount is 25000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 138
+#line 136
  testRunner.Then(string.Format("the results object contains {0} repayment months", monthlyRepayCount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
