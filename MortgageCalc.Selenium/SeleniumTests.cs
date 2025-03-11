@@ -31,6 +31,8 @@ public class Tests
         Assert.That(driver.Title, Is.EqualTo("Mortgage Calculator"), "The page title does not match.");
 
         Console.WriteLine($"Page title after navigation: {driver.Title}");
+
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
     }
     
     // [TearDown]
