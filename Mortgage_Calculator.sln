@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mortgage_Calculator", "Mort
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MortgageCalculator.Specs", "MortgageCalculator.Specs\MortgageCalculator.Specs.csproj", "{979763EE-38F7-4CF7-B07F-CDDE0030A809}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MortgageCalc.Selenium", "MortgageCalc.Selenium\MortgageCalc.Selenium.csproj", "{AB9FF8A0-046A-457F-9F61-48549F4807AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MortgageCalculator.Selenium", "MortgageCalculator.Selenium\MortgageCalculator.Selenium.csproj", "{D5905FCF-CC57-42B5-A95A-B90B7904BEEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{979763EE-38F7-4CF7-B07F-CDDE0030A809}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{979763EE-38F7-4CF7-B07F-CDDE0030A809}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{979763EE-38F7-4CF7-B07F-CDDE0030A809}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB9FF8A0-046A-457F-9F61-48549F4807AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB9FF8A0-046A-457F-9F61-48549F4807AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB9FF8A0-046A-457F-9F61-48549F4807AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB9FF8A0-046A-457F-9F61-48549F4807AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5905FCF-CC57-42B5-A95A-B90B7904BEEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5905FCF-CC57-42B5-A95A-B90B7904BEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5905FCF-CC57-42B5-A95A-B90B7904BEEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5905FCF-CC57-42B5-A95A-B90B7904BEEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

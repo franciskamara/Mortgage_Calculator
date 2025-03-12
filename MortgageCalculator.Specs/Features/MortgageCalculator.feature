@@ -23,6 +23,7 @@ Scenario Outline: Loan amount input validation
 		| loanAmount | action                          |
 		| -1         | Amount needs to be more than 0. |
 		| 0          | Amount needs to be more than 0. |
+		| 1          |                                 |
   
 Scenario Outline: Loan amount input validation NEGATIVE 
 	Given page object is initialized
@@ -41,6 +42,7 @@ Scenario Outline: Term input validation
 		| input | action                                              |
 		| 0     | Term input is required and needs to be more than 0. |
 		| -1    | Term input is required and needs to be more than 0. |
+		| 1     |                                                     |
 		| 41    | Term input cannot be more than 40 years.            |
   
 Scenario Outline: Term input validation NEGATIVE 
@@ -49,7 +51,6 @@ Scenario Outline: Term input validation NEGATIVE
 	Then the error message does not contain <action>
 	Examples: 
 	| term | action                                   |
-	| 1    | Term input cannot be more than 40 years. |
 	| 10   | Term input cannot be more than 40 years. |
 	| 25   | Term input cannot be more than 40 years. |
 	| 40   | Term input cannot be more than 40 years. |
@@ -60,6 +61,7 @@ Scenario Outline: Mortgage Type selection validation
 	Then the system displays for Mortgage Type <action>
 	Examples: 
 		| type                     | action                        |
+#		| --Select mortgage type-- | Select a valid mortgage type. |
 		| None                     | Select a valid mortgage type. |
 		| Standard                 | valid                         |
 		| Interest                 | valid                         |
