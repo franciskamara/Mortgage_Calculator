@@ -34,7 +34,7 @@ public class Tests
 
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
     }
-    // Save this commit 
+    // Save this commit on new branch
     // [TearDown]
     // public void Cleanup()
     // {
