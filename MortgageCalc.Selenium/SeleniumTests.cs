@@ -6,7 +6,7 @@ public class Tests
     private BlazorApp.Shared.MortgageCalculator _mortgageCalculator;
     private Mortgage_Calculator.UserInput _calculatorUserInput;
 
-    [SetUp]
+    [OneTimeSetUp]
     public void Setup()
     {
         driver = new ChromeDriver(); // Open Chrome browser
@@ -17,27 +17,42 @@ public class Tests
         Console.WriteLine($"Page title: {driver.Title}"); // Print page title
     }
 
-    [Test]
-    public void ClickCalculatorButtonOnHomepage()
+    [Test, Order(1)]
+    public void ClickCalculatorButtonOnHomepage() // Click the Calculator button on Homepage
     {
-        var clickForCalc = driver.FindElement(By.Id("mortCalculatorButton")); // Update with actual button ID
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        
+        IWebElement clickForCalc = driver.FindElement(By.Id("mortCalculatorButton")); // Update with actual button ID
         clickForCalc.Click();
 
         // Wait for navigation 
-        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-        wait.Until(d => d.Title == "Mortgage Calculator"); // Page title updates
+        wait.Until(d => d.Title == "Mortgage Calculator"); 
 
-        // Validate the page title (case-sensitive check)
+        // Validate the page title 
         Assert.That(driver.Title, Is.EqualTo("Mortgage Calculator"), "The page title does not match.");
-
         Console.WriteLine($"Page title after navigation: {driver.Title}");
-
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
     }
-//Commit saving with object issue
-    // [TearDown]
+    
+    [Test, Order(2)]
+    public void ClickToCalculateSingleMortgage()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+        IWebElement clickSingleMortgage = wait.Until(d => d.FindElement(By.Id("singleMortClick")));
+        clickSingleMortgage.Click();
+        
+        Console.WriteLine("Single Mortgage button clicked.");
+        
+        // Check Single mortgage form is displayed
+        IWebElement singleFormTitle = wait.Until(d => d.FindElement(By.Id("singleMortFormTitle")));
+        Assert.IsTrue(singleFormTitle.Displayed, "Single Mortgage calculation form is not displayed.");
+    }
+    
+    // [OneTimeTearDown]
     // public void Cleanup()
     // {
     //     driver.Quit(); // Close browser after tests
     // }
+    
+    
 }
