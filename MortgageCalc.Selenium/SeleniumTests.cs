@@ -47,6 +47,21 @@ public class Tests
         IWebElement singleFormTitle = wait.Until(d => d.FindElement(By.Id("singleMortFormTitle")));
         Assert.IsTrue(singleFormTitle.Displayed, "Single Mortgage calculation form is not displayed.");
     }
+
+    [Test, Order(3)]
+    public void LoanAmountInput()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+        IWebElement loanAmountInput = wait.Until(d => d.FindElement(By.Id("loanInputField")));
+        loanAmountInput.Click();
+        // loanAmountInput.Clear();
+        // loanAmountInput.SendKeys(250000.ToString());
+        //
+        // Console.WriteLine($"Loan amount is {loanAmountInput.Displayed}");
+        // // Assert.IsTrue(loanAmountInput.Displayed, "Loan amount input is displayed.");
+        // Assert.IsTrue(loanAmountInput.Displayed, "Loan amount not inputted.");
+    }
     
     // [OneTimeTearDown]
     // public void Cleanup()
