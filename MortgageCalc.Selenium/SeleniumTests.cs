@@ -32,7 +32,7 @@ public class Tests
         Assert.That(driver.Title, Is.EqualTo("Mortgage Calculator"), "The page title does not match.");
         Console.WriteLine($"Page title after navigation: {driver.Title}");
     }
-    
+
     [Test, Order(2)]
     public void ClickToCalculateSingleMortgage()
     {
@@ -40,9 +40,9 @@ public class Tests
 
         IWebElement clickSingleMortgage = wait.Until(d => d.FindElement(By.Id("singleMortClick")));
         clickSingleMortgage.Click();
-        
+
         Console.WriteLine("Single Mortgage button clicked.");
-        
+
         // Check Single mortgage form is displayed
         IWebElement singleFormTitle = wait.Until(d => d.FindElement(By.Id("singleMortFormTitle")));
         Assert.IsTrue(singleFormTitle.Displayed, "Single Mortgage calculation form is not displayed.");
@@ -62,16 +62,27 @@ public class Tests
     }
 
     [Test, Order(4)]
-    public void TermInput()
+    public void MortgageTermInput()
     {
-        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
 
-        IWebElement mortgageTermInput = driver.FindElement(By.Id("termInputField"));
+        IWebElement mortgageTermInput = driver.FindElement(By.Id("mTermInputField"));
         mortgageTermInput.Click();
         mortgageTermInput.Clear();
         mortgageTermInput.SendKeys(20.ToString());
         
         Assert.IsTrue(mortgageTermInput.Displayed);
+    }
+
+    [Test, Order(5)]
+    public void MortgageTypeSelect()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+        IWebElement mortgageTypeSelect = driver.FindElement(By.Id("mTypeDropdown"));
+        mortgageTypeSelect.Click();
+        // mortgageTypeSelect.FindElement(By.XPath("Standard"));
+        // mortgageTypeSelect.Click();
     }
     
     // [OneTimeTearDown]
