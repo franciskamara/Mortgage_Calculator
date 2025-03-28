@@ -55,13 +55,37 @@ public class Tests
 
         IWebElement loanAmountInput = wait.Until(d => d.FindElement(By.Id("loanInputField")));
         loanAmountInput.Click();
-        // loanAmountInput.Clear();
-        // loanAmountInput.SendKeys(250000.ToString());
-        //
-        // Console.WriteLine($"Loan amount is {loanAmountInput.Displayed}");
-        // // Assert.IsTrue(loanAmountInput.Displayed, "Loan amount input is displayed.");
+        loanAmountInput.Clear();
+        loanAmountInput.SendKeys(250000.ToString());
+        
+        Console.WriteLine($"Loan amount displayed? {loanAmountInput.Text}");
+        Assert.IsTrue(loanAmountInput.Displayed);
         // Assert.IsTrue(loanAmountInput.Displayed, "Loan amount not inputted.");
     }
+    
+    [Test, Order(4)]
+    public void MortgageTermInput()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+
+        IWebElement mortgageTermInput = driver.FindElement(By.Id("termInputField"));
+        mortgageTermInput.Click();
+        mortgageTermInput.Clear();
+        mortgageTermInput.SendKeys(20.ToString());
+        
+        Assert.IsTrue(mortgageTermInput.Displayed);
+    }
+
+    // [Test, Order(5)]
+    // public void MortgageTypeSelect()
+    // {
+    //     WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+    //
+    //     IWebElement mortgageTypeSelect = driver.FindElement(By.Id("typeDropdown"));
+    //     mortgageTypeSelect.Click();
+    //     // mortgageTypeSelect.FindElement(By.XPath("Standard"));
+    //     // mortgageTypeSelect.Click();
+    // }
     
     // [OneTimeTearDown]
     // public void Cleanup()

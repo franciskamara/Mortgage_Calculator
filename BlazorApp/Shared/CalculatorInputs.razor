@@ -34,7 +34,7 @@
                 <p>The average period for repayment of a mortgage is 25 years.
                     <br/>Term cannot exceed 40 years.</p>
                 <div class="flex">
-                    <InputNumber @bind-Value="userInput.Term"
+                    <InputNumber id="termInputField" @bind-Value="userInput.Term"
                                  class="border-gray-400 border-b border-l-0 w-full border pl-2 ml-0 h-auto"
                                  Placeholder="Enter years"/>
                     <span aria-hidden="true" class="py-2 px-3 rounded-r border-gray-400 border border-solid">years</span>
@@ -43,7 +43,7 @@
         </div>
 
         <div>
-            <MortgageTypeSelect @bind-selection="userInput.Type"></MortgageTypeSelect>
+            <MortgageTypeSelect  @bind-selection="userInput.Type"></MortgageTypeSelect>
         </div>
 
         <div class="space-y-3 border-bottom">
