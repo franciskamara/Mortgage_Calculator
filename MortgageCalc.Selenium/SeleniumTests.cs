@@ -55,12 +55,23 @@ public class Tests
 
         IWebElement loanAmountInput = wait.Until(d => d.FindElement(By.Id("loanInputField")));
         loanAmountInput.Click();
-        // loanAmountInput.Clear();
-        // loanAmountInput.SendKeys(250000.ToString());
-        //
-        // Console.WriteLine($"Loan amount is {loanAmountInput.Displayed}");
-        // // Assert.IsTrue(loanAmountInput.Displayed, "Loan amount input is displayed.");
-        // Assert.IsTrue(loanAmountInput.Displayed, "Loan amount not inputted.");
+        loanAmountInput.Clear();
+        loanAmountInput.SendKeys(250000.ToString());
+        
+        Assert.IsTrue(loanAmountInput.Displayed);
+    }
+
+    [Test, Order(4)]
+    public void TermInput()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+        IWebElement mortgageTermInput = driver.FindElement(By.Id("termInputField"));
+        mortgageTermInput.Click();
+        mortgageTermInput.Clear();
+        mortgageTermInput.SendKeys(20.ToString());
+        
+        Assert.IsTrue(mortgageTermInput.Displayed);
     }
     
     // [OneTimeTearDown]
