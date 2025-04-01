@@ -79,7 +79,7 @@ public class Tests
     {
         WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
-        IWebElement mortgageTypeSelect = driver.FindElement(By.Id("mTypeDropdown"));
+        IWebElement mortgageTypeSelect = driver.FindElement(By.Id("mTypeSelect"));
         mortgageTypeSelect.Click();
         // mortgageTypeSelect.FindElement(By.XPath("Standard"));
         // mortgageTypeSelect.Click();
