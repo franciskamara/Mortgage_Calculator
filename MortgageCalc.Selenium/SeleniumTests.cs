@@ -85,6 +85,7 @@ public class Tests
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     [Test, Order(5)]
     public void MortgageTypeSelect()
     {
@@ -120,6 +121,8 @@ public class Tests
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     // [Test, Order(5)]
     // public void MortgageTypeSelect()
     // {
@@ -133,6 +136,9 @@ public class Tests
     //     Assert.That(mortgageTypeSelect.Displayed, Is.True);
     // }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
