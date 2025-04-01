@@ -2,7 +2,6 @@ namespace Mortgage_Calculator;
 
 public class UIMethods
 {
-
     /// <summary>
     /// Print Mortgage Calculator Welcome message
     /// </summary>
@@ -146,8 +145,10 @@ public class UIMethods
                     else
                         return MortgageType.Interest_Only;
                 }
+
                 InvalidInputMessage();
             }
+
             InvalidInputMessage();
         }
     }
@@ -174,27 +175,30 @@ public class UIMethods
     {
         while (true)
         {
-        ClearConsole();
-        Console.Write("Input deposit (optional): ");
+            ClearConsole();
+            Console.Write("Input deposit (optional): ");
             string input = Console.ReadLine();
-        if (double.TryParse(input, out double depositInput))
-        {
-            return depositInput;
-        }
-        if (string.IsNullOrWhiteSpace(input))
-        {
-            return 0;
-        }
-        InvalidInputMessage();
-        }
+            if (double.TryParse(input, out double depositInput))
+            {
+                return depositInput;
+            }
 
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return 0;
+            }
+
+            InvalidInputMessage();
+        }
     }
 
     /// <summary>
     /// Message for user to make the first set of inputs 
     /// </summary>
     public static void MessageFirstInputSet()
-    { Console.WriteLine("Make the first set of inputs.\n"); }
+    {
+        Console.WriteLine("Make the first set of inputs.\n");
+    }
 
     /// <summary>
     /// Message for user to make the second set of inputs 
