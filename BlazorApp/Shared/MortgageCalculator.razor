@@ -14,9 +14,9 @@
 <!--Navbar setup and styling-->
 <nav class="calc-nav-options br-bottom-8">
     <div class="topnav text-left">
-        <a class="nav-link" style="color:white; cursor:pointer; text-decoration:none" id="singleMortClick" @onclick="() => setCalcOption(1)">Calculate a mortgage</a>
+        <a class="nav-link" style="color:white; cursor:pointer; text-decoration:none; hover" @onclick="() => setCalcOption(1)">Calculate a mortgage</a>
         &nbsp; &nbsp;
-        <a class="nav-link" style="color: white; cursor: pointer; text-decoration: none" id="compareMortClick" @onclick="() => setCalcOption(2)">Compare mortgages</a>
+        <a class="nav-link" style="color: white; cursor: pointer; text-decoration: none" @onclick="() => setCalcOption(2)">Compare mortgages</a>
     </div>
     <br />
 </nav>
@@ -44,7 +44,7 @@
                 <div class="col-sm-6">
                     <div title="Single mortgage form">
                         <div class="h2 pb-2 mb-4 border-bottom form-header-colour">
-                            <h5 id="singleMortFormTitle">Single mortgage</h5>
+                            <h5>Single mortgage</h5>
                         </div>
 
                         <div class="chart-container">
