@@ -64,17 +64,24 @@ public class Tests
     }
     
     [Test, Order(4)]
-    public void MortgageTermInput()
+    public void TermInput()
     {
+<<<<<<< HEAD
         WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
 
         IWebElement mortgageTermInput = wait.Until(d => d.FindElement(By.Id("termInputField")));
+=======
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+        IWebElement mortgageTermInput = driver.FindElement(By.Id("termInputField"));
+>>>>>>> parent of fd055da (WIP TypeSelect)
         mortgageTermInput.Click();
         mortgageTermInput.Clear();
         mortgageTermInput.SendKeys(20.ToString());
         
         Assert.That(mortgageTermInput.Displayed, Is.True);
     }
+<<<<<<< HEAD
 
     [Test, Order(5)]
     public void MortgageTypeSelect()
@@ -106,6 +113,8 @@ public class Tests
         
         Assert.That(mortgageIntRate.Displayed, Is.True);
     }
+=======
+>>>>>>> parent of fd055da (WIP TypeSelect)
     
     // [OneTimeTearDown]
     // public void Cleanup()
