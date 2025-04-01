@@ -12,7 +12,9 @@
     </p>
     <div class="space-y-2 border-b border-gray-400 pb-4">
         <div class="flex">
-            <InputSelect class="border-gray-400 border-b border-l-0 w-full border pl-2 ml-0 h-auto" @bind-Value="selection" @bind-Value:after="Updateselection" @onchange="Updateselection" name="mTypeSelectStatement" id="mTypeSelect">
+            <InputSelect @bind-Value="selection" @bind-Value:after="Updateselection" 
+                         @onchange="Updateselection" name="mTypeSelectStatement" id="mTypeSelect" 
+                         class="border-gray-400 border-b border-l-0 w-full border pl-2 ml-0 h-auto">
                 <option value=""> --Select mortgage type-- </option>
                 @foreach (MortgageType type in Enum.GetValues(typeof(MortgageType)))
                 {
