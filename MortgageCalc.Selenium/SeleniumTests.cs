@@ -83,6 +83,7 @@ public class Tests
     }
 <<<<<<< HEAD
 
+<<<<<<< Updated upstream
     [Test, Order(5)]
     public void MortgageTypeSelect()
     {
@@ -115,6 +116,20 @@ public class Tests
     }
 =======
 >>>>>>> parent of fd055da (WIP TypeSelect)
+=======
+    // [Test, Order(5)]
+    // public void MortgageTypeSelect()
+    // {
+    //     WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+    //
+    //     IWebElement mortgageTypeSelect = driver.FindElement(By.Id("mTypeSelect"));
+    //     mortgageTypeSelect.Click();
+    //     mortgageTypeSelect.SendKeys("Standard");
+    //     mortgageTypeSelect.Click();
+    //     
+    //     Assert.That(mortgageTypeSelect.Displayed, Is.True);
+    // }
+>>>>>>> Stashed changes
     
     // [OneTimeTearDown]
     // public void Cleanup()
