@@ -84,6 +84,7 @@ public class Tests
 <<<<<<< HEAD
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     [Test, Order(5)]
     public void MortgageTypeSelect()
     {
@@ -117,6 +118,8 @@ public class Tests
 =======
 >>>>>>> parent of fd055da (WIP TypeSelect)
 =======
+=======
+>>>>>>> Stashed changes
     // [Test, Order(5)]
     // public void MortgageTypeSelect()
     // {
@@ -129,6 +132,9 @@ public class Tests
     //     
     //     Assert.That(mortgageTypeSelect.Displayed, Is.True);
     // }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     
     // [OneTimeTearDown]
