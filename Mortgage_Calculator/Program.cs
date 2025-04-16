@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the mortgage calculator \n");
+            UIMethods.PrintWelcomeMessage();
 
             int mortgageCalcSelect = UIMethods.SingleOrDoubleCalculatorSelection();
 

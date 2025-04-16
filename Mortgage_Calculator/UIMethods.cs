@@ -41,7 +41,7 @@ public class UIMethods
     /// <summary>
     /// User made invalid input 
     /// </summary>
-    public static void InvalidInputMessage()
+    private static void InvalidInputMessage()
     {
         Console.WriteLine("Invalid input. Please try again");
         ClearConsole();
