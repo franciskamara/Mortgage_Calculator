@@ -5,8 +5,6 @@
 
 <PageTitle>Mortgage Calculator</PageTitle>
 
-@*<a style="font-size:x-small" href="/home">Click to go back </a>*@
-
 <div class="h2 pb-0 mb-0 border-bottom page-header br-top-8">
     <p>Mortgage Calculator</p>
 </div>
@@ -34,7 +32,7 @@
 }
 
 <!-- Single mortgage calculator -->
-@if (calcOption == 1) // Option for single mortgage calculation
+@if (calcOption == 1)
 {
     <section class="mc-tool">
         <br />
@@ -108,7 +106,7 @@
 
                     <div title="Comparison mortgages form">
                         <div class="h2 pb-2 mb-4 border-bottom form-header-colour">
-                            <h5>First mortgage</h5>
+                            <h5 id="compareMortFormTitle">First mortgage</h5>
                         </div>
                         <!-- Adjust the width with Bootstrap grid (6 of 12 columns) -->
 

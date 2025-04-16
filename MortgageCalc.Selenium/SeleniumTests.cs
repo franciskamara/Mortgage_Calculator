@@ -20,7 +20,7 @@ public class Tests
     [Test, Order(1)]
     public void ClickCalculatorButtonOnHomepage() // Click the Calculator button on Homepage
     {
-        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
         
         IWebElement clickForCalc = driver.FindElement(By.Id("mortCalculatorButton")); // Update with actual button ID
         clickForCalc.Click();
@@ -36,7 +36,7 @@ public class Tests
     [Test, Order(2)]
     public void ClickToCalculateSingleMortgage()
     {
-        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
 
         IWebElement clickSingleMortgage = wait.Until(d => d.FindElement(By.Id("singleMortClick")));
         clickSingleMortgage.Click();
@@ -51,7 +51,7 @@ public class Tests
     [Test, Order(3)]
     public void LoanAmountInput()
     {
-        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
 
         IWebElement loanAmountInput = wait.Until(d => d.FindElement(By.Id("loanInputField")));
         loanAmountInput.Click();
@@ -66,7 +66,7 @@ public class Tests
     [Test, Order(4)]
     public void MortgageTermInput()
     {
-        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
 
         IWebElement mortgageTermInput = wait.Until(d => d.FindElement(By.Id("termInputField")));
         mortgageTermInput.Click();
@@ -79,7 +79,7 @@ public class Tests
     [Test, Order(5)]
     public void MortgageTypeSelect()
     {
-        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
     
         IWebElement mortgageTypeSelect = wait.Until(d => d.FindElement(By.Id("mTypeSelect")));
         mortgageTypeSelect.Click();
@@ -92,7 +92,7 @@ public class Tests
     [Test, Order(6)]
     public void MortgageInterestRateInput()
     {
-        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
     
         IWebElement mortgageIntRate = wait.Until(d => d.FindElement(By.Id("intRateInputField")));
         mortgageIntRate.Click();
@@ -100,6 +100,19 @@ public class Tests
         mortgageIntRate.SendKeys(6.6.ToString());
         
         Assert.That(mortgageIntRate.Displayed, Is.True);
+    }
+
+    [Test,Order(7)]
+    public void MortgageDepositInput()
+    {
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
+
+        IWebElement mortgageDeposit = wait.Until(d => d.FindElement(By.Id("depositInput")));
+        mortgageDeposit.Click();
+        mortgageDeposit.Clear();
+        mortgageDeposit.SendKeys(10000.ToString());
+        
+        Assert.That(mortgageDeposit.Displayed,Is.True);
     }
     
     // [OneTimeTearDown]
